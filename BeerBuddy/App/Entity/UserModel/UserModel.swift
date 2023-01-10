@@ -8,16 +8,17 @@
 import UIKit
 
 struct UserModel {
+    let id: UUID
     let firstName: String
     let lastName: String
     let username: String
-    var matches: [UserModel]
+    var matches: [UUID]
     let sex: Sex
-    let birthDate: Date
+    let birthDate: Double
     var age: Int {
         let now = Date()
         let calendar = Calendar.current
-        let ageComponents = calendar.dateComponents([.year], from: birthDate, to: now)
+        let ageComponents = calendar.dateComponents([.year], from: Date(timeIntervalSince1970: birthDate), to: now)
         return ageComponents.year!
     }
     var interests: [Interests]

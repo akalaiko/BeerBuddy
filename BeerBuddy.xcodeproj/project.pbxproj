@@ -52,13 +52,69 @@
 		AF7AAF75296D54C7001DF0CD /* BeerBuddy */ = {
 			isa = PBXGroup;
 			children = (
-				AF7AAF76296D54C7001DF0CD /* AppDelegate.swift */,
-				AF7AAF7A296D54C7001DF0CD /* ViewController.swift */,
-				AF7AAF7F296D54C9001DF0CD /* Assets.xcassets */,
-				AF7AAF81296D54C9001DF0CD /* LaunchScreen.storyboard */,
-				AF7AAF84296D54C9001DF0CD /* Info.plist */,
+				F286E3D4296D6E1300B0D3EC /* App */,
+				F286E3D5296D6E2000B0D3EC /* Core */,
+				F286E3D6296D6E2800B0D3EC /* Resources */,
+				F286E3D7296D6EFB00B0D3EC /* Environments */,
 			);
 			path = BeerBuddy;
+			sourceTree = "<group>";
+		};
+		F286E3D4296D6E1300B0D3EC /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F286E3D9296D6F4200B0D3EC /* BusinessLogic */,
+				F286E3DA296D6F5100B0D3EC /* Entity */,
+				F286E3D8296D6F1200B0D3EC /* Flows */,
+				AF7AAF76296D54C7001DF0CD /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F286E3D5296D6E2000B0D3EC /* Core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		F286E3D6296D6E2800B0D3EC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AF7AAF7F296D54C9001DF0CD /* Assets.xcassets */,
+				AF7AAF81296D54C9001DF0CD /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F286E3D7296D6EFB00B0D3EC /* Environments */ = {
+			isa = PBXGroup;
+			children = (
+				AF7AAF84296D54C9001DF0CD /* Info.plist */,
+			);
+			path = Environments;
+			sourceTree = "<group>";
+		};
+		F286E3D8296D6F1200B0D3EC /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				AF7AAF7A296D54C7001DF0CD /* ViewController.swift */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		F286E3D9296D6F4200B0D3EC /* BusinessLogic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BusinessLogic;
+			sourceTree = "<group>";
+		};
+		F286E3DA296D6F5100B0D3EC /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,7 +351,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G46T4VKZ45;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BeerBuddy/Info.plist;
+				INFOPLIST_FILE = BeerBuddy/Environments/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -326,7 +382,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G46T4VKZ45;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BeerBuddy/Info.plist;
+				INFOPLIST_FILE = BeerBuddy/Environments/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

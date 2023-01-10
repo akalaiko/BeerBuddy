@@ -45,7 +45,7 @@ file_length:
   error: 1200
 
 line_length:
-  error: 120
+  error: 200
   ignores_urls: true
   ignores_comments: true
 

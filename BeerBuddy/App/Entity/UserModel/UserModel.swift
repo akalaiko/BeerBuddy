@@ -31,9 +31,9 @@ enum Sex {
 }
 
 indirect enum Interests {
-    case Sport(Sport)
-    case Music(Music)
-    case Movies(Movies)
+    case sport(Sport)
+    case music(Music)
+    case movies(Movies)
 }
 
 enum Sport {

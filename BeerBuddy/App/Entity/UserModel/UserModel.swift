@@ -13,8 +13,11 @@ struct UserModel {
     let lastName: String
     let username: String
     var matches: [UUID]
-    let sex: Sex
+    let sex: Gender
+    let avatar: UIImage
+    let smokingAttitude: ViewsOnSmoking
     let birthDate: Double
+    let bio: String
     var age: Int {
         let now = Date()
         let calendar = Calendar.current
@@ -25,9 +28,16 @@ struct UserModel {
     var favAlcohol: [Alcohol]
 }
 
-enum Sex {
+enum Gender {
     case male
     case female
+    case other
+}
+
+enum ViewsOnSmoking {
+    case positive
+    case negative
+    case neutral
 }
 
 indirect enum Interests {
@@ -46,6 +56,7 @@ enum Sport {
     case cycling
     case running
     case golf
+    case other
 }
 
 enum Music {
@@ -89,6 +100,7 @@ enum Alcohol {
     case liqueur
     case absinthe
     case tequila
+    case noDrinking
 }
 
 

@@ -4,6 +4,8 @@
 //
 //  Created by Polina Tikhomirova on 12.01.2023.
 //
+// swiftlint: disable type_name
+//
 
 import UIKit
 

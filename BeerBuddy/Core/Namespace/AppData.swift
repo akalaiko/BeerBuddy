@@ -20,6 +20,14 @@ enum AppData {
         static var matchBeer: String {
             "matchBeer"
         }
+        
+        static var bearLogin: String {
+            "bearLogin"
+        }
+        
+        static var waveBackground: String {
+            "waveBackground"
+        }
     }
 
     /// Screens data for building.

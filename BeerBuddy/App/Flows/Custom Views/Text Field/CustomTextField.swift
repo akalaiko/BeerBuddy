@@ -20,6 +20,8 @@ extension CustomTextField {
 
 final class CustomTextField: UITextField {
     private var maxLength: Int = 0
+    private var minLength: Int = 0
+    private var isSecure: Bool = false
     private var allowedCharInString: String = ""
     private var restriction = RestrictionType.none
     private var textPadding = UIEdgeInsets(
@@ -29,10 +31,18 @@ final class CustomTextField: UITextField {
         right: 20
     )
     
-    init(restriction: RestrictionType = .none, maxLength: Int = 0) {
-        super.init(frame: .init(x: 0, y: 0, width: 0, height: 40))
-        self.restriction = restriction
-        self.maxLength = maxLength
+    init(
+        restriction: RestrictionType = .none,
+        maxLength: Int = 0,
+        minLength: Int = 0,
+        isSecure: Bool = false,
+        placeholder: String) {
+            super.init(frame: .init(x: 0, y: 0, width: 0, height: 40))
+            self.restriction = restriction
+            self.maxLength = maxLength
+            self.minLength = minLength
+            self.isSecure = isSecure
+            self.placeholder = placeholder
 
         setupUI()
     }
@@ -72,6 +82,17 @@ final class CustomTextField: UITextField {
                 let finalText = text.replacingCharacters(in: textRange, with: string)
                 if maxLength > 0, maxLength < finalText.utf8.count {
                     return false
+                }
+            }
+            if let text = self.text, let textRange = Range(range, in: text) {
+                let finalText = text.replacingCharacters(in: textRange, with: string)
+                if minLength < 0, minLength < finalText.utf8.count {
+                    return false
+                }
+            }
+            if self.text != nil {
+                if isSecure == true {
+                    isSecureTextEntry = true
                 }
             }
             if !self.allowedCharInString.isEmpty {

@@ -56,9 +56,8 @@ final class CustomTextField: UITextField {
         setBorder()
     }
     
-    func verify(
-        shouldChangeCharactersIn range: NSRange,
-        replacementString string: String) -> Bool {
+    func verify(shouldChangeCharactersIn range: NSRange,
+                replacementString string: String) -> Bool {
             switch restriction {
             case .none:
                 break
@@ -107,12 +106,12 @@ final class CustomTextField: UITextField {
     private func setupUI() {
         textColor = .black
         attributedPlaceholder = NSAttributedString(
-            string: "Placeholder Text",
+            string: self.placeholder ?? "",
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.darkGray
             ]
         )
-
+        isSecureTextEntry = isSecure
     }
 
     private func setBorder() {
@@ -134,4 +133,3 @@ extension CustomTextField {
         return rect.inset(by: textPadding)
     }
 }
-

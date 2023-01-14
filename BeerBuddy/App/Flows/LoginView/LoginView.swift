@@ -49,26 +49,17 @@ final class LoginView: UIView {
         return label
     }()
     
-    private lazy var loginTextField: UITextField = {
-        let textField = UITextField()
+    private lazy var loginTextField: CustomTextField = {
+        let textField = CustomTextField(placeholder: "Login")
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .white
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.black.cgColor
-        textField.layer.cornerRadius = 25
-        textField.placeholder = "Login"
         return textField
     }()
     
-    private lazy var passwordTextField: UITextField = {
-        let textField = UITextField()
+    private lazy var passwordTextField: CustomTextField = {
+        let textField = CustomTextField(isSecure: true, placeholder: "Password")
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .white
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.black.cgColor
-        textField.layer.cornerRadius = 25
-        textField.placeholder = "Password"
-        textField.isSecureTextEntry = true
         return textField
     }()
     

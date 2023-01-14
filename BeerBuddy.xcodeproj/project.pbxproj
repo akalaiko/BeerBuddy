@@ -18,6 +18,7 @@
 		EF5D25CE296D922600B6F3B1 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5D25CD296D922600B6F3B1 /* UserModel.swift */; };
 		EF5D25D129705BAE00B6F3B1 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5D25D029705BAE00B6F3B1 /* UIColor+Extensions.swift */; };
 		EF5D25D3297080E400B6F3B1 /* AppStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5D25D2297080E400B6F3B1 /* AppStyles.swift */; };
+		EF5D25D72971D7DC00B6F3B1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5D25D62971D7DC00B6F3B1 /* CustomTextField.swift */; };
 		F2F66FD9296D7C45000CF8A8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F66FD8296D7C45000CF8A8 /* MainViewController.swift */; };
 		F2F66FDC296D81A4000CF8A8 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F66FDB296D81A4000CF8A8 /* AppData.swift */; };
 /* End PBXBuildFile section */
@@ -33,6 +34,7 @@
 		EF5D25CD296D922600B6F3B1 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		EF5D25D029705BAE00B6F3B1 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		EF5D25D2297080E400B6F3B1 /* AppStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyles.swift; sourceTree = "<group>"; };
+		EF5D25D62971D7DC00B6F3B1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		F2F66FD8296D7C45000CF8A8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F2F66FDB296D81A4000CF8A8 /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +96,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		EF5D25D42971D77B00B6F3B1 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				EF5D25D52971D78700B6F3B1 /* Text Field */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		EF5D25D52971D78700B6F3B1 /* Text Field */ = {
+			isa = PBXGroup;
+			children = (
+				EF5D25D62971D7DC00B6F3B1 /* CustomTextField.swift */,
+			);
+			path = "Text Field";
+			sourceTree = "<group>";
+		};
 		F286E3D4296D6E1300B0D3EC /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +153,7 @@
 		F286E3D8296D6F1200B0D3EC /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				EF5D25D42971D77B00B6F3B1 /* Custom Views */,
 				F2F66FD7296D7C1C000CF8A8 /* Main */,
 				AF7AAF7A296D54C7001DF0CD /* ViewController.swift */,
 			);
@@ -278,6 +297,7 @@
 				EF5D25D3297080E400B6F3B1 /* AppStyles.swift in Sources */,
 				EF5D25D129705BAE00B6F3B1 /* UIColor+Extensions.swift in Sources */,
 				AF7AAF7B296D54C7001DF0CD /* ViewController.swift in Sources */,
+				EF5D25D72971D7DC00B6F3B1 /* CustomTextField.swift in Sources */,
 				EF5D25CE296D922600B6F3B1 /* UserModel.swift in Sources */,
 				AF7AAF77296D54C7001DF0CD /* AppDelegate.swift in Sources */,
 				F2F66FDC296D81A4000CF8A8 /* AppData.swift in Sources */,

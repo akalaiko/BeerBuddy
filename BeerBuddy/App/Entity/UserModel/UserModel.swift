@@ -4,7 +4,7 @@
 //
 //  Created by Polina Tikhomirova on 10.01.2023.
 //
-
+// swiftlint: disable identifier_name
 import UIKit
 
 struct UserModel {

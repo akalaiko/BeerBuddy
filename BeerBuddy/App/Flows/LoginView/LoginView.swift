@@ -13,9 +13,11 @@ final class LoginView: UIView {
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: .zero)
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
         scrollView.frame = self.bounds
         scrollView.contentSize = contentSize
         scrollView.backgroundColor = .clear
+        scrollView.isScrollEnabled = false
         scrollView.addGestureRecognizer(
             UITapGestureRecognizer(
                 target: self,
@@ -30,7 +32,7 @@ final class LoginView: UIView {
     }()
     
     private var contentSize: CGSize {
-        CGSize(width: frame.size.width, height: frame.size.height + 10)
+        CGSize(width: frame.size.width, height: frame.size.height + AppStyles.size.smallPadding)
     }
     
     private lazy var avatarImageView: UIImageView = {
@@ -63,18 +65,13 @@ final class LoginView: UIView {
         return textField
     }()
     
-    private(set) lazy var loginButton: UIButton = {
-        let button = UIButton()
+    private lazy var loginButton: CustomButton = {
+        let button = CustomButton(title: "LOG IN")
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("LOG IN", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .medium)
-        button.layer.cornerRadius = 25
-        button.backgroundColor = AppStyles.color.brown
         return button
     }()
     
-    private(set) lazy var registrationButton: UIButton = {
+    private lazy var registrationButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         let title = "REGISTRATION"
@@ -91,7 +88,6 @@ final class LoginView: UIView {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -99,7 +95,7 @@ final class LoginView: UIView {
     }
     
     // MARK: - Private methods
-    private func configureUI() {
+    func configureUI() {
         addScrollView()
         setupBackground()
         addAvatarImage()
@@ -133,10 +129,10 @@ final class LoginView: UIView {
         
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor,
-                                                 constant: 50),
+                                                 constant: 100),
             avatarImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 200),
-            avatarImageView.heightAnchor.constraint(equalToConstant: 230)
+            avatarImageView.widthAnchor.constraint(equalToConstant: AppStyles.size.avatarWidth),
+            avatarImageView.heightAnchor.constraint(equalToConstant: AppStyles.size.avatarHeight)
         ])
     }
     
@@ -145,7 +141,7 @@ final class LoginView: UIView {
         
         NSLayoutConstraint.activate([
             nameAppLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor,
-                                              constant: 10),
+                                              constant: AppStyles.size.smallPadding),
             nameAppLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
     }
@@ -157,10 +153,10 @@ final class LoginView: UIView {
             loginTextField.topAnchor.constraint(equalTo: nameAppLabel.bottomAnchor,
                                                 constant: 30),
             loginTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
-                                                    constant: 50),
+                                                    constant: AppStyles.size.bigPadding),
             loginTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
-                                                     constant: -50),
-            loginTextField.heightAnchor.constraint(equalToConstant: 50)
+                                                     constant: -AppStyles.size.bigPadding),
+            loginTextField.heightAnchor.constraint(equalToConstant: AppStyles.size.bigPadding)
         ])
     }
     
@@ -169,12 +165,10 @@ final class LoginView: UIView {
         
         NSLayoutConstraint.activate([
             passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor,
-                                                   constant: 10),
-            passwordTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
-                                                       constant: 50),
-            passwordTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
-                                                        constant: -50),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 50)
+                                                   constant: AppStyles.size.smallPadding),
+            passwordTextField.leadingAnchor.constraint(equalTo: loginTextField.leadingAnchor),
+            passwordTextField.trailingAnchor.constraint(equalTo: loginTextField.trailingAnchor),
+            passwordTextField.heightAnchor.constraint(equalTo: loginTextField.heightAnchor)
         ])
     }
     
@@ -183,12 +177,10 @@ final class LoginView: UIView {
         
         NSLayoutConstraint.activate([
             loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor,
-                                             constant: 10),
-            loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
-                                                 constant: 50),
-            loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
-                                                  constant: -50),
-            loginButton.heightAnchor.constraint(equalToConstant: 50)
+                                             constant: AppStyles.size.smallPadding),
+            loginButton.leadingAnchor.constraint(equalTo: loginTextField.leadingAnchor),
+            loginButton.trailingAnchor.constraint(equalTo: loginTextField.trailingAnchor),
+            loginButton.heightAnchor.constraint(equalTo: loginTextField.heightAnchor)
         ])
     }
     
@@ -196,7 +188,8 @@ final class LoginView: UIView {
         contentView.addSubview(registrationButton)
         
         NSLayoutConstraint.activate([
-            registrationButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 5),
+            registrationButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor,
+                                                    constant: AppStyles.size.smallPadding),
             registrationButton.centerXAnchor.constraint(equalTo: loginButton.centerXAnchor)
         ])
     }
@@ -225,6 +218,14 @@ final class LoginView: UIView {
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
     }
+    
+    func addLoginButtonTarget(_ target: Any, action: Selector) {
+        loginButton.addTarget(target, action: action, for: .touchUpInside)
+    }
+    
+    func addRegistrationButtonTarget(_ target: Any, action: Selector) {
+        registrationButton.addTarget(target, action: action, for: .touchUpInside)
+    }
 }
 
 // MARK: - Observer Keyboard
@@ -235,7 +236,7 @@ extension LoginView {
         else { return }
         let kbSize = keyboardSize.cgRectValue.size
         let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: kbSize.height, right: 0.0)
-        
+        scrollView.isScrollEnabled = true
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
         UIView.animate(withDuration: 1) {
@@ -251,6 +252,7 @@ extension LoginView {
     
     @objc func keyboardWillBeHidden(notification: Notification) {
         let contentInsets = UIEdgeInsets.zero
+        scrollView.isScrollEnabled = false
         scrollView.contentInset = contentInsets
         UIView.animate(withDuration: 1) {
             self.scrollView.constraints

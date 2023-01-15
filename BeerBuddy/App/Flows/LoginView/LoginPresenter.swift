@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol LoginViewInput: AnyObject {
+    
+}
+
 protocol LoginViewOutput: AnyObject {
     func tappedLoginButton()
     func tappedRegistrationButton()
@@ -17,7 +21,7 @@ final class LoginPresenter {
     weak var viewController: LoginViewInput?
 }
 
-// MARK: - Release LoginViewOutput
+// MARK: - LoginViewOutput
 extension LoginPresenter: LoginViewOutput {
     func tappedLoginButton() {
         print("Login")

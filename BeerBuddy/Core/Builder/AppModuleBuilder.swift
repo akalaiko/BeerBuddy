@@ -1,14 +1,15 @@
 //
-//  LoginViewAssembly.swift
+//  AppModuleBuilder.swift
 //  BeerBuddy
 //
-//  Created by Никита Мошенцев on 14.01.2023.
+//  Created by Никита Мошенцев on 15.01.2023.
 //
 
 import Foundation
+import UIKit
 
-final class LoginViewAssembly {
-    func assemble() -> LoginViewController {
+enum AppModuleBuilder {
+    static func loginViewController() -> UIViewController & LoginViewInput {
         let presenter = LoginPresenter()
         let viewController = LoginViewController(presenter: presenter)
         presenter.viewController = viewController

@@ -108,7 +108,7 @@ final class CustomTextField: UITextField {
         attributedPlaceholder = NSAttributedString(
             string: self.placeholder ?? "",
             attributes: [
-                NSAttributedString.Key.foregroundColor: UIColor.darkGray
+                NSAttributedString.Key.foregroundColor: UIColor.lightGray
             ]
         )
         isSecureTextEntry = isSecure

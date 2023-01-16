@@ -5,10 +5,11 @@
 //  Created by Polina Tikhomirova on 12.01.2023.
 //
 // swiftlint: disable type_name
-//
+// swiftlint: disable nesting
 
 import UIKit
 
+// MARK: - Color
 enum AppStyles {
     /// Application color
     enum color {
@@ -19,11 +20,36 @@ enum AppStyles {
                    black = UIColor(hex: 0x000000),
                    offwhite = UIColor(hex: 0xFFFFFF)
     }
+}
+
+// MARK: - Size
+
+extension AppStyles {
     /// Application size
     enum size {
-        static var bigPadding: CGFloat { 50 }
-        static var smallPadding: CGFloat { 10 }
-        static var avatarWidth: CGFloat { 200 }
-        static var avatarHeight: CGFloat { 230 }
+        /// Side padding.
+        enum horizontalMargin {
+            static var big: CGFloat { 48 }
+            static var small: CGFloat { 8 }
+        }
+
+        enum verticalMargin {
+            static var small: CGFloat { 8 }
+            static var middle: CGFloat { 24 }
+        }
+
+        enum height {
+            static var textfield: CGFloat { 56 }
+        }
+    }
+}
+
+// MARK: - Font
+
+extension AppStyles {
+    /// Application font
+    enum font {
+        static var label: UIFont = .systemFont(ofSize: 44, weight: .bold)
+        static var button: UIFont = .systemFont(ofSize: 20, weight: .medium)
     }
 }

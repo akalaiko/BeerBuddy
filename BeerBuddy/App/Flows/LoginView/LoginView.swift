@@ -32,7 +32,7 @@ final class LoginView: UIView {
     }()
     
     private var contentSize: CGSize {
-        CGSize(width: frame.size.width, height: frame.size.height + AppStyles.size.smallPadding)
+        CGSize(width: frame.size.width, height: frame.size.height + 10)
     }
     
     private lazy var avatarImageView: UIImageView = {
@@ -46,7 +46,7 @@ final class LoginView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "BEER BUDDY"
-        label.font = .systemFont(ofSize: 50, weight: .bold)
+        label.font = AppStyles.font.label
         label.textColor = AppStyles.color.brown
         return label
     }()
@@ -98,9 +98,9 @@ final class LoginView: UIView {
     func configureUI() {
         addScrollView()
         setupBackground()
-        addAvatarImage()
-        addNameAppLabel()
         addLoginTextField()
+        addNameAppLabel()
+        addAvatarImage()
         addPasswordTextField()
         addLoginButton()
         addRegistrationButton()
@@ -123,49 +123,53 @@ final class LoginView: UIView {
         self.addSubview(imageView)
         self.sendSubviewToBack(imageView)
     }
-    
-    private func addAvatarImage() {
-        contentView.addSubview(avatarImageView)
-        
-        NSLayoutConstraint.activate([
-            avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor,
-                                                 constant: 100),
-            avatarImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            avatarImageView.widthAnchor.constraint(equalToConstant: AppStyles.size.avatarWidth),
-            avatarImageView.heightAnchor.constraint(equalToConstant: AppStyles.size.avatarHeight)
-        ])
-    }
-    
-    private func addNameAppLabel() {
-        contentView.addSubview(nameAppLabel)
-        
-        NSLayoutConstraint.activate([
-            nameAppLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor,
-                                              constant: AppStyles.size.smallPadding),
-            nameAppLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
-        ])
-    }
-    
+
     private func addLoginTextField() {
         contentView.addSubview(loginTextField)
         
         NSLayoutConstraint.activate([
-            loginTextField.topAnchor.constraint(equalTo: nameAppLabel.bottomAnchor,
-                                                constant: 30),
+            loginTextField.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             loginTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
-                                                    constant: AppStyles.size.bigPadding),
+                                                    constant: AppStyles.size.horizontalMargin.big),
             loginTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
-                                                     constant: -AppStyles.size.bigPadding),
-            loginTextField.heightAnchor.constraint(equalToConstant: AppStyles.size.bigPadding)
+                                                     constant: -AppStyles.size.horizontalMargin.big),
+            loginTextField.heightAnchor.constraint(equalToConstant: AppStyles.size.height.textfield)
         ])
     }
-    
+
+    private func addNameAppLabel() {
+        contentView.addSubview(nameAppLabel)
+
+        NSLayoutConstraint.activate([
+            nameAppLabel.bottomAnchor.constraint(equalTo: loginTextField.topAnchor,
+                                                 constant: -AppStyles.size.verticalMargin.middle),
+            nameAppLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+        ])
+    }
+
+    private func addAvatarImage() {
+        guard let width = avatarImageView.image?.size.width,
+                let height = avatarImageView.image?.size.height else { return }
+
+        let multiplierHeight = height / width
+
+        contentView.addSubview(avatarImageView)
+        NSLayoutConstraint.activate([
+            avatarImageView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor),
+            avatarImageView.bottomAnchor.constraint(equalTo: nameAppLabel.topAnchor,
+                                                    constant: -AppStyles.size.verticalMargin.small),
+            avatarImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            avatarImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.42),
+            avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor, multiplier: multiplierHeight)
+        ])
+    }
+
     private func addPasswordTextField() {
         contentView.addSubview(passwordTextField)
         
         NSLayoutConstraint.activate([
             passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor,
-                                                   constant: AppStyles.size.smallPadding),
+                                                   constant: AppStyles.size.verticalMargin.small),
             passwordTextField.leadingAnchor.constraint(equalTo: loginTextField.leadingAnchor),
             passwordTextField.trailingAnchor.constraint(equalTo: loginTextField.trailingAnchor),
             passwordTextField.heightAnchor.constraint(equalTo: loginTextField.heightAnchor)
@@ -177,7 +181,7 @@ final class LoginView: UIView {
         
         NSLayoutConstraint.activate([
             loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor,
-                                             constant: AppStyles.size.smallPadding),
+                                             constant: AppStyles.size.verticalMargin.small),
             loginButton.leadingAnchor.constraint(equalTo: loginTextField.leadingAnchor),
             loginButton.trailingAnchor.constraint(equalTo: loginTextField.trailingAnchor),
             loginButton.heightAnchor.constraint(equalTo: loginTextField.heightAnchor)
@@ -189,7 +193,7 @@ final class LoginView: UIView {
         
         NSLayoutConstraint.activate([
             registrationButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor,
-                                                    constant: AppStyles.size.smallPadding),
+                                                    constant: AppStyles.size.verticalMargin.small),
             registrationButton.centerXAnchor.constraint(equalTo: loginButton.centerXAnchor)
         ])
     }

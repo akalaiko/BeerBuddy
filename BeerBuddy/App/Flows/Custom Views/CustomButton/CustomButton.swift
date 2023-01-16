@@ -46,6 +46,6 @@ final class CustomButton: UIButton {
             setTitleColor(.white, for: .normal)
             backgroundColor = AppStyles.color.brown
         }
-        titleLabel?.font = .systemFont(ofSize: 20, weight: .medium)
+        titleLabel?.font = AppStyles.font.button
     }
 }

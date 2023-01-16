@@ -33,7 +33,7 @@ final class MainViewController: UITabBarController {
     ///
     /// According to the settings from the namespace
     private func setItems() {
-        self.viewControllers = AppData.screen.main.map { title, imageName, controller in
+        self.viewControllers = AppData.screen.main.items.map { title, imageName, controller in
             let vc = controller.init()
             randomColorVc(view: vc.view)
 

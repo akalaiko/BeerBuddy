@@ -90,5 +90,3 @@ enum Alcohol {
     case absinthe
     case tequila
 }
-
-

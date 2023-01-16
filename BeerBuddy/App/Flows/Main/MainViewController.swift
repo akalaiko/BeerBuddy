@@ -33,12 +33,12 @@ final class MainViewController: UITabBarController {
     ///
     /// According to the settings from the namespace
     private func setItems() {
-        self.viewControllers = AppData.screen.main.map { tittle, imageName, controller in
+        self.viewControllers = AppData.screen.main.map { title, imageName, controller in
             let vc = controller.init()
             randomColorVc(view: vc.view)
 
             let image = UIImage(named: imageName)
-            vc.tabBarItem = UITabBarItem(title: tittle, image: image, selectedImage: image)
+            vc.tabBarItem = UITabBarItem(title: title, image: image, selectedImage: image)
             return UINavigationController(rootViewController: vc)
         }
     }

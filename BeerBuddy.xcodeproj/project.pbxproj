@@ -11,6 +11,11 @@
 		AF00D8052971B743005B6C5D /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = AF00D8042971B743005B6C5D /* FirebaseDatabase */; };
 		AF00D8072971B743005B6C5D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AF00D8062971B743005B6C5D /* FirebaseFirestore */; };
 		AF00D8092971B866005B6C5D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF00D8082971B866005B6C5D /* GoogleService-Info.plist */; };
+		AF00D80D2972B16B005B6C5D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF00D80C2972B16B005B6C5D /* LoginViewController.swift */; };
+		AF00D80F2972B261005B6C5D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF00D80E2972B261005B6C5D /* LoginView.swift */; };
+		AF00D8112972F171005B6C5D /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF00D8102972F171005B6C5D /* LoginPresenter.swift */; };
+		AF00D81629742D06005B6C5D /* AppModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF00D81529742D06005B6C5D /* AppModuleBuilder.swift */; };
+		AF00D81929743C17005B6C5D /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF00D81829743C17005B6C5D /* CustomButton.swift */; };
 		AF7AAF77296D54C7001DF0CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7AAF76296D54C7001DF0CD /* AppDelegate.swift */; };
 		AF7AAF7B296D54C7001DF0CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7AAF7A296D54C7001DF0CD /* ViewController.swift */; };
 		AF7AAF80296D54C9001DF0CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF7AAF7F296D54C9001DF0CD /* Assets.xcassets */; };
@@ -25,6 +30,11 @@
 
 /* Begin PBXFileReference section */
 		AF00D8082971B866005B6C5D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AF00D80C2972B16B005B6C5D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		AF00D80E2972B261005B6C5D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		AF00D8102972F171005B6C5D /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		AF00D81529742D06005B6C5D /* AppModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModuleBuilder.swift; sourceTree = "<group>"; };
+		AF00D81829743C17005B6C5D /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		AF7AAF73296D54C7001DF0CD /* BeerBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeerBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF7AAF76296D54C7001DF0CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF7AAF7A296D54C7001DF0CD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +63,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF00D80B2972B14C005B6C5D /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				AF00D80C2972B16B005B6C5D /* LoginViewController.swift */,
+				AF00D80E2972B261005B6C5D /* LoginView.swift */,
+				AF00D8102972F171005B6C5D /* LoginPresenter.swift */,
+			);
+			path = LoginView;
+			sourceTree = "<group>";
+		};
+		AF00D81429742CC7005B6C5D /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				AF00D81529742D06005B6C5D /* AppModuleBuilder.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		AF00D81729743C00005B6C5D /* CustomButton */ = {
+			isa = PBXGroup;
+			children = (
+				AF00D81829743C17005B6C5D /* CustomButton.swift */,
+			);
+			path = CustomButton;
+			sourceTree = "<group>";
+		};
 		AF7AAF6A296D54C7001DF0CD = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +135,7 @@
 		EF5D25D42971D77B00B6F3B1 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				AF00D81729743C00005B6C5D /* CustomButton */,
 				EF5D25D52971D78700B6F3B1 /* Text Field */,
 			);
 			path = "Custom Views";
@@ -118,7 +155,6 @@
 				F286E3D9296D6F4200B0D3EC /* BusinessLogic */,
 				F286E3DA296D6F5100B0D3EC /* Entity */,
 				F286E3D8296D6F1200B0D3EC /* Flows */,
-				AF7AAF76296D54C7001DF0CD /* AppDelegate.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -126,6 +162,7 @@
 		F286E3D5296D6E2000B0D3EC /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				AF00D81429742CC7005B6C5D /* Builder */,
 				EF5D25CF29705B8D00B6F3B1 /* Extensions */,
 				F2F66FDA296D8190000CF8A8 /* Namespace */,
 			);
@@ -153,9 +190,11 @@
 		F286E3D8296D6F1200B0D3EC /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				AF00D80B2972B14C005B6C5D /* LoginView */,
 				EF5D25D42971D77B00B6F3B1 /* Custom Views */,
 				F2F66FD7296D7C1C000CF8A8 /* Main */,
 				AF7AAF7A296D54C7001DF0CD /* ViewController.swift */,
+				AF7AAF76296D54C7001DF0CD /* AppDelegate.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -296,7 +335,12 @@
 				F2F66FD9296D7C45000CF8A8 /* MainViewController.swift in Sources */,
 				EF5D25D3297080E400B6F3B1 /* AppStyles.swift in Sources */,
 				EF5D25D129705BAE00B6F3B1 /* UIColor+Extensions.swift in Sources */,
+				AF00D81929743C17005B6C5D /* CustomButton.swift in Sources */,
+				AF00D81629742D06005B6C5D /* AppModuleBuilder.swift in Sources */,
+				AF00D80F2972B261005B6C5D /* LoginView.swift in Sources */,
+				AF00D8112972F171005B6C5D /* LoginPresenter.swift in Sources */,
 				AF7AAF7B296D54C7001DF0CD /* ViewController.swift in Sources */,
+				AF00D80D2972B16B005B6C5D /* LoginViewController.swift in Sources */,
 				EF5D25D72971D7DC00B6F3B1 /* CustomTextField.swift in Sources */,
 				EF5D25CE296D922600B6F3B1 /* UserModel.swift in Sources */,
 				AF7AAF77296D54C7001DF0CD /* AppDelegate.swift in Sources */,

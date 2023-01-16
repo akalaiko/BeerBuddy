@@ -49,7 +49,7 @@ extension AppStyles {
 extension AppStyles {
     /// Application font
     enum font {
-        static var label: UIFont = .systemFont(ofSize: 44, weight: .bold)
+        static var logo: UIFont = .systemFont(ofSize: 44, weight: .bold)
         static var button: UIFont = .systemFont(ofSize: 20, weight: .medium)
     }
 }

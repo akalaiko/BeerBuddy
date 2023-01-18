@@ -44,7 +44,9 @@ extension AppStyles {
         }
 
         enum height {
+            static var header: CGFloat { 80 }
             static var textfield: CGFloat { 56 }
+            static var tableCell: CGFloat { 80 }
         }
     }
 }

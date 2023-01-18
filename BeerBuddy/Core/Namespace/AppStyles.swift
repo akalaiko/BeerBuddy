@@ -57,5 +57,6 @@ extension AppStyles {
         static var logo: UIFont = .systemFont(ofSize: 44, weight: .bold)
         static var button: UIFont = .systemFont(ofSize: 20, weight: .medium)
         static var title: UIFont = .systemFont(ofSize: 32, weight: .semibold)
+        static var username: UIFont = .systemFont(ofSize: 24, weight: .semibold)
     }
 }

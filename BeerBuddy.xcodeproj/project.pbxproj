@@ -25,6 +25,7 @@
 		EF5D25D3297080E400B6F3B1 /* AppStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5D25D2297080E400B6F3B1 /* AppStyles.swift */; };
 		EF5D25D72971D7DC00B6F3B1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5D25D62971D7DC00B6F3B1 /* CustomTextField.swift */; };
 		F23AF69529742A8000584F85 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23AF69429742A8000584F85 /* HeaderView.swift */; };
+		F26C37C92976E0C400E14944 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C37C82976E0C400E14944 /* UserInfoView.swift */; };
 		F2F66FD9296D7C45000CF8A8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F66FD8296D7C45000CF8A8 /* MainViewController.swift */; };
 		F2F66FDC296D81A4000CF8A8 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F66FDB296D81A4000CF8A8 /* AppData.swift */; };
 /* End PBXBuildFile section */
@@ -47,6 +48,7 @@
 		EF5D25D2297080E400B6F3B1 /* AppStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyles.swift; sourceTree = "<group>"; };
 		EF5D25D62971D7DC00B6F3B1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		F23AF69429742A8000584F85 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		F26C37C82976E0C400E14944 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		F2F66FD8296D7C45000CF8A8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F2F66FDB296D81A4000CF8A8 /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +139,7 @@
 		EF5D25D42971D77B00B6F3B1 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				F26C37C72976E09D00E14944 /* UserInfo */,
 				AF00D81729743C00005B6C5D /* CustomButton */,
 				F23AF69329742A6E00584F85 /* Header */,
 				EF5D25D52971D78700B6F3B1 /* Text Field */,
@@ -158,6 +161,14 @@
 				F23AF69429742A8000584F85 /* HeaderView.swift */,
 			);
 			path = Header;
+			sourceTree = "<group>";
+		};
+		F26C37C72976E09D00E14944 /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				F26C37C82976E0C400E14944 /* UserInfoView.swift */,
+			);
+			path = UserInfo;
 			sourceTree = "<group>";
 		};
 		F286E3D4296D6E1300B0D3EC /* App */ = {
@@ -356,6 +367,7 @@
 				EF5D25D72971D7DC00B6F3B1 /* CustomTextField.swift in Sources */,
 				EF5D25CE296D922600B6F3B1 /* UserModel.swift in Sources */,
 				AF7AAF77296D54C7001DF0CD /* AppDelegate.swift in Sources */,
+				F26C37C92976E0C400E14944 /* UserInfoView.swift in Sources */,
 				F2F66FDC296D81A4000CF8A8 /* AppData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

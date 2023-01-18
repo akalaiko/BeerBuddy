@@ -31,6 +31,10 @@ enum AppData {
         static var waveBackground: String {
             "waveBackground"
         }
+        static var location: String { "location" }
+        static var noSmoking: String { "noSmoking" }
+        static var noDrinking: String { "noDrinking" }
+        static var testAvatar: String { "avatar" }
     }
 }
 

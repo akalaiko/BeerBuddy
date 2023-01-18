@@ -24,4 +24,8 @@ enum AppModuleBuilder {
 
         return viewController
     }
+
+    static func testController() -> UIViewController {
+           return ViewController()
+    }
 }

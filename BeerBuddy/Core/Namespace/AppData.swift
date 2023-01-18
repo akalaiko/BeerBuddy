@@ -16,21 +16,10 @@ enum AppData {
     
     /// Names of the images added to the Assets.
     enum imageName {
-        static var beer: String {
-            "beer"
-        }
-
-        static var matchBeer: String {
-            "matchBeer"
-        }
-        
-        static var bearLogin: String {
-            "bearLogin"
-        }
-        
-        static var waveBackground: String {
-            "waveBackground"
-        }
+        static var beer: String { "beer" }
+        static var matchBeer: String { "matchBeer" }
+        static var bearLogin: String { "bearLogin" }
+        static var waveBackground: String { "waveBackground" }
         static var location: String { "location" }
         static var noSmoking: String { "noSmoking" }
         static var noDrinking: String { "noDrinking" }

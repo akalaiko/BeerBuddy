@@ -16,4 +16,16 @@ enum AppModuleBuilder {
         
         return viewController
     }
+
+    static func matchesController() -> UIViewController & MatchesViewInput {
+        let presenter = MatchesPresenter()
+        let viewController = MatchesViewController(presenter: presenter)
+        presenter.viewInput = viewController
+
+        return viewController
+    }
+
+    static func testController() -> UIViewController {
+           return ViewController()
+    }
 }

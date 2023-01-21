@@ -63,6 +63,8 @@ class MatchesView: UIView {
             imageName: AppData.imageName.slider,
             target: self,
             action: #selector(filterAction))
+
+        setUITests()
     }
 
     // MARK: - Public Methods
@@ -77,6 +79,15 @@ class MatchesView: UIView {
     }
 
     // MARK: - Private Methods
+
+    /// Setting ui test Identifiers.
+    private func setUITests() {
+        self.accessibilityIdentifier = "matchesView"
+        headerView.accessibilityIdentifier = "headerView"
+        tableView.accessibilityIdentifier = "tableView"
+    }
+
+    // MARK: - Actions
 
     /// The action of the header button.
     @objc private func filterAction() {

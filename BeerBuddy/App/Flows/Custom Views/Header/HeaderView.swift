@@ -29,6 +29,7 @@ class HeaderView: UIView {
     init(title text: String) {
         super.init(frame: .zero)
         setupUI(title: text)
+        setUITests()
     }
 
     required init?(coder: NSCoder) {
@@ -70,6 +71,7 @@ class HeaderView: UIView {
             let image = UIImage(named: imageName)
             button.setImage(image, for: .normal)
             button.tintColor = titleLabel.textColor
+            button.accessibilityIdentifier = "rightButton"
             return button
         }()
 
@@ -118,5 +120,12 @@ class HeaderView: UIView {
                 button.transform = CGAffineTransform.identity
             }
         }
+    }
+
+    // MARK: - Private Methods
+
+    /// Setting ui test Identifiers.
+    private func setUITests() {
+        titleLabel.accessibilityIdentifier = "titleLabel"
     }
 }

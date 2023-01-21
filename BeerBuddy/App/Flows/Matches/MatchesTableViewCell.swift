@@ -34,6 +34,7 @@ class MatchesTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
+        setUITests()
     }
 
     required init?(coder: NSCoder) {
@@ -101,5 +102,10 @@ class MatchesTableViewCell: UITableViewCell {
     private func  circleAvatar() {
         avatarImageView.layer.cornerRadius = avatarImageView.frame.height / 2
         avatarImageView.clipsToBounds = true
+    }
+
+    /// Setting ui test Identifiers.
+    private func setUITests() {
+        self.accessibilityIdentifier = "matchesTableViewCell"
     }
 }

@@ -46,7 +46,7 @@ final class LoginView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "BEER BUDDY"
-        label.font = AppStyles.font.label
+        label.font = AppStyles.font.logo
         label.textColor = AppStyles.color.brown
         return label
     }()

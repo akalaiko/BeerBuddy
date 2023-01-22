@@ -27,9 +27,28 @@
 		EF5D25D129705BAE00B6F3B1 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5D25D029705BAE00B6F3B1 /* UIColor+Extensions.swift */; };
 		EF5D25D3297080E400B6F3B1 /* AppStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5D25D2297080E400B6F3B1 /* AppStyles.swift */; };
 		EF5D25D72971D7DC00B6F3B1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5D25D62971D7DC00B6F3B1 /* CustomTextField.swift */; };
+		F2039603297C2D7C00F655C2 /* AppUITestsLaunchArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2039602297C2D7C00F655C2 /* AppUITestsLaunchArguments.swift */; };
+		F2039605297C2DAA00F655C2 /* MatchesViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2039604297C2DAA00F655C2 /* MatchesViewUITests.swift */; };
+		F2039606297C2DAE00F655C2 /* AppUITestsLaunchArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2039602297C2D7C00F655C2 /* AppUITestsLaunchArguments.swift */; };
+		F23AF69529742A8000584F85 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23AF69429742A8000584F85 /* HeaderView.swift */; };
+		F26C37C92976E0C400E14944 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C37C82976E0C400E14944 /* UserInfoView.swift */; };
+		F2E59C3F29759582008773E8 /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E59C3E29759582008773E8 /* MatchesViewController.swift */; };
+		F2E59C412975962D008773E8 /* MatchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E59C402975962D008773E8 /* MatchesView.swift */; };
+		F2E59C432975AA0E008773E8 /* MatchesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E59C422975AA0E008773E8 /* MatchesPresenter.swift */; };
+		F2E59C452975AC7F008773E8 /* MatchesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E59C442975AC7F008773E8 /* MatchesTableViewCell.swift */; };
 		F2F66FD9296D7C45000CF8A8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F66FD8296D7C45000CF8A8 /* MainViewController.swift */; };
 		F2F66FDC296D81A4000CF8A8 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F66FDB296D81A4000CF8A8 /* AppData.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F20395FD297C2D2000F655C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AF7AAF6B296D54C7001DF0CD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AF7AAF72296D54C7001DF0CD;
+			remoteInfo = BeerBuddy;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		AF00D8082971B866005B6C5D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -51,6 +70,15 @@
 		EF5D25D029705BAE00B6F3B1 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		EF5D25D2297080E400B6F3B1 /* AppStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyles.swift; sourceTree = "<group>"; };
 		EF5D25D62971D7DC00B6F3B1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		F20395F7297C2D2000F655C2 /* BeerBuddyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerBuddyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2039602297C2D7C00F655C2 /* AppUITestsLaunchArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUITestsLaunchArguments.swift; sourceTree = "<group>"; };
+		F2039604297C2DAA00F655C2 /* MatchesViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesViewUITests.swift; sourceTree = "<group>"; };
+		F23AF69429742A8000584F85 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		F26C37C82976E0C400E14944 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
+		F2E59C3E29759582008773E8 /* MatchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
+		F2E59C402975962D008773E8 /* MatchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesView.swift; sourceTree = "<group>"; };
+		F2E59C422975AA0E008773E8 /* MatchesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesPresenter.swift; sourceTree = "<group>"; };
+		F2E59C442975AC7F008773E8 /* MatchesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesTableViewCell.swift; sourceTree = "<group>"; };
 		F2F66FD8296D7C45000CF8A8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F2F66FDB296D81A4000CF8A8 /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,6 +91,13 @@
 				AF00D8052971B743005B6C5D /* FirebaseDatabase in Frameworks */,
 				AF00D8032971B743005B6C5D /* FirebaseAuth in Frameworks */,
 				AF00D8072971B743005B6C5D /* FirebaseFirestore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F20395F4297C2D2000F655C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				AF7AAF75296D54C7001DF0CD /* BeerBuddy */,
+				F20395F8297C2D2000F655C2 /* BeerBuddyUITests */,
 				AF7AAF74296D54C7001DF0CD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -107,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				AF7AAF73296D54C7001DF0CD /* BeerBuddy.app */,
+				F20395F7297C2D2000F655C2 /* BeerBuddyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				F286E3D4296D6E1300B0D3EC /* App */,
+				AF7AAF76296D54C7001DF0CD /* AppDelegate.swift */,
 				F286E3D5296D6E2000B0D3EC /* Core */,
 				F286E3D6296D6E2800B0D3EC /* Resources */,
 				F286E3D7296D6EFB00B0D3EC /* Environments */,
@@ -151,7 +189,9 @@
 		EF5D25D42971D77B00B6F3B1 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				F26C37C72976E09D00E14944 /* UserInfo */,
 				AF00D81729743C00005B6C5D /* CustomButton */,
+				F23AF69329742A6E00584F85 /* Header */,
 				EF5D25D52971D78700B6F3B1 /* Text Field */,
 			);
 			path = "Custom Views";
@@ -163,6 +203,31 @@
 				EF5D25D62971D7DC00B6F3B1 /* CustomTextField.swift */,
 			);
 			path = "Text Field";
+			sourceTree = "<group>";
+		};
+		F20395F8297C2D2000F655C2 /* BeerBuddyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F2039602297C2D7C00F655C2 /* AppUITestsLaunchArguments.swift */,
+				F2039604297C2DAA00F655C2 /* MatchesViewUITests.swift */,
+			);
+			path = BeerBuddyUITests;
+			sourceTree = "<group>";
+		};
+		F23AF69329742A6E00584F85 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				F23AF69429742A8000584F85 /* HeaderView.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		F26C37C72976E09D00E14944 /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				F26C37C82976E0C400E14944 /* UserInfoView.swift */,
+			);
+			path = UserInfo;
 			sourceTree = "<group>";
 		};
 		F286E3D4296D6E1300B0D3EC /* App */ = {
@@ -207,11 +272,11 @@
 			isa = PBXGroup;
 			children = (
 				EF51CE0E2975F85F00B865E8 /* RegistrationView */,
+				F2E59C3D2975955D008773E8 /* Matches */,
 				AF00D80B2972B14C005B6C5D /* LoginView */,
 				EF5D25D42971D77B00B6F3B1 /* Custom Views */,
 				F2F66FD7296D7C1C000CF8A8 /* Main */,
 				AF7AAF7A296D54C7001DF0CD /* ViewController.swift */,
-				AF7AAF76296D54C7001DF0CD /* AppDelegate.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -229,6 +294,17 @@
 				EF5D25CC296D921600B6F3B1 /* UserModel */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		F2E59C3D2975955D008773E8 /* Matches */ = {
+			isa = PBXGroup;
+			children = (
+				F2E59C3E29759582008773E8 /* MatchesViewController.swift */,
+				F2E59C402975962D008773E8 /* MatchesView.swift */,
+				F2E59C422975AA0E008773E8 /* MatchesPresenter.swift */,
+				F2E59C442975AC7F008773E8 /* MatchesTableViewCell.swift */,
+			);
+			path = Matches;
 			sourceTree = "<group>";
 		};
 		F2F66FD7296D7C1C000CF8A8 /* Main */ = {
@@ -274,6 +350,24 @@
 			productReference = AF7AAF73296D54C7001DF0CD /* BeerBuddy.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F20395F6297C2D2000F655C2 /* BeerBuddyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2039601297C2D2000F655C2 /* Build configuration list for PBXNativeTarget "BeerBuddyUITests" */;
+			buildPhases = (
+				F20395F3297C2D2000F655C2 /* Sources */,
+				F20395F4297C2D2000F655C2 /* Frameworks */,
+				F20395F5297C2D2000F655C2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F20395FE297C2D2000F655C2 /* PBXTargetDependency */,
+			);
+			name = BeerBuddyUITests;
+			productName = BeerBuddyUITests;
+			productReference = F20395F7297C2D2000F655C2 /* BeerBuddyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -286,6 +380,11 @@
 				TargetAttributes = {
 					AF7AAF72296D54C7001DF0CD = {
 						CreatedOnToolsVersion = 14.2;
+					};
+					F20395F6297C2D2000F655C2 = {
+						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
+						TestTargetID = AF7AAF72296D54C7001DF0CD;
 					};
 				};
 			};
@@ -306,6 +405,7 @@
 			projectRoot = "";
 			targets = (
 				AF7AAF72296D54C7001DF0CD /* BeerBuddy */,
+				F20395F6297C2D2000F655C2 /* BeerBuddyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -318,6 +418,13 @@
 				AF7AAF83296D54C9001DF0CD /* LaunchScreen.storyboard in Resources */,
 				AF7AAF80296D54C9001DF0CD /* Assets.xcassets in Resources */,
 				AF00D8092971B866005B6C5D /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F20395F5297C2D2000F655C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,7 +456,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2039606297C2DAE00F655C2 /* AppUITestsLaunchArguments.swift in Sources */,
 				F2F66FD9296D7C45000CF8A8 /* MainViewController.swift in Sources */,
+				F2E59C452975AC7F008773E8 /* MatchesTableViewCell.swift in Sources */,
+				F23AF69529742A8000584F85 /* HeaderView.swift in Sources */,
+				F2E59C412975962D008773E8 /* MatchesView.swift in Sources */,
 				EF5D25D3297080E400B6F3B1 /* AppStyles.swift in Sources */,
 				EF5D25D129705BAE00B6F3B1 /* UIColor+Extensions.swift in Sources */,
 				EF51CE102975F87300B865E8 /* RegistrationView.swift in Sources */,
@@ -357,18 +468,38 @@
 				AF00D81629742D06005B6C5D /* AppModuleBuilder.swift in Sources */,
 				AF00D80F2972B261005B6C5D /* LoginView.swift in Sources */,
 				AF00D8112972F171005B6C5D /* LoginPresenter.swift in Sources */,
+				F2E59C432975AA0E008773E8 /* MatchesPresenter.swift in Sources */,
 				AF7AAF7B296D54C7001DF0CD /* ViewController.swift in Sources */,
 				EF51CE18297730E900B865E8 /* RegistrationPresenter.swift in Sources */,
 				EF51CE16297730CA00B865E8 /* RegistrationViewController.swift in Sources */,
 				AF00D80D2972B16B005B6C5D /* LoginViewController.swift in Sources */,
 				EF5D25D72971D7DC00B6F3B1 /* CustomTextField.swift in Sources */,
+				F2E59C3F29759582008773E8 /* MatchesViewController.swift in Sources */,
 				EF5D25CE296D922600B6F3B1 /* UserModel.swift in Sources */,
 				AF7AAF77296D54C7001DF0CD /* AppDelegate.swift in Sources */,
+				F26C37C92976E0C400E14944 /* UserInfoView.swift in Sources */,
 				F2F66FDC296D81A4000CF8A8 /* AppData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F20395F3297C2D2000F655C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2039605297C2DAA00F655C2 /* MatchesViewUITests.swift in Sources */,
+				F2039603297C2D7C00F655C2 /* AppUITestsLaunchArguments.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F20395FE297C2D2000F655C2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AF7AAF72296D54C7001DF0CD /* BeerBuddy */;
+			targetProxy = F20395FD297C2D2000F655C2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		AF7AAF81296D54C9001DF0CD /* LaunchScreen.storyboard */ = {
@@ -558,6 +689,61 @@
 			};
 			name = Release;
 		};
+		F20395FF297C2D2000F655C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 97UL48L835;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kermit.the.frog.BeerBuddyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = BeerBuddy;
+			};
+			name = Debug;
+		};
+		F2039600297C2D2000F655C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 97UL48L835;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kermit.the.frog.BeerBuddyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = BeerBuddy;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -575,6 +761,15 @@
 			buildConfigurations = (
 				AF7AAF88296D54C9001DF0CD /* Debug */,
 				AF7AAF89296D54C9001DF0CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2039601297C2D2000F655C2 /* Build configuration list for PBXNativeTarget "BeerBuddyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F20395FF297C2D2000F655C2 /* Debug */,
+				F2039600297C2D2000F655C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

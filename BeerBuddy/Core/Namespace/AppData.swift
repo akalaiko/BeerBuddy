@@ -16,25 +16,16 @@ enum AppData {
     
     /// Names of the images added to the Assets.
     enum imageName {
-        static var beer: String {
-            "beer"
-        }
-
-        static var matchBeer: String {
-            "matchBeer"
-        }
-        
-        static var bearLogin: String {
-            "bearLogin"
-        }
-        
-        static var waveBackground: String {
-            "waveBackground"
-        }
-        
-        static var missingPhoto: String {
-            "missingPhoto"
-        }
+        static var beer: String { "beer" }
+        static var matchBeer: String { "matchBeer" }
+        static var bearLogin: String { "bearLogin" }
+        static var waveBackground: String { "waveBackground" }
+        static var missingPhoto: String { "missingPhoto" }
+        static var location: String { "location" }
+        static var noSmoking: String { "noSmoking" }
+        static var noDrinking: String { "noDrinking" }
+        static var testAvatar: String { "avatar" }
+        static var slider: String { "slider" }
     }
 }
 
@@ -45,12 +36,12 @@ extension AppData {
     enum screen {
         enum main {
             /// Controllers to be added to the tab bar
-            static var items: [(title: String, imageName: String, controller: UIViewController.Type)] {
+            static var items: [(title: String, imageName: String, controller: () -> UIViewController)] {
                 [
-                    ("Match", AppData.imageName.beer, ViewController.self),
-                    ("Map", AppData.imageName.matchBeer, ViewController.self),
-                    ("Info", AppData.imageName.beer, ViewController.self),
-                    ("Shop", AppData.imageName.matchBeer, ViewController.self)
+                    ("Match", AppData.imageName.beer, AppModuleBuilder.matchesController),
+                    ("Map", AppData.imageName.matchBeer, AppModuleBuilder.testController),
+                    ("Info", AppData.imageName.beer, AppModuleBuilder.testController),
+                    ("Shop", AppData.imageName.matchBeer, AppModuleBuilder.testController)
                 ]
             }
         }

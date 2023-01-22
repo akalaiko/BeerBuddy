@@ -19,6 +19,10 @@ enum AppStyles {
                    brown = UIColor(hex: 0x734E33),
                    black = UIColor(hex: 0x000000),
                    offwhite = UIColor(hex: 0xFFFFFF)
+
+        enum background {
+            static var main: UIColor { light }
+        }
     }
 }
 
@@ -31,6 +35,7 @@ extension AppStyles {
         enum horizontalMargin {
             static var big: CGFloat { 48 }
             static var small: CGFloat { 8 }
+            static var middle: CGFloat { 24 }
         }
 
         enum verticalMargin {
@@ -39,7 +44,9 @@ extension AppStyles {
         }
 
         enum height {
+            static var header: CGFloat { 80 }
             static var textfield: CGFloat { 56 }
+            static var tableCell: CGFloat { 80 }
         }
     }
 }
@@ -51,5 +58,7 @@ extension AppStyles {
     enum font {
         static var logo: UIFont = .systemFont(ofSize: 44, weight: .bold)
         static var button: UIFont = .systemFont(ofSize: 20, weight: .medium)
+        static var title: UIFont = .systemFont(ofSize: 32, weight: .semibold)
+        static var username: UIFont = .systemFont(ofSize: 24, weight: .semibold)
     }
 }

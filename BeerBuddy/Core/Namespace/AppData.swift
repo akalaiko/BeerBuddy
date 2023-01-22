@@ -31,6 +31,10 @@ enum AppData {
         static var waveBackground: String {
             "waveBackground"
         }
+        
+        static var missingPhoto: String {
+            "missingPhoto"
+        }
     }
 }
 

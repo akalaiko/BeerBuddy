@@ -5,7 +5,6 @@
 //  Created by Ke4a on 10.01.2023.
 //
 // swiftlint:disable type_name
-// swiftlint:disable nesting
 
 import Foundation
 import UIKit
@@ -25,5 +24,8 @@ enum AppData {
         static var noDrinking: String { "noDrinking" }
         static var testAvatar: String { "avatar" }
         static var slider: String { "slider" }
+        static var search: String { "magnifyingGlass" }
+        static var message: String { "message" }
+        static var settings: String { "gear" }
     }
 }

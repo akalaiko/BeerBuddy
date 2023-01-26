@@ -25,6 +25,10 @@ enum AppModuleBuilder {
         return viewController
     }
 
+    static func mainController() -> UIViewController {
+        return MainViewController()
+    }
+
     static func testController() -> UIViewController {
            return ViewController()
     }

@@ -41,8 +41,8 @@ class RegistrationView: UIView {
     
     private(set) lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: AppData.imageName.missingPhoto)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         
         return imageView
     }()
@@ -53,6 +53,7 @@ class RegistrationView: UIView {
         button.setTitleColor(
             AppStyles.color.black,
             for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()
@@ -163,8 +164,6 @@ class RegistrationView: UIView {
         
         contentView.addSubview(avatarImageView)
         
-        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             avatarImageView.bottomAnchor.constraint(equalTo: nameTextField.topAnchor, constant: -AppStyles.size.verticalMargin.middle),
             avatarImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -175,8 +174,6 @@ class RegistrationView: UIView {
     
     private func createAddButton() {
         contentView.addSubview(addAvatarButton)
-        
-        addAvatarButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             addAvatarButton.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor),
@@ -189,8 +186,6 @@ class RegistrationView: UIView {
     private func addNameTextField() {
         contentView.addSubview(nameTextField)
         
-        nameTextField.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             nameTextField.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -AppStyles.size.horizontalMargin.big),
             nameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: AppStyles.size.horizontalMargin.big),
@@ -201,8 +196,6 @@ class RegistrationView: UIView {
     
     private func addLoginTextField() {
         contentView.addSubview(loginTextField)
-        
-        loginTextField.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             loginTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: AppStyles.size.verticalMargin.small),
@@ -215,8 +208,6 @@ class RegistrationView: UIView {
     private func addPasswordTextField() {
         contentView.addSubview(passwordTextField)
         
-        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: AppStyles.size.verticalMargin.small),
             passwordTextField.leadingAnchor.constraint(equalTo: loginTextField.leadingAnchor),
@@ -228,8 +219,6 @@ class RegistrationView: UIView {
     private func addRepeatPasswordTextField() {
         contentView.addSubview(repeatPasswordTextField)
         
-        repeatPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             repeatPasswordTextField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: AppStyles.size.verticalMargin.small),
             repeatPasswordTextField.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor),
@@ -240,8 +229,6 @@ class RegistrationView: UIView {
     
     private func addRegistrationButton() {
         contentView.addSubview(registrationButton)
-        
-        registrationButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             registrationButton.topAnchor.constraint(equalTo: repeatPasswordTextField.bottomAnchor, constant: AppStyles.size.verticalMargin.small),

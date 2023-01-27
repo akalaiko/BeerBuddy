@@ -157,6 +157,8 @@ class RegistrationView: UIView {
     private func addScrollView() {
         self.addSubview(scrollView)
         scrollView.addSubview(contentView)
+        
+        scrollView.keyboardDismissMode = .onDrag
     }
     
     private func setupBackground() {
@@ -313,6 +315,7 @@ extension RegistrationView {
         else { return }
         let kbSize = keyboardSize.cgRectValue.size
         let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: kbSize.height, right: 0.0)
+        contentView.frame.origin.y = 0 - kbSize.height / 2
         scrollView.isScrollEnabled = true
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
@@ -328,9 +331,14 @@ extension RegistrationView {
     }
     
     @objc func keyboardWillBeHidden(notification: Notification) {
+        guard let info = notification.userInfo as? NSDictionary,
+              let keyboardSize = info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue
+        else { return }
+        let kbSize = keyboardSize.cgRectValue.size
         let contentInsets = UIEdgeInsets.zero
         scrollView.isScrollEnabled = false
         scrollView.contentInset = contentInsets
+        contentView.frame.origin.y = 0 + kbSize.height / AppStyles.size.horizontalMargin.big
         UIView.animate(withDuration: 1) {
             self.scrollView.constraints
                 .first(where: { $0.identifier == "keyboardShown" })?

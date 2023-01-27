@@ -33,7 +33,6 @@
 		F2E59C412975962D008773E8 /* MatchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E59C402975962D008773E8 /* MatchesView.swift */; };
 		F2E59C432975AA0E008773E8 /* MatchesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E59C422975AA0E008773E8 /* MatchesPresenter.swift */; };
 		F2E59C452975AC7F008773E8 /* MatchesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E59C442975AC7F008773E8 /* MatchesTableViewCell.swift */; };
-		F2F66FD9296D7C45000CF8A8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F66FD8296D7C45000CF8A8 /* MainViewController.swift */; };
 		F2F66FDC296D81A4000CF8A8 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F66FDB296D81A4000CF8A8 /* AppData.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,7 +72,6 @@
 		F2E59C402975962D008773E8 /* MatchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesView.swift; sourceTree = "<group>"; };
 		F2E59C422975AA0E008773E8 /* MatchesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesPresenter.swift; sourceTree = "<group>"; };
 		F2E59C442975AC7F008773E8 /* MatchesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesTableViewCell.swift; sourceTree = "<group>"; };
-		F2F66FD8296D7C45000CF8A8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F2F66FDB296D81A4000CF8A8 /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -293,7 +291,6 @@
 		F2F66FD7296D7C1C000CF8A8 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				F2F66FD8296D7C45000CF8A8 /* MainViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -440,7 +437,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2039606297C2DAE00F655C2 /* AppUITestsLaunchArguments.swift in Sources */,
-				F2F66FD9296D7C45000CF8A8 /* MainViewController.swift in Sources */,
 				F2E59C452975AC7F008773E8 /* MatchesTableViewCell.swift in Sources */,
 				F23AF69529742A8000584F85 /* HeaderView.swift in Sources */,
 				F2E59C412975962D008773E8 /* MatchesView.swift in Sources */,

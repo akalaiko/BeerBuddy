@@ -27,22 +27,3 @@ enum AppData {
         static var slider: String { "slider" }
     }
 }
-
-extension AppData {
-    // MARK: - Screens
-
-    /// Screen settings data.
-    enum screen {
-        enum main {
-            /// Controllers to be added to the tab bar
-            static var items: [(title: String, imageName: String, controller: () -> UIViewController)] {
-                [
-                    ("Match", AppData.imageName.beer, AppModuleBuilder.matchesController),
-                    ("Map", AppData.imageName.matchBeer, AppModuleBuilder.testController),
-                    ("Info", AppData.imageName.beer, AppModuleBuilder.testController),
-                    ("Shop", AppData.imageName.matchBeer, AppModuleBuilder.testController)
-                ]
-            }
-        }
-    }
-}

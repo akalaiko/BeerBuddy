@@ -12,7 +12,7 @@ class RegistrationView: UIView {
     
     // MARK: - Private properties
     private(set) lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView(frame: .zero)
+        let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
         scrollView.frame = self.bounds
         scrollView.contentSize = contentSize

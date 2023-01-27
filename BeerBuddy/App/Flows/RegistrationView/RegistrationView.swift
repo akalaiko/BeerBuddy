@@ -11,6 +11,17 @@ import Foundation
 class RegistrationView: UIView {
     
     // MARK: - Private properties
+    
+    private(set) lazy var backgroundImage: UIImageView = {
+        var imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = UIImage(named: AppData.imageName.waveBackground)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return imageView
+    }()
+    
     private(set) lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -107,6 +118,7 @@ class RegistrationView: UIView {
     }()
     
     //MARK: - Initialisation
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -116,9 +128,10 @@ class RegistrationView: UIView {
     }
     
     // MARK: - Configure UI public method
+    
     public func configureUI() {
-        addScrollView()
         setupBackground()
+        addScrollView()
         addNameTextField()
         addAvatarImage()
         createAddButton()
@@ -129,6 +142,18 @@ class RegistrationView: UIView {
     }
     
     // MARK: - Private methods
+    
+    private func setupBackground() {
+        self.addSubview(backgroundImage)
+        
+        NSLayoutConstraint.activate([
+            backgroundImage.topAnchor.constraint(equalTo: self.topAnchor),
+            backgroundImage.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            backgroundImage.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            backgroundImage.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        ])
+    }
+    
     private func addScrollView() {
         self.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -239,6 +264,7 @@ class RegistrationView: UIView {
     }
     
     // MARK: - Public methods
+    
     public func subscribeObserver() {
         NotificationCenter.default.addObserver(
             self,
@@ -271,6 +297,7 @@ class RegistrationView: UIView {
 }
 
 // MARK: - Extensions
+
 extension RegistrationView {
     // MARK: - Obj-C keyboard methods
     @objc func hideKeyboard() {

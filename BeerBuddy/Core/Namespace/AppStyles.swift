@@ -44,7 +44,8 @@ extension AppStyles {
         }
 
         enum height {
-            static var header: CGFloat { 80 }
+            static var header: CGFloat = UIScreen.main.bounds.height / 12
+            static var footer: CGFloat { header }
             static var textfield: CGFloat { 56 }
             static var tableCell: CGFloat { 80 }
         }

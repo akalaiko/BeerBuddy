@@ -14,7 +14,7 @@ class RegistrationViewController: UIViewController {
         guard
             let view = self.view as? RegistrationView
         else {
-            let correctView = RegistrationView(frame: self.view.frame)
+            let correctView = RegistrationView()
             self.view = correctView
             return correctView
         }

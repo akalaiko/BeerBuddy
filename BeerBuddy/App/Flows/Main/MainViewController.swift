@@ -116,10 +116,12 @@ final class MainViewController: UIViewController {
         button.contentHorizontalAlignment = .fill
 
         let isBigFooter = view.frame.maxY > view.safeAreaLayoutGuide.layoutFrame.maxY
-        button.imageEdgeInsets = UIEdgeInsets(top: isBigFooter ? AppStyles.size.verticalMargin.middle
-                                              : AppStyles.size.verticalMargin.small,
+        let middleMargin = AppStyles.size.verticalMargin.middle
+        let smallMargin = AppStyles.size.verticalMargin.small
+
+        button.imageEdgeInsets = UIEdgeInsets(top: isBigFooter ? middleMargin : smallMargin,
                                               left: 0,
-                                              bottom: isBigFooter ? 0 : AppStyles.size.verticalMargin.small,
+                                              bottom: isBigFooter ? 0 : smallMargin,
                                               right: 0)
         button.tintColor = .lightGray
         button.addTarget(self, action: #selector(tabBarButtonAction), for: .touchUpInside)

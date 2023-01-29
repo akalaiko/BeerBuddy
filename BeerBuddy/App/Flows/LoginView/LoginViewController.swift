@@ -25,6 +25,7 @@ final class LoginViewController: UIViewController {
     private var presenter: LoginViewOutput?
     
     // MARK: - Init
+    
     init(presenter: LoginViewOutput) {
         super.init(nibName: nil, bundle: nil)
         self.presenter = presenter
@@ -35,6 +36,7 @@ final class LoginViewController: UIViewController {
     }
     
     // MARK: - Lifecycle
+    
     override func loadView() {
         super.loadView()
         self.view = loginView
@@ -68,7 +70,13 @@ final class LoginViewController: UIViewController {
 
 extension LoginViewController {
     @objc func tappedLoginButton(sender: UIButton) {
-        presenter?.tappedLoginButton()
+        guard
+            let login = loginView.loginTextField.text,
+            let password = loginView.passwordTextField.text
+        else {
+            return
+        }
+        presenter?.tappedLoginButton(login: login, password: password)
     }
     
     @objc func tappedRegistrationButton() {

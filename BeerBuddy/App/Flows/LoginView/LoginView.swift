@@ -9,7 +9,8 @@ import UIKit
 
 final class LoginView: UIView {
     
-    // MARK: - private properties
+    // MARK: - Private properties
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: .zero)
         scrollView.showsHorizontalScrollIndicator = false
@@ -51,14 +52,14 @@ final class LoginView: UIView {
         return label
     }()
     
-    private lazy var loginTextField: CustomTextField = {
+    private(set) lazy var loginTextField: CustomTextField = {
         let textField = CustomTextField(placeholder: "Login")
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .white
         return textField
     }()
     
-    private lazy var passwordTextField: CustomTextField = {
+    private(set) lazy var passwordTextField: CustomTextField = {
         let textField = CustomTextField(isSecure: true, placeholder: "Password")
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .white
@@ -86,6 +87,7 @@ final class LoginView: UIView {
     }()
     
     // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -95,6 +97,7 @@ final class LoginView: UIView {
     }
     
     // MARK: - Private methods
+    
     func configureUI() {
         addScrollView()
         setupBackground()
@@ -199,6 +202,7 @@ final class LoginView: UIView {
     }
     
     // MARK: - Methods
+    
     func subscribeObserver() {
         NotificationCenter.default.addObserver(
             self,
@@ -233,6 +237,7 @@ final class LoginView: UIView {
 }
 
 // MARK: - Observer Keyboard
+
 extension LoginView {
     @objc func keyboardWasShown(notification: Notification) {
         guard let info = notification.userInfo as? NSDictionary,

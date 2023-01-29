@@ -90,7 +90,7 @@ final class MainViewController: UIViewController {
     ///   - imageName: Image name. You can use both the symbol and the image from the Asset.
     /// - Returns: The controller that will be shown on the screen when you switch the buttons on the tab bar.
     private func createController(with controller: () -> UIViewController, imageName: String) -> UIViewController {
-        let index = controllers.count
+        let index = tabBar.arrangedSubviews.count
 
         let button = createButton(imageName: imageName)
         button.tag = index
@@ -115,7 +115,7 @@ final class MainViewController: UIViewController {
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
 
-        let isBigFooter = view.frame.maxY > view.safeAreaLayoutGuide.layoutFrame.maxY
+        let isBigFooter = view.safeAreaInsets.bottom > 0
         let middleMargin = AppStyles.size.verticalMargin.middle
         let smallMargin = AppStyles.size.verticalMargin.small
 

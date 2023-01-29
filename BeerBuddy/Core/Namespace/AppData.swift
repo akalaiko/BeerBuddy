@@ -5,7 +5,6 @@
 //  Created by Ke4a on 10.01.2023.
 //
 // swiftlint:disable type_name
-// swiftlint:disable nesting
 
 import Foundation
 import UIKit
@@ -26,24 +25,8 @@ enum AppData {
         static var noDrinking: String { "noDrinking" }
         static var testAvatar: String { "avatar" }
         static var slider: String { "slider" }
-    }
-}
-
-extension AppData {
-    // MARK: - Screens
-
-    /// Screen settings data.
-    enum screen {
-        enum main {
-            /// Controllers to be added to the tab bar
-            static var items: [(title: String, imageName: String, controller: () -> UIViewController)] {
-                [
-                    ("Match", AppData.imageName.beer, AppModuleBuilder.matchesController),
-                    ("Map", AppData.imageName.matchBeer, AppModuleBuilder.testController),
-                    ("Info", AppData.imageName.beer, AppModuleBuilder.testController),
-                    ("Shop", AppData.imageName.matchBeer, AppModuleBuilder.testController)
-                ]
-            }
-        }
+        static var search: String { "magnifyingGlass" }
+        static var message: String { "message" }
+        static var settings: String { "gear" }
     }
 }

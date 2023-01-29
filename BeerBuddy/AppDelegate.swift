@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if arguments.contains(AppUITestsLaunchArguments.matchesView) {
             controller = AppModuleBuilder.matchesController()
         } else {
-            controller = AppModuleBuilder.loginViewController()
+            controller = AppModuleBuilder.mainController()
         }
 
         return controller

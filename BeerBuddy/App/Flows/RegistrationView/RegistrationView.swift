@@ -5,8 +5,8 @@
 //  Created by Polina Tikhomirova on 17.01.2023.
 //
 
-import UIKit
 import Foundation
+import UIKit
 
 class RegistrationView: UIView {
     
@@ -35,7 +35,6 @@ class RegistrationView: UIView {
         
         return scrollView
     }()
-
 
     private(set) lazy var contentView: UIView = {
         let view = UIView()
@@ -86,6 +85,7 @@ class RegistrationView: UIView {
     private(set) lazy var passwordTextField: CustomTextField = {
         let textField = CustomTextField(
             minLength: 8,
+            isSecure: true,
             placeholder: "Password")
         textField.backgroundColor = .white
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -96,6 +96,7 @@ class RegistrationView: UIView {
     private(set) lazy var repeatPasswordTextField: CustomTextField = {
         let textField = CustomTextField(
             minLength: 8,
+            isSecure: true,
             placeholder: "Repeat Password")
         textField.backgroundColor = .white
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -110,7 +111,7 @@ class RegistrationView: UIView {
         return button
     }()
     
-    //MARK: - Initialisation
+    // MARK: - Initialisation
     
     init() {
         super.init(frame: .zero)

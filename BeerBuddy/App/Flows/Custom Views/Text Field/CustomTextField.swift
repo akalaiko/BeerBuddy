@@ -56,44 +56,61 @@ final class CustomTextField: UITextField {
         setBorder()
     }
     
-    func verify(shouldChangeCharactersIn range: NSRange,
-                replacementString string: String) -> Bool {
-            switch restriction {
-            case .none:
-                break
-            case .lettersOnly:
-                let characterSet = CharacterSet.letters
-                if string.rangeOfCharacter(from: characterSet.inverted) != nil {
-                    return false
-                }
-            case .numbersOnly:
-                let numberSet = CharacterSet.decimalDigits
-                if string.rangeOfCharacter(from: numberSet.inverted) != nil {
-                    return false
-                }
-            case .phoneNumber:
-                let phoneNumberSet = CharacterSet(charactersIn: "+0123456789")
-                if string.rangeOfCharacter(from: phoneNumberSet.inverted) != nil {
-                    return false
-                }
+    private func calcRestrictionType(
+        range: NSRange,
+        string: String
+    ) -> Bool {
+        switch restriction {
+        case .none:
+            break
+        case .lettersOnly:
+            let characterSet = CharacterSet.letters
+            if string.rangeOfCharacter(from: characterSet.inverted) != nil {
+                return false
             }
-            if let text = self.text, let textRange = Range(range, in: text) {
-                let finalText = text.replacingCharacters(in: textRange, with: string)
+        case .numbersOnly:
+            let numberSet = CharacterSet.decimalDigits
+            if string.rangeOfCharacter(from: numberSet.inverted) != nil {
+                return false
+            }
+        case .phoneNumber:
+            let phoneNumberSet = CharacterSet(charactersIn: "+0123456789")
+            if string.rangeOfCharacter(from: phoneNumberSet.inverted) != nil {
+                return false
+            }
+        }
+        return true
+    }
+    
+    private func verify(
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        guard calcRestrictionType(range: range, string: string) else {
+            return false
+        }
+            guard
+                let text = self.text,
+                let textRange = Range(range, in: text)
+            else { return false }
+        
+            let finalText = String()
+        
+            if finalText == text.replacingCharacters(in: textRange, with: string) {
                 if maxLength > 0, maxLength < finalText.utf8.count {
                     return false
                 }
-            }
-            if let text = self.text, let textRange = Range(range, in: text) {
-                let finalText = text.replacingCharacters(in: textRange, with: string)
                 if minLength < 0, minLength < finalText.utf8.count {
                     return false
                 }
             }
+    
             if self.text != nil {
                 if isSecure == true {
                     isSecureTextEntry = true
                 }
             }
+        
             if !self.allowedCharInString.isEmpty {
                 let customSet = CharacterSet(charactersIn: self.allowedCharInString)
                 if string.rangeOfCharacter(from: customSet.inverted) != nil {

@@ -62,7 +62,8 @@ class RegistrationViewController: UIViewController {
     }
 }
 
-//MARK: - Extensions
+// MARK: - Extensions
+
 extension RegistrationViewController {
     // MARK: - Obj-C methods
     @objc func didTapRegistrationButton(sender: UIButton) {
@@ -71,4 +72,3 @@ extension RegistrationViewController {
 }
 
 extension RegistrationViewController: RegistrationViewInput { }
-

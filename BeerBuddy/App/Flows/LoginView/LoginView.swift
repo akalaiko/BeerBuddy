@@ -52,14 +52,14 @@ final class LoginView: UIView {
         return label
     }()
     
-    private(set) lazy var loginTextField: CustomTextField = {
+    private lazy var loginTextField: CustomTextField = {
         let textField = CustomTextField(placeholder: "Login")
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .white
         return textField
     }()
     
-    private(set) lazy var passwordTextField: CustomTextField = {
+    private lazy var passwordTextField: CustomTextField = {
         let textField = CustomTextField(isSecure: true, placeholder: "Password")
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .white
@@ -85,6 +85,14 @@ final class LoginView: UIView {
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .medium)
         return button
     }()
+    
+    var loginText: String {
+        loginTextField.text ?? ""
+    }
+    
+    var passwordText: String {
+        passwordTextField.text ?? ""
+    }
     
     // MARK: - Init
     

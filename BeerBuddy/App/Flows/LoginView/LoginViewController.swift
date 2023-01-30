@@ -44,6 +44,7 @@ final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.isNavigationBarHidden = true
         loginView.configureUI()
         setupActionsForButton()
     }
@@ -70,13 +71,7 @@ final class LoginViewController: UIViewController {
 
 extension LoginViewController {
     @objc func tappedLoginButton(sender: UIButton) {
-        guard
-            let login = loginView.loginTextField.text,
-            let password = loginView.passwordTextField.text
-        else {
-            return
-        }
-        presenter?.tappedLoginButton(login: login, password: password)
+        presenter?.tappedLoginButton(login: loginView.loginText, password: loginView.passwordText)
     }
     
     @objc func tappedRegistrationButton() {

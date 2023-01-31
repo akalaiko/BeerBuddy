@@ -10,6 +10,7 @@ import UIKit
 class RegistrationViewController: UIViewController {
     
     // MARK: - Private properties
+    
     private var registrationView: RegistrationView {
         guard
             let view = self.view as? RegistrationView
@@ -21,10 +22,11 @@ class RegistrationViewController: UIViewController {
         return view
     }
     
-    private var presenter: RegistrationPresenter?
+    private var presenter: RegistrationViewOutput?
     
-    // MARK: - Initialisation
-    init(presenter: RegistrationPresenter? = nil) {
+    // MARK: - Initialization
+    
+    init(presenter: RegistrationViewOutput) {
         super.init(nibName: nil, bundle: nil)
         self.presenter = presenter
     }
@@ -34,6 +36,7 @@ class RegistrationViewController: UIViewController {
     }
     
     // MARK: - Lifecycle
+    
     override func loadView() {
         super.loadView()
         self.view = registrationView
@@ -58,17 +61,18 @@ class RegistrationViewController: UIViewController {
     // MARK: - Private methods
     
     private func setupActionForButton() {
-        registrationView.addRegistrationButtonTarget(self, action: #selector(didTapRegistrationButton))
+        registrationView.registrationButton.addTarget(self,
+                                                      action: #selector(self.didTapRegistrationButton),
+                                                      for: .touchUpInside)
     }
-}
-
-// MARK: - Extensions
-
-extension RegistrationViewController {
-    // MARK: - Obj-C methods
+    
+    // MARK: - Actions
+    
     @objc func didTapRegistrationButton(sender: UIButton) {
         presenter?.didTapRegistrationButton()
     }
 }
+
+// MARK: - Extensions
 
 extension RegistrationViewController: RegistrationViewInput { }

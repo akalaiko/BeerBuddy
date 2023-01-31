@@ -7,17 +7,22 @@
 
 import Foundation
 
+// MARK: - Protocols 
+
+/// Controller input.
 protocol RegistrationViewInput: AnyObject { }
 
+/// Controller output.
 protocol RegistrationViewOutput: AnyObject {
     func didTapRegistrationButton()
 }
 
 final class RegistrationPresenter {
-    weak var viewController: RegistrationViewController?
+    weak var viewController: RegistrationViewInput?
 }
 
-// MARK: - Extension
+// MARK: - Extensions
+
 extension RegistrationPresenter: RegistrationViewOutput {
     func didTapRegistrationButton() {
         print(#function)

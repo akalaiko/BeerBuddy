@@ -15,7 +15,6 @@ class RegistrationView: UIView {
     private(set) lazy var backgroundImage: UIImageView = {
         var imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
         imageView.image = UIImage(named: AppData.imageName.waveBackground)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -26,7 +25,6 @@ class RegistrationView: UIView {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = .clear
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.addGestureRecognizer(
             UITapGestureRecognizer(
@@ -50,15 +48,13 @@ class RegistrationView: UIView {
         return imageView
     }()
     
-    private(set) lazy var addAvatarButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("ADD", for: .normal)
-        button.setTitleColor(
-            AppStyles.color.black,
-            for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
+    private(set) lazy var addAvatarLabel: UILabel = {
+        let label = UILabel()
+        label.text = "ADD"
+        label.textColor = AppStyles.color.black
+        label.translatesAutoresizingMaskIntoConstraints = false
         
-        return button
+        return label
     }()
     
     private(set) lazy var nameTextField: CustomTextField = {
@@ -111,7 +107,7 @@ class RegistrationView: UIView {
         return button
     }()
     
-    // MARK: - Initialisation
+    // MARK: - Initialization
     
     init() {
         super.init(frame: .zero)
@@ -121,14 +117,14 @@ class RegistrationView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Configure UI public method
+    // MARK: - Views
     
-    public func configureUI() {
+    func configureUI() {
         setupBackground()
         addScrollView()
         addNameTextField()
         addAvatarImage()
-        createAddButton()
+        createAddLabel()
         addLoginTextField()
         addPasswordTextField()
         addRepeatPasswordTextField()
@@ -192,14 +188,12 @@ class RegistrationView: UIView {
         ])
     }
 
-    private func createAddButton() {
-        avatarImageView.addSubview(addAvatarButton)
+    private func createAddLabel() {
+        avatarImageView.addSubview(addAvatarLabel)
 
         NSLayoutConstraint.activate([
-            addAvatarButton.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor),
-            addAvatarButton.centerXAnchor.constraint(equalTo: avatarImageView.centerXAnchor),
-            addAvatarButton.trailingAnchor.constraint(equalTo: avatarImageView.trailingAnchor),
-            addAvatarButton.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor)
+            addAvatarLabel.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor),
+            addAvatarLabel.centerXAnchor.constraint(equalTo: avatarImageView.centerXAnchor)
         ])
     }
 
@@ -255,48 +249,28 @@ class RegistrationView: UIView {
 
     // MARK: - Public methods
     
-    public func subscribeObserver() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(self.keyboardWasShown),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil)
+    func subscribeObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardWasShown),
+                                               name: UIResponder.keyboardWillShowNotification, object: nil)
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(self.keyboardWillBeHidden),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardWillBeHidden),
+                                               name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    public func unsubscribeObserver() {
-        NotificationCenter.default.removeObserver(
-            self,
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil)
+    func unsubscribeObserver() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         
-        NotificationCenter.default.removeObserver(
-            self,
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    public func addRegistrationButtonTarget(_ target: Any, action: Selector) {
-        registrationButton.addTarget(target, action: action, for: .touchUpInside)
-    }
-}
-
-// MARK: - Extensions
-
-extension RegistrationView {
-    // MARK: - Obj-C keyboard methods
+    // MARK: - Actions
+    
     @objc func hideKeyboard() {
         scrollView.endEditing(true)
     }
-}
-
-extension RegistrationView {
-    // MARK: - Obj-C keyboard observer methods
+    
     @objc func keyboardWasShown(notification: Notification) {
         guard let keyboardValue = notification
             .userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue

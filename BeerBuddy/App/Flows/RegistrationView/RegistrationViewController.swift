@@ -22,10 +22,13 @@ class RegistrationViewController: UIViewController {
         return view
     }
     
+    /// Controller's presenter.
     private var presenter: RegistrationViewOutput?
     
     // MARK: - Initialization
     
+    /// Created controller screen "Registration".
+    /// - Parameter presenter: Controller's presenter.
     init(presenter: RegistrationViewOutput) {
         super.init(nibName: nil, bundle: nil)
         self.presenter = presenter

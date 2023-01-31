@@ -12,6 +12,8 @@ class RegistrationView: UIView {
     
     // MARK: - Private properties
     
+    /// Initilazing view's components.
+    
     private(set) lazy var backgroundImage: UIImageView = {
         var imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -109,6 +111,7 @@ class RegistrationView: UIView {
     
     // MARK: - Initialization
     
+    /// Creates  view with zero frame.
     init() {
         super.init(frame: .zero)
     }
@@ -119,6 +122,7 @@ class RegistrationView: UIView {
     
     // MARK: - Views
     
+    /// Setting up visual components.
     func configureUI() {
         setupBackground()
         addScrollView()
@@ -133,6 +137,7 @@ class RegistrationView: UIView {
     
     // MARK: - Private methods
     
+    /// .Setting up background.
     private func setupBackground() {
         self.addSubview(backgroundImage)
         
@@ -144,6 +149,7 @@ class RegistrationView: UIView {
         ])
     }
     
+    /// Setting up scroll view.
     private func addScrollView() {
         self.addSubview(scrollView)
         NSLayoutConstraint.activate([
@@ -163,6 +169,7 @@ class RegistrationView: UIView {
         scrollView.contentSize = contentView.frame.size
     }
 
+    /// Setting up name textfield.
     private func addNameTextField() {
         contentView.addSubview(nameTextField)
 
@@ -175,6 +182,9 @@ class RegistrationView: UIView {
         ])
     }
 
+    /// Setting up user's avatar image.
+    ///
+    /// By tapping on this image you can add a user avatar.
     private func addAvatarImage() {
         contentView.addSubview(avatarImageView)
 
@@ -188,6 +198,9 @@ class RegistrationView: UIView {
         ])
     }
 
+    /// Setting up "add" label.
+    ///
+    ///  By tapping on this label you can add a user avatar.
     private func createAddLabel() {
         avatarImageView.addSubview(addAvatarLabel)
 
@@ -197,6 +210,7 @@ class RegistrationView: UIView {
         ])
     }
 
+    /// Setting up login textfield.
     private func addLoginTextField() {
         contentView.addSubview(loginTextField)
 
@@ -210,6 +224,7 @@ class RegistrationView: UIView {
         ])
     }
 
+    /// Setting up password textfield.
     private func addPasswordTextField() {
         contentView.addSubview(passwordTextField)
 
@@ -222,6 +237,7 @@ class RegistrationView: UIView {
         ])
     }
 
+    /// Setting up repeat password textfield.
     private func addRepeatPasswordTextField() {
         contentView.addSubview(repeatPasswordTextField)
 
@@ -234,6 +250,7 @@ class RegistrationView: UIView {
         ])
     }
 
+    /// Setting up registration button.
     private func addRegistrationButton() {
         contentView.addSubview(registrationButton)
 
@@ -267,6 +284,7 @@ class RegistrationView: UIView {
     
     // MARK: - Actions
     
+    /// A method that hides the keyboard when tapped.
     @objc func hideKeyboard() {
         scrollView.endEditing(true)
     }

@@ -30,6 +30,9 @@
 		F23AF69529742A8000584F85 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23AF69429742A8000584F85 /* HeaderView.swift */; };
 		F24CC1C32982D18B003C8197 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24CC1C22982D18B003C8197 /* MainViewController.swift */; };
 		F26C37C92976E0C400E14944 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C37C82976E0C400E14944 /* UserInfoView.swift */; };
+		F2C2E46E298E7F7A00051E53 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = F2C2E46D298E7F7A00051E53 /* FirebaseDatabase */; };
+		F2C2E470298E7F7D00051E53 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F2C2E46F298E7F7D00051E53 /* FirebaseAuth */; };
+		F2C2E472298E7F8000051E53 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F2C2E471298E7F8000051E53 /* FirebaseFirestore */; };
 		F2E59C3F29759582008773E8 /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E59C3E29759582008773E8 /* MatchesViewController.swift */; };
 		F2E59C412975962D008773E8 /* MatchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E59C402975962D008773E8 /* MatchesView.swift */; };
 		F2E59C432975AA0E008773E8 /* MatchesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E59C422975AA0E008773E8 /* MatchesPresenter.swift */; };
@@ -39,6 +42,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		F20395FD297C2D2000F655C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AF7AAF6B296D54C7001DF0CD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AF7AAF72296D54C7001DF0CD;
+			remoteInfo = BeerBuddy;
+		};
+		F2C2E467298E7F5F00051E53 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AF7AAF6B296D54C7001DF0CD /* Project object */;
 			proxyType = 1;
@@ -70,6 +80,7 @@
 		F23AF69429742A8000584F85 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		F24CC1C22982D18B003C8197 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F26C37C82976E0C400E14944 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
+		F2C2E463298E7F5F00051E53 /* BeerBuddyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerBuddyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2E59C3E29759582008773E8 /* MatchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
 		F2E59C402975962D008773E8 /* MatchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesView.swift; sourceTree = "<group>"; };
 		F2E59C422975AA0E008773E8 /* MatchesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesPresenter.swift; sourceTree = "<group>"; };
@@ -92,6 +103,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2C2E460298E7F5F00051E53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2C2E46E298E7F7A00051E53 /* FirebaseDatabase in Frameworks */,
+				F2C2E470298E7F7D00051E53 /* FirebaseAuth in Frameworks */,
+				F2C2E472298E7F8000051E53 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,6 +150,7 @@
 			children = (
 				AF7AAF75296D54C7001DF0CD /* BeerBuddy */,
 				F20395F8297C2D2000F655C2 /* BeerBuddyUITests */,
+				F2C2E464298E7F5F00051E53 /* BeerBuddyTests */,
 				AF7AAF74296D54C7001DF0CD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -138,6 +160,7 @@
 			children = (
 				AF7AAF73296D54C7001DF0CD /* BeerBuddy.app */,
 				F20395F7297C2D2000F655C2 /* BeerBuddyUITests.xctest */,
+				F2C2E463298E7F5F00051E53 /* BeerBuddyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -279,6 +302,13 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		F2C2E464298E7F5F00051E53 /* BeerBuddyTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BeerBuddyTests;
+			sourceTree = "<group>";
+		};
 		F2E59C3D2975955D008773E8 /* Matches */ = {
 			isa = PBXGroup;
 			children = (
@@ -351,6 +381,29 @@
 			productReference = F20395F7297C2D2000F655C2 /* BeerBuddyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		F2C2E462298E7F5F00051E53 /* BeerBuddyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2C2E46B298E7F5F00051E53 /* Build configuration list for PBXNativeTarget "BeerBuddyTests" */;
+			buildPhases = (
+				F2C2E45F298E7F5F00051E53 /* Sources */,
+				F2C2E460298E7F5F00051E53 /* Frameworks */,
+				F2C2E461298E7F5F00051E53 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F2C2E468298E7F5F00051E53 /* PBXTargetDependency */,
+			);
+			name = BeerBuddyTests;
+			packageProductDependencies = (
+				F2C2E46D298E7F7A00051E53 /* FirebaseDatabase */,
+				F2C2E46F298E7F7D00051E53 /* FirebaseAuth */,
+				F2C2E471298E7F8000051E53 /* FirebaseFirestore */,
+			);
+			productName = BeerBuddyTests;
+			productReference = F2C2E463298E7F5F00051E53 /* BeerBuddyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -365,6 +418,11 @@
 						CreatedOnToolsVersion = 14.2;
 					};
 					F20395F6297C2D2000F655C2 = {
+						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
+						TestTargetID = AF7AAF72296D54C7001DF0CD;
+					};
+					F2C2E462298E7F5F00051E53 = {
 						CreatedOnToolsVersion = 14.2;
 						LastSwiftMigration = 1420;
 						TestTargetID = AF7AAF72296D54C7001DF0CD;
@@ -389,6 +447,7 @@
 			targets = (
 				AF7AAF72296D54C7001DF0CD /* BeerBuddy */,
 				F20395F6297C2D2000F655C2 /* BeerBuddyUITests */,
+				F2C2E462298E7F5F00051E53 /* BeerBuddyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -405,6 +464,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F20395F5297C2D2000F655C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2C2E461298E7F5F00051E53 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -471,6 +537,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F2C2E45F298E7F5F00051E53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -478,6 +551,11 @@
 			isa = PBXTargetDependency;
 			target = AF7AAF72296D54C7001DF0CD /* BeerBuddy */;
 			targetProxy = F20395FD297C2D2000F655C2 /* PBXContainerItemProxy */;
+		};
+		F2C2E468298E7F5F00051E53 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AF7AAF72296D54C7001DF0CD /* BeerBuddy */;
+			targetProxy = F2C2E467298E7F5F00051E53 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -724,6 +802,63 @@
 			};
 			name = Release;
 		};
+		F2C2E469298E7F5F00051E53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 97UL48L835;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kermit.the.frog.BeerBuddyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BeerBuddy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BeerBuddy";
+			};
+			name = Debug;
+		};
+		F2C2E46A298E7F5F00051E53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 97UL48L835;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kermit.the.frog.BeerBuddyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BeerBuddy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BeerBuddy";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -754,6 +889,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		F2C2E46B298E7F5F00051E53 /* Build configuration list for PBXNativeTarget "BeerBuddyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2C2E469298E7F5F00051E53 /* Debug */,
+				F2C2E46A298E7F5F00051E53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -779,6 +923,21 @@
 			productName = FirebaseDatabase;
 		};
 		AF00D8062971B743005B6C5D /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF00D8012971B743005B6C5D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		F2C2E46D298E7F7A00051E53 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF00D8012971B743005B6C5D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		F2C2E46F298E7F7D00051E53 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF00D8012971B743005B6C5D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		F2C2E471298E7F8000051E53 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AF00D8012971B743005B6C5D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;

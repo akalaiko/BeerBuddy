@@ -23,6 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        // Forced synchronization of new data when minimizing the application. Since the user can close the application.
+        UserDefaults.standard.synchronize()
+    }
+
     /// Selecting a controller based on launch arguments.
     /// - Parameter arguments: Launch Arguments.
     /// - Returns: Controller.

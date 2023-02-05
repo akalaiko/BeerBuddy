@@ -35,6 +35,10 @@
 		F2C2E472298E7F8000051E53 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F2C2E471298E7F8000051E53 /* FirebaseFirestore */; };
 		F2C2E477298E84F400051E53 /* DateFormatterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C2E476298E84F400051E53 /* DateFormatterHelper.swift */; };
 		F2C2E479298E859A00051E53 /* DateFormatterHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C2E478298E859A00051E53 /* DateFormatterHelperTests.swift */; };
+		F2C2E47C298E872E00051E53 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C2E47B298E872E00051E53 /* ChatsViewController.swift */; };
+		F2C2E47E298E875200051E53 /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C2E47D298E875200051E53 /* ChatsView.swift */; };
+		F2C2E480298E87A500051E53 /* ChatsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C2E47F298E87A500051E53 /* ChatsTableViewCell.swift */; };
+		F2C2E482298E87CE00051E53 /* ChatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C2E481298E87CE00051E53 /* ChatsPresenter.swift */; };
 		F2E59C3F29759582008773E8 /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E59C3E29759582008773E8 /* MatchesViewController.swift */; };
 		F2E59C412975962D008773E8 /* MatchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E59C402975962D008773E8 /* MatchesView.swift */; };
 		F2E59C432975AA0E008773E8 /* MatchesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E59C422975AA0E008773E8 /* MatchesPresenter.swift */; };
@@ -85,6 +89,10 @@
 		F2C2E463298E7F5F00051E53 /* BeerBuddyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerBuddyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C2E476298E84F400051E53 /* DateFormatterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterHelper.swift; sourceTree = "<group>"; };
 		F2C2E478298E859A00051E53 /* DateFormatterHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterHelperTests.swift; sourceTree = "<group>"; };
+		F2C2E47B298E872E00051E53 /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
+		F2C2E47D298E875200051E53 /* ChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsView.swift; sourceTree = "<group>"; };
+		F2C2E47F298E87A500051E53 /* ChatsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsTableViewCell.swift; sourceTree = "<group>"; };
+		F2C2E481298E87CE00051E53 /* ChatsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsPresenter.swift; sourceTree = "<group>"; };
 		F2E59C3E29759582008773E8 /* MatchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
 		F2E59C402975962D008773E8 /* MatchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesView.swift; sourceTree = "<group>"; };
 		F2E59C422975AA0E008773E8 /* MatchesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesPresenter.swift; sourceTree = "<group>"; };
@@ -283,6 +291,7 @@
 		F286E3D8296D6F1200B0D3EC /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				F2C2E47A298E872500051E53 /* Chats */,
 				F2E59C3D2975955D008773E8 /* Matches */,
 				AF00D80B2972B14C005B6C5D /* LoginView */,
 				EF5D25D42971D77B00B6F3B1 /* Custom Views */,
@@ -321,6 +330,17 @@
 				F2C2E476298E84F400051E53 /* DateFormatterHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F2C2E47A298E872500051E53 /* Chats */ = {
+			isa = PBXGroup;
+			children = (
+				F2C2E47B298E872E00051E53 /* ChatsViewController.swift */,
+				F2C2E47D298E875200051E53 /* ChatsView.swift */,
+				F2C2E47F298E87A500051E53 /* ChatsTableViewCell.swift */,
+				F2C2E481298E87CE00051E53 /* ChatsPresenter.swift */,
+			);
+			path = Chats;
 			sourceTree = "<group>";
 		};
 		F2E59C3D2975955D008773E8 /* Matches */ = {
@@ -520,18 +540,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2039606297C2DAE00F655C2 /* AppUITestsLaunchArguments.swift in Sources */,
+				F2C2E480298E87A500051E53 /* ChatsTableViewCell.swift in Sources */,
 				F2E59C452975AC7F008773E8 /* MatchesTableViewCell.swift in Sources */,
 				F23AF69529742A8000584F85 /* HeaderView.swift in Sources */,
 				F2E59C412975962D008773E8 /* MatchesView.swift in Sources */,
 				EF5D25D3297080E400B6F3B1 /* AppStyles.swift in Sources */,
 				EF5D25D129705BAE00B6F3B1 /* UIColor+Extensions.swift in Sources */,
+				F2C2E47C298E872E00051E53 /* ChatsViewController.swift in Sources */,
 				AF00D81929743C17005B6C5D /* CustomButton.swift in Sources */,
 				AF00D81629742D06005B6C5D /* AppModuleBuilder.swift in Sources */,
 				AF00D80F2972B261005B6C5D /* LoginView.swift in Sources */,
 				AF00D8112972F171005B6C5D /* LoginPresenter.swift in Sources */,
 				F2E59C432975AA0E008773E8 /* MatchesPresenter.swift in Sources */,
+				F2C2E47E298E875200051E53 /* ChatsView.swift in Sources */,
 				AF7AAF7B296D54C7001DF0CD /* ViewController.swift in Sources */,
 				AF00D80D2972B16B005B6C5D /* LoginViewController.swift in Sources */,
+				F2C2E482298E87CE00051E53 /* ChatsPresenter.swift in Sources */,
 				EF5D25D72971D7DC00B6F3B1 /* CustomTextField.swift in Sources */,
 				F2E59C3F29759582008773E8 /* MatchesViewController.swift in Sources */,
 				F2C2E477298E84F400051E53 /* DateFormatterHelper.swift in Sources */,

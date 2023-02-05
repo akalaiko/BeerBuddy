@@ -25,6 +25,14 @@ enum AppModuleBuilder {
         return viewController
     }
 
+    static func chatsController() -> UIViewController & ChatsViewInput {
+        let dateFormatter = DateFormatterHelper()
+        let presenter = ChatsPresenter(dateFormatter: dateFormatter)
+        let viewcController = ChatsViewController(presenter: presenter)
+        presenter.viewInput = viewcController
+        return viewcController
+    }
+
     static func mainController() -> UIViewController {
         return MainViewController()
     }

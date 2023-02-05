@@ -52,8 +52,7 @@ class MatchesView: UIView {
 
         addSubview(tableView)
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor,
-                                           constant: 1),
+            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)

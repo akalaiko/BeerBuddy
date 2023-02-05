@@ -92,15 +92,16 @@ class HeaderView: UIView {
     /// Draws a line at the bottom of the view
     /// - Parameter rect: View’s bounds
     private func drawBottomSeparator(_ rect: CGRect) {
+        let lineWidth: CGFloat = 1
         let path = UIBezierPath()
-        path.move(to: .init(x: rect.maxX * 0.05, y: rect.maxY))
-        path.addLine(to: .init(x: rect.maxX * 0.95, y: rect.maxY))
+        path.move(to: .init(x: rect.maxX * 0.05, y: rect.maxY - lineWidth))
+        path.addLine(to: .init(x: rect.maxX * 0.95, y: rect.maxY - lineWidth))
         path.close()
 
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
         shapeLayer.strokeColor = titleLabel.textColor.cgColor
-        shapeLayer.lineWidth = 1.5
+        shapeLayer.lineWidth = lineWidth
 
         layer.addSublayer(shapeLayer)
     }

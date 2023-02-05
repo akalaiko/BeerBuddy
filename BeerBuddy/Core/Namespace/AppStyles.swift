@@ -61,5 +61,6 @@ extension AppStyles {
         static var button: UIFont = .systemFont(ofSize: 20, weight: .medium)
         static var title: UIFont = .systemFont(ofSize: 32, weight: .semibold)
         static var username: UIFont = .systemFont(ofSize: 24, weight: .semibold)
+        static var smallTextCell: UIFont = .systemFont(ofSize: 16, weight: .light)
     }
 }

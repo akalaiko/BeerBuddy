@@ -13,7 +13,7 @@ final class LoginViewController: UIViewController {
     
     private var loginView: LoginView {
         guard let view = self.view as? LoginView else {
-            let correctView = LoginView(frame: self.view.frame)
+            let correctView = LoginView()
             self.view = correctView
             return correctView
         }

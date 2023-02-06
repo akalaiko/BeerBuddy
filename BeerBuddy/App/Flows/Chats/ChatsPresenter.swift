@@ -52,31 +52,34 @@ class ChatsPresenter: ChatsViewOutput {
 
     // MARK: - Private Properties
 
-    private var pinnedData: [ChatModelTest] = [] {
+    private var pinnedData: [ChatModelStub] = [] {
         didSet {
             updatePinsInUserDefaults()
         }
     }
 
-    private var unpinnedData: [ChatModelTest] = []
+    private var unpinnedData: [ChatModelStub] = []
 
-    private var data: [ChatModelTest] {
+    private var data: [ChatModelStub] {
         pinnedData + unpinnedData
     }
 
     private let dateFormatter: DateFormatterProtocol
+    private let network: NetworkMockProtocol
     private lazy var userDefaults = UserDefaults.standard
 
     // MARK: - Initialization
 
-    init(dateFormatter: DateFormatterProtocol) {
+    init(dateFormatter: DateFormatterProtocol, network: NetworkMockProtocol) {
         self.dateFormatter = dateFormatter
+        self.network = network
     }
 
     // MARK: - Public Methods
 
     func viewRequestFetch() {
-        let distributedData = distributDataFromUserdefaults(ChatModelTest.testData)
+        let response = network.fetchChats()
+        let distributedData = distributDataFromUserdefaults(response)
         self.unpinnedData = distributedData.unpinnedData
         self.pinnedData = distributedData.pinnedData
     }
@@ -119,7 +122,7 @@ class ChatsPresenter: ChatsViewOutput {
     }
 
     func viewOpenScreenChat(_ indexPath: IndexPath) {
-        let data: ChatModelTest
+        let data: ChatModelStub
 
         if pinnedData.count > indexPath.row {
             data = pinnedData [indexPath.row]
@@ -141,141 +144,18 @@ class ChatsPresenter: ChatsViewOutput {
     /// Recovering/distributing saved data in user defaults.
     /// - Parameter data: Data table.
     /// - Returns: A tuple with pinned data and unpinned data.
-    private func distributDataFromUserdefaults(_ data: [ChatModelTest]) -> (unpinnedData: [ChatModelTest],
-                                                                            pinnedData: [ChatModelTest]) {
-        var response = ChatModelTest.testData.sorted(by: { $0.date > $1.date })
-        var pinArray: [ChatModelTest] = []
-        let pinnedIdArray = (userDefaults.array(forKey: "pinnedChats") as? [Int] ?? []).filter { pinId in
-            guard let index = response.firstIndex(where: { $0.id == pinId }) else { return false }
-            pinArray.append(response.remove(at: index))
+    private func distributDataFromUserdefaults(_ data: [ChatModelStub]) -> (unpinnedData: [ChatModelStub],
+                                                                            pinnedData: [ChatModelStub]) {
+        var unpinned = data.sorted(by: { $0.date > $1.date })
+        var pinned: [ChatModelStub] = []
 
-            return true
+        if let userDefaultsData = userDefaults.array(forKey: "pinnedChats") as? [Int] {
+            userDefaultsData.forEach { pinId in
+                guard let index = unpinned.firstIndex(where: { $0.id == pinId }) else { return }
+                pinned.append(unpinned.remove(at: index))
+            }
         }
 
-        return (unpinnedData: response, pinnedData: pinArray)
-    }
-}
-
-// FIXME: Only for tests, remove after connecting firebase.
-
-struct ChatModelTest {
-    let id: Int
-    let username: String = UserTest.names.randomElement() ?? "Error name"
-    let lastMessage: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
-    "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    let date: Double
-
-    static var testData: [ChatModelTest] {
-        let now = Date()
-        return [ .init(id: 0,
-                       date: Date().timeIntervalSince1970),
-                 .init(id: 1,
-                       date: Calendar.current.date(byAdding: .second,
-                                                   value: -10, to: now)!.timeIntervalSince1970),
-                 .init(id: 2,
-                       date: Calendar.current.date(byAdding: .minute,
-                                                   value: -Int.random(in: 1...100), to: now)!.timeIntervalSince1970),
-                 .init(id: 3,
-                       date: Calendar.current.date(byAdding: .minute,
-                                                   value: -Int.random(in: 500...1000), to: now)!.timeIntervalSince1970),
-                 .init(id: 4,
-                       date: Calendar.current.date(byAdding: .hour,
-                                                   value: -Int.random(in: 12...16), to: now)!.timeIntervalSince1970),
-                 .init(id: 5,
-                       date: Calendar.current.date(byAdding: .hour,
-                                                   value: -Int.random(in: 16...24), to: now)!.timeIntervalSince1970),
-                 .init(id: 6,
-                       date: Calendar.current.date(byAdding: .day,
-                                                   value: -Int.random(in: 2...6), to: now)!.timeIntervalSince1970),
-                 .init(id: 7,
-                       date: Calendar.current.date(byAdding: .day,
-                                                   value: -Int.random(in: 6...12), to: now)!.timeIntervalSince1970),
-                 .init(id: 8,
-                       date: Calendar.current.date(byAdding: .day,
-                                                   value: -Int.random(in: 12...24), to: now)!.timeIntervalSince1970),
-                 .init(id: 9,
-                       date: Calendar.current.date(byAdding: .minute,
-                                                   value: -Int.random(in: 60...500), to: now)!.timeIntervalSince1970),
-                 .init(id: 10,
-                       date: Calendar.current.date(byAdding: .minute,
-                                                   value: -Int.random(in: 500...1000), to: now)!.timeIntervalSince1970),
-                 .init(id: 11,
-                       date: Calendar.current.date(byAdding: .hour,
-                                                   value: -Int.random(in: 12...16), to: now)!.timeIntervalSince1970),
-                 .init(id: 12,
-                       date: Calendar.current.date(byAdding: .hour,
-                                                   value: -Int.random(in: 16...24), to: now)!.timeIntervalSince1970),
-                 .init(id: 13,
-                       date: Calendar.current.date(byAdding: .day,
-                                                   value: -Int.random(in: 2...6), to: now)!.timeIntervalSince1970),
-                 .init(id: 14,
-                       date: Calendar.current.date(byAdding: .day,
-                                                   value: -Int.random(in: 6...12), to: now)!.timeIntervalSince1970),
-                 .init(id: 15,
-                       date: Calendar.current.date(byAdding: .day,
-                                                   value: -Int.random(in: 12...24), to: now)!.timeIntervalSince1970),
-                 .init(id: 16,
-                       date: Calendar.current.date(byAdding: .minute,
-                                                   value: -Int.random(in: 60...500), to: now)!.timeIntervalSince1970),
-                 .init(id: 17,
-                       date: Calendar.current.date(byAdding: .minute,
-                                                   value: -Int.random(in: 500...1000), to: now)!.timeIntervalSince1970),
-                 .init(id: 18,
-                       date: Calendar.current.date(byAdding: .hour,
-                                                   value: -Int.random(in: 12...16), to: now)!.timeIntervalSince1970),
-                 .init(id: 19,
-                       date: Calendar.current.date(byAdding: .hour,
-                                                   value: -Int.random(in: 16...24), to: now)!.timeIntervalSince1970),
-                 .init(id: 20,
-                       date: Calendar.current.date(byAdding: .day,
-                                                   value: -Int.random(in: 2...6), to: now)!.timeIntervalSince1970),
-                 .init(id: 21,
-                       date: Calendar.current.date(byAdding: .day,
-                                                   value: -Int.random(in: 6...12), to: now)!.timeIntervalSince1970),
-                 .init(id: 22,
-                       date: Calendar.current.date(byAdding: .day,
-                                                   value: -Int.random(in: 12...24), to: now)!.timeIntervalSince1970),
-                 .init(id: 23,
-                       date: Calendar.current.date(byAdding: .minute,
-                                                   value: -Int.random(in: 60...500), to: now)!.timeIntervalSince1970),
-                 .init(id: 24,
-                       date: Calendar.current.date(byAdding: .minute,
-                                                   value: -Int.random(in: 500...1000), to: now)!.timeIntervalSince1970),
-                 .init(id: 25,
-                       date: Calendar.current.date(byAdding: .hour,
-                                                   value: -Int.random(in: 12...16), to: now)!.timeIntervalSince1970),
-                 .init(id: 26,
-                       date: Calendar.current.date(byAdding: .hour,
-                                                   value: -Int.random(in: 16...24), to: now)!.timeIntervalSince1970),
-                 .init(id: 27,
-                       date: Calendar.current.date(byAdding: .day,
-                                                   value: -Int.random(in: 2...6), to: now)!.timeIntervalSince1970),
-                 .init(id: 28,
-                       date: Calendar.current.date(byAdding: .day,
-                                                   value: -Int.random(in: 6...12), to: now)!.timeIntervalSince1970),
-                 .init(id: 29,
-                       date: Calendar.current.date(byAdding: .day,
-                                                   value: -Int.random(in: 12...24), to: now)!.timeIntervalSince1970),
-                 .init(id: 30,
-                       date: Calendar.current.date(byAdding: .minute,
-                                                   value: -Int.random(in: 60...500), to: now)!.timeIntervalSince1970),
-                 .init(id: 31,
-                       date: Calendar.current.date(byAdding: .minute,
-                                                   value: -Int.random(in: 500...1000), to: now)!.timeIntervalSince1970),
-                 .init(id: 32,
-                       date: Calendar.current.date(byAdding: .hour,
-                                                   value: -Int.random(in: 12...16), to: now)!.timeIntervalSince1970),
-                 .init(id: 33,
-                       date: Calendar.current.date(byAdding: .hour,
-                                                   value: -Int.random(in: 16...24), to: now)!.timeIntervalSince1970),
-                 .init(id: 34,
-                       date: Calendar.current.date(byAdding: .day,
-                                                   value: -Int.random(in: 2...6), to: now)!.timeIntervalSince1970),
-                 .init(id: 35,
-                       date: Calendar.current.date(byAdding: .day,
-                                                   value: -Int.random(in: 6...12), to: now)!.timeIntervalSince1970),
-                 .init(id: 36,
-                       date: Calendar.current.date(byAdding: .day,
-                                                   value: -Int.random(in: 12...24), to: now)!.timeIntervalSince1970)]
+        return (unpinnedData: unpinned, pinnedData: pinned)
     }
 }

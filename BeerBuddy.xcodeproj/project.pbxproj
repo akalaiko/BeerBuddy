@@ -30,6 +30,8 @@
 		F23AF69529742A8000584F85 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23AF69429742A8000584F85 /* HeaderView.swift */; };
 		F24CC1C32982D18B003C8197 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24CC1C22982D18B003C8197 /* MainViewController.swift */; };
 		F26C37C92976E0C400E14944 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C37C82976E0C400E14944 /* UserInfoView.swift */; };
+		F29355F72990DA42003DADCA /* NetworkMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29355F62990DA42003DADCA /* NetworkMock.swift */; };
+		F29355FA2990DB2A003DADCA /* ChatModelStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29355F92990DB2A003DADCA /* ChatModelStub.swift */; };
 		F2C2E46E298E7F7A00051E53 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = F2C2E46D298E7F7A00051E53 /* FirebaseDatabase */; };
 		F2C2E470298E7F7D00051E53 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F2C2E46F298E7F7D00051E53 /* FirebaseAuth */; };
 		F2C2E472298E7F8000051E53 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F2C2E471298E7F8000051E53 /* FirebaseFirestore */; };
@@ -86,6 +88,8 @@
 		F23AF69429742A8000584F85 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		F24CC1C22982D18B003C8197 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F26C37C82976E0C400E14944 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
+		F29355F62990DA42003DADCA /* NetworkMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMock.swift; sourceTree = "<group>"; };
+		F29355F92990DB2A003DADCA /* ChatModelStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModelStub.swift; sourceTree = "<group>"; };
 		F2C2E463298E7F5F00051E53 /* BeerBuddyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerBuddyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C2E476298E84F400051E53 /* DateFormatterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterHelper.swift; sourceTree = "<group>"; };
 		F2C2E478298E859A00051E53 /* DateFormatterHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterHelperTests.swift; sourceTree = "<group>"; };
@@ -262,6 +266,7 @@
 		F286E3D5296D6E2000B0D3EC /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				F29355F52990D9E5003DADCA /* Network */,
 				F2C2E475298E84DB00051E53 /* Helpers */,
 				AF00D81429742CC7005B6C5D /* Builder */,
 				EF5D25CF29705B8D00B6F3B1 /* Extensions */,
@@ -311,9 +316,26 @@
 		F286E3DA296D6F5100B0D3EC /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				F29355F82990DB0A003DADCA /* ChatModelStub */,
 				EF5D25CC296D921600B6F3B1 /* UserModel */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		F29355F52990D9E5003DADCA /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F29355F62990DA42003DADCA /* NetworkMock.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		F29355F82990DB0A003DADCA /* ChatModelStub */ = {
+			isa = PBXGroup;
+			children = (
+				F29355F92990DB2A003DADCA /* ChatModelStub.swift */,
+			);
+			path = ChatModelStub;
 			sourceTree = "<group>";
 		};
 		F2C2E464298E7F5F00051E53 /* BeerBuddyTests */ = {
@@ -549,6 +571,7 @@
 				F2C2E47C298E872E00051E53 /* ChatsViewController.swift in Sources */,
 				AF00D81929743C17005B6C5D /* CustomButton.swift in Sources */,
 				AF00D81629742D06005B6C5D /* AppModuleBuilder.swift in Sources */,
+				F29355F72990DA42003DADCA /* NetworkMock.swift in Sources */,
 				AF00D80F2972B261005B6C5D /* LoginView.swift in Sources */,
 				AF00D8112972F171005B6C5D /* LoginPresenter.swift in Sources */,
 				F2E59C432975AA0E008773E8 /* MatchesPresenter.swift in Sources */,
@@ -559,6 +582,7 @@
 				EF5D25D72971D7DC00B6F3B1 /* CustomTextField.swift in Sources */,
 				F2E59C3F29759582008773E8 /* MatchesViewController.swift in Sources */,
 				F2C2E477298E84F400051E53 /* DateFormatterHelper.swift in Sources */,
+				F29355FA2990DB2A003DADCA /* ChatModelStub.swift in Sources */,
 				EF5D25CE296D922600B6F3B1 /* UserModel.swift in Sources */,
 				AF7AAF77296D54C7001DF0CD /* AppDelegate.swift in Sources */,
 				F26C37C92976E0C400E14944 /* UserInfoView.swift in Sources */,

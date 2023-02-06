@@ -54,7 +54,6 @@ class MatchesViewController: UIViewController {
 
     // MARK: - Actions
     
-   
 }
 
 // MARK: - MatchesViewInput

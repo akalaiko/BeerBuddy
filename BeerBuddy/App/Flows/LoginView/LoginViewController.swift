@@ -44,7 +44,7 @@ final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.navigationBar.tintColor = .black
         loginView.configureUI()
         setupActionsForButton()
     }

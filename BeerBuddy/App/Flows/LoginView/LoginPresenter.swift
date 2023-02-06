@@ -35,6 +35,8 @@ extension LoginPresenter: LoginViewOutput {
     }
     
     func tappedRegistrationButton() {
-        viewController?.navigationController?.pushViewController(ViewController(), animated: true)
+        viewController?.navigationController?.pushViewController(
+            AppModuleBuilder.registrationViewController(),
+            animated: true)
     }
 }

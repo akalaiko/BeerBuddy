@@ -9,7 +9,7 @@ import UIKit
 
 final class LoginView: UIView {
     
-    // MARK: - private properties
+    // MARK: - Private properties
     
     private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
@@ -91,7 +91,16 @@ final class LoginView: UIView {
         return button
     }()
     
+    var loginText: String {
+        loginTextField.text ?? ""
+    }
+    
+    var passwordText: String {
+        passwordTextField.text ?? ""
+    }
+    
     // MARK: - Init
+
     init() {
         super.init(frame: .zero)
     }
@@ -101,6 +110,7 @@ final class LoginView: UIView {
     }
     
     // MARK: - Private methods
+    
     func configureUI() {
         setupBackground()
         addScrollView()
@@ -218,6 +228,7 @@ final class LoginView: UIView {
     }
     
     // MARK: - Methods
+    
     func subscribeObserver() {
         NotificationCenter.default.addObserver(
             self,
@@ -252,6 +263,7 @@ final class LoginView: UIView {
 }
 
 // MARK: - Observer Keyboard
+
 extension LoginView {
     @objc func keyboardWasShown(notification: Notification) {
         guard let keyboardValue = notification

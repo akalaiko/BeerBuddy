@@ -47,8 +47,8 @@ final class ChatsPresenterTests: XCTestCase {
         let unpinnedUser1 = presenter.viewRequestCellData(unpinIndexUser1)
         let unpinnedUser2 = presenter.viewRequestCellData(unpinIndexUser2)
 
-        let pinIndexUser1 = presenter.viewPinCell(unpinIndexUser1)
-        let pinIndexUser2 = presenter.viewPinCell(unpinIndexUser2)
+        let pinIndexUser1 = presenter.viewToggleCellPin(unpinIndexUser1)
+        let pinIndexUser2 = presenter.viewToggleCellPin(unpinIndexUser2)
 
         let pinnedUser1 = presenter.viewRequestCellData(pinIndexUser1)
         let pinnedUser2 = presenter.viewRequestCellData(pinIndexUser2)

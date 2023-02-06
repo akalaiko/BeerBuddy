@@ -24,18 +24,14 @@ protocol ChatsViewOutput: AnyObject {
     /// Pins the cell from the table.
     /// - Parameter indexPath: Index path.
     /// - Returns: New cell index in the table.
-    func viewPinCell(_ indexPath: IndexPath) -> IndexPath
-    /// Unpins the cell from the table.
-    /// - Parameter indexPath: Index path.
-    /// - Returns: New cell index in the table.
-    func viewUnpinCell(_ indexPath: IndexPath) -> IndexPath
+    func viewToggleCellPin(_ indexPath: IndexPath) -> IndexPath
     /// Deletes cell .
     /// - Parameter indexPath: Index path.
     func viewDeleteCell(_ indexPath: IndexPath)
     /// Checks if the cell is pinned in the table.
     /// - Parameter indexPath: Index path.
     /// - Returns: If the cell is pinned, it will return true.
-    func viewCheckCellIsPin(_ indexPath: IndexPath) -> Bool
+    func viewCheckCellIsPinned(_ indexPath: IndexPath) -> Bool
     /// Open the chat screen.
     /// - Parameter indexPath: Index path.
     func viewOpenScreenChat(_ indexPath: IndexPath)
@@ -52,17 +48,12 @@ class ChatsPresenter: ChatsViewOutput {
 
     // MARK: - Private Properties
 
-    private var pinnedData: [ChatModelStub] = [] {
+    private lazy var pinnedItems: [Int] = [] {
         didSet {
-            updatePinsInUserDefaults()
+            updateFixationsInUserDefaults()
         }
     }
-
-    private var unpinnedData: [ChatModelStub] = []
-
-    private var data: [ChatModelStub] {
-        pinnedData + unpinnedData
-    }
+    private lazy var data: [ChatModelStub] = []
 
     private let dateFormatter: DateFormatterProtocol
     private let network: NetworkMockProtocol
@@ -79,83 +70,95 @@ class ChatsPresenter: ChatsViewOutput {
 
     func viewRequestFetch() {
         let response = network.fetchChats()
-        let distributedData = distributDataFromUserdefaults(response)
-        self.unpinnedData = distributedData.unpinnedData
-        self.pinnedData = distributedData.pinnedData
+        let distributData = distributDataFromUserdefaults(response)
+        self.data = sortData(distributData)
     }
 
     func viewRequestCellData(_ indexPath: IndexPath) -> CellData {
-        let data = data[indexPath.row]
-        let dateString = dateFormatter.getString(timeIntervalSince1970: data.date)
-        let isPinned = viewCheckCellIsPin(indexPath)
-        return (username: data.username, lastMessage: data.lastMessage, date: dateString, isPinned: isPinned)
+        let item = data[indexPath.row]
+        let dateString = dateFormatter.getString(timeIntervalSince1970: item.date)
+        return (username: item.username, lastMessage: item.lastMessage, date: dateString, isPinned: item.isPinned)
     }
 
     func viewDeleteCell(_ indexPath: IndexPath) {
-        if pinnedData.count > indexPath.row {
-            pinnedData.remove(at: indexPath.row)
+        let item = data.remove(at: indexPath.row)
+        if let pinsIndex = pinnedItems.firstIndex(of: item.id) {
+            pinnedItems.remove(at: pinsIndex)
+        }
+    }
+
+    func viewToggleCellPin(_ indexPath: IndexPath) -> IndexPath {
+        var item = data.remove(at: indexPath.row)
+        item.isPinned.toggle()
+
+        let newIndex: IndexPath
+        if item.isPinned {
+            newIndex = IndexPath(row: pinnedItems.count, section: 0)
+            pinnedItems.append(item.id)
         } else {
-            unpinnedData.remove(at: indexPath.row - pinnedData.count)
-        }
-    }
-
-    func viewPinCell(_ indexPath: IndexPath) -> IndexPath {
-        let data = unpinnedData.remove(at: indexPath.row - pinnedData.count)
-        pinnedData.append(data)
-        return IndexPath(row: pinnedData.count - 1, section: 0)
-    }
-
-    func viewUnpinCell(_ indexPath: IndexPath) -> IndexPath {
-        let data = pinnedData.remove(at: indexPath.row)
-
-        guard  let index = unpinnedData.firstIndex(where: { $0.date < data.date }) else {
-            unpinnedData.append(data)
-            return .init(row: dataCount - 1, section: 0)
+            if let pinsIndex = pinnedItems.firstIndex(of: item.id) {
+                pinnedItems.remove(at: pinsIndex)
+            }
+            guard  let index = self.data.firstIndex(where: { $0.date < item.date && !$0.isPinned }) else {
+                self.data.append(item)
+                return .init(row: dataCount - 1, section: 0)
+            }
+            newIndex = IndexPath(row: index, section: 0)
         }
 
-        unpinnedData.insert(data, at: index)
-        return IndexPath(row: pinnedData.count + index, section: 0)
+        self.data.insert(item, at: newIndex.row)
+        return newIndex
     }
 
-    func viewCheckCellIsPin(_ indexPath: IndexPath) -> Bool {
-        pinnedData.count > indexPath.row
+    func viewCheckCellIsPinned(_ indexPath: IndexPath) -> Bool {
+        let item = self.data[indexPath.row]
+        return item.isPinned
     }
 
     func viewOpenScreenChat(_ indexPath: IndexPath) {
-        let data: ChatModelStub
-
-        if pinnedData.count > indexPath.row {
-            data = pinnedData [indexPath.row]
-        } else {
-            data = unpinnedData [indexPath.row - pinnedData.count]
-        }
-
-        print(data.id)
+        let id = data[indexPath.row].id
+        print(id)
     }
 
     // MARK: - Private Methods
 
     /// Updating the fixation data in userdefaults.
-    private func updatePinsInUserDefaults() {
-        let newPins = pinnedData.map { $0.id }
-        userDefaults.set(newPins, forKey: "pinnedChats")
+    private func updateFixationsInUserDefaults() {
+        userDefaults.set(pinnedItems, forKey: "pinnedChats")
     }
 
     /// Recovering/distributing saved data in user defaults.
     /// - Parameter data: Data table.
     /// - Returns: A tuple with pinned data and unpinned data.
-    private func distributDataFromUserdefaults(_ data: [ChatModelStub]) -> (unpinnedData: [ChatModelStub],
-                                                                            pinnedData: [ChatModelStub]) {
-        var unpinned = data.sorted(by: { $0.date > $1.date })
-        var pinned: [ChatModelStub] = []
+    private func distributDataFromUserdefaults(_ data: [ChatModelStub]) -> [ChatModelStub] {
+        guard let pinnedChats = userDefaults.array(forKey: "pinnedChats") as? [Int] else { return data }
 
-        if let userDefaultsData = userDefaults.array(forKey: "pinnedChats") as? [Int] {
-            userDefaultsData.forEach { pinId in
-                guard let index = unpinned.firstIndex(where: { $0.id == pinId }) else { return }
-                pinned.append(unpinned.remove(at: index))
+        var correctPins: [Int] = []
+        let data = data.map { item in
+            var item = item
+            let isPinned = pinnedChats.contains(item.id)
+            if isPinned {
+                correctPins.append(item.id)
             }
+            item.isPinned = isPinned
+            return item
         }
+        pinnedItems = pinnedChats.filter { correctPins.contains($0) }
+        return data
+    }
 
-        return (unpinnedData: unpinned, pinnedData: pinned)
+    /// Sorting by fixation and time.
+    /// - Parameter data: Data.
+    /// - Returns: Sorted data.
+    private func sortData(_ data: [ChatModelStub]) -> [ChatModelStub] {
+        return data.sorted(by: { item1, item2 in
+            if item1.isPinned && item2.isPinned {
+                return pinnedItems.firstIndex(of: item1.id) ?? 0 < pinnedItems.firstIndex(of: item2.id) ?? 0
+            } else if item1.isPinned || item2.isPinned {
+                return item1.isPinned
+            }
+
+            return  item1.date > item2.date
+        })
     }
 }

@@ -70,7 +70,7 @@ class ChatsViewController: UIViewController {
                 return
             }
 
-            let newIndex = pinned ? presenter.viewUnpinCell(indexPath) : presenter.viewPinCell(indexPath)
+            let newIndex = presenter.viewToggleCellPin(indexPath)
             tableView.moveRow(at: indexPath, to: newIndex)
             tableView.reloadRows(at: [newIndex], with: .automatic)
             complete(true)
@@ -123,7 +123,7 @@ extension ChatsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView,
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        guard let cellIsPinned = presenter?.viewCheckCellIsPin(indexPath) else { return nil }
+        guard let cellIsPinned = presenter?.viewCheckCellIsPinned(indexPath) else { return nil }
         
         let action = toggleСellFixationAction(cellIsPinned, tableView: tableView, indexPath: indexPath)
         return UISwipeActionsConfiguration(actions: [action])

@@ -15,4 +15,5 @@ struct ChatModelStub {
     let lastMessage: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
     "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     let date: Double
+    var isPinned: Bool = false
 }

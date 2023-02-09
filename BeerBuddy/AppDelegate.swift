@@ -14,9 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? ) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
+        #if DEBUG
         let launchArguments = CommandLine.arguments
-
         window?.rootViewController = selectTestController(launchArguments)
+        #else
+        window?.rootViewController = AppModuleBuilder.loginViewController()
+        #endif
         window?.makeKeyAndVisible()
 
         FirebaseApp.configure()
@@ -27,7 +30,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Forced synchronization of new data when minimizing the application. Since the user can close the application.
         UserDefaults.standard.synchronize()
     }
+}
 
+// MARK: - UI Testing
+
+#if DEBUG
+extension AppDelegate {
     /// Selecting a controller based on launch arguments.
     /// - Parameter arguments: Launch Arguments.
     /// - Returns: Controller.
@@ -35,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let controller: UIViewController
 
         if arguments.contains(AppUITestsLaunchArguments.matchesView) {
-            controller = AppModuleBuilder.matchesController()
+            controller = AppUITestBuilder.matchesController()
         } else {
             controller = AppModuleBuilder.mainController()
         }
@@ -43,3 +51,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return controller
     }
 }
+#endif

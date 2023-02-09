@@ -18,7 +18,8 @@ enum AppModuleBuilder {
     }
 
     static func matchesController() -> UIViewController & MatchesViewInput {
-        let presenter = MatchesPresenter()
+        let network = NetworkMockForTests()
+        let presenter = MatchesPresenter(newtwork: network)
         let viewController = MatchesViewController(presenter: presenter)
         presenter.viewInput = viewController
 
@@ -27,7 +28,7 @@ enum AppModuleBuilder {
 
     static func chatsController() -> UIViewController & ChatsViewInput {
         let dateFormatter = DateFormatterHelper()
-        let network = NetworkMock()
+        let network = NetworkMockForTests()
         let presenter = ChatsPresenter(dateFormatter: dateFormatter, network: network)
         let viewcController = ChatsViewController(presenter: presenter)
         presenter.viewInput = viewcController

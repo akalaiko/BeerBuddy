@@ -4,8 +4,7 @@
 //
 //  Created by Ke4a on 06.02.2023.
 //
-
-@testable import BeerBuddy
+#if DEBUG
 import Foundation
 
 class NetworkMockForTests: NetworkMockProtocol {
@@ -45,4 +44,14 @@ class NetworkMockForTests: NetworkMockProtocol {
                                                    value: -Int.random(in: 12...24), to: now)!.timeIntervalSince1970)
              ]
     }
+
+    func fetchMatches() -> [UserModelStub] {
+        [
+           .init(id: 0), .init(id: 1), .init(id: 2), .init(id: 3),
+           .init(id: 4), .init(id: 5), .init(id: 6), .init(id: 7),
+           .init(id: 8), .init(id: 9), .init(id: 10), .init(id: 11),
+           .init(id: 12), .init(id: 13), .init(id: 14), .init(id: 15)
+       ]
+    }
 }
+#endif

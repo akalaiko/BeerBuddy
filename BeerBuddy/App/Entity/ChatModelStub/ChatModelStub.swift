@@ -11,7 +11,7 @@ import Foundation
 
 struct ChatModelStub {
     let id: Int
-    let username: String = UserTest.names.randomElement() ?? "Error name"
+    let username: String = UserModelStub.names.randomElement() ?? "Error name"
     let lastMessage: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
     "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     let date: Double

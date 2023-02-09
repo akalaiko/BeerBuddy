@@ -63,7 +63,9 @@ class MatchesView: UIView {
             target: self,
             action: #selector(filterAction))
 
+        #if DEBUG
         setUITests()
+        #endif
     }
 
     // MARK: - Public Methods
@@ -77,15 +79,6 @@ class MatchesView: UIView {
         tableView.delegate = controller
     }
 
-    // MARK: - Private Methods
-
-    /// Setting ui test Identifiers.
-    private func setUITests() {
-        self.accessibilityIdentifier = "matchesView"
-        headerView.accessibilityIdentifier = "headerView"
-        tableView.accessibilityIdentifier = "tableView"
-    }
-
     // MARK: - Actions
 
     /// The action of the header button.
@@ -94,3 +87,24 @@ class MatchesView: UIView {
         print("!!!!!!")
     }
 }
+
+// MARK: - MatchesViewInput
+
+extension MatchesView: MatchesViewInput {
+    func reloadTable() {
+        tableView.reloadData()
+    }
+}
+
+// MARK: - UI Testing
+
+#if DEBUG
+extension MatchesView {
+    /// Setting ui test Identifiers.
+    private func setUITests() {
+        self.accessibilityIdentifier = "matches"
+        headerView.accessibilityIdentifier = "matchesHeader"
+        tableView.accessibilityIdentifier = "matchesTable"
+    }
+}
+#endif

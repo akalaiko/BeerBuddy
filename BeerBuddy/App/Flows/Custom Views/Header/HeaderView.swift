@@ -29,7 +29,9 @@ class HeaderView: UIView {
     init(title text: String) {
         super.init(frame: .zero)
         setupUI(title: text)
+        #if DEBUG
         setUITests()
+        #endif
     }
 
     required init?(coder: NSCoder) {
@@ -48,7 +50,7 @@ class HeaderView: UIView {
     private func setupUI(title text: String) {
         titleLabel.text = text
         backgroundColor = AppStyles.color.background.main
-        
+
         addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
@@ -71,7 +73,9 @@ class HeaderView: UIView {
             let image = UIImage(named: imageName)
             button.setImage(image, for: .normal)
             button.tintColor = titleLabel.textColor
-            button.accessibilityIdentifier = "rightButton"
+            #if DEBUG
+            button.accessibilityIdentifier = "headerRightButton"
+            #endif
             return button
         }()
 
@@ -122,11 +126,15 @@ class HeaderView: UIView {
             }
         }
     }
+}
 
-    // MARK: - Private Methods
+// MARK: - UI Testing
 
+#if DEBUG
+extension HeaderView {
     /// Setting ui test Identifiers.
     private func setUITests() {
-        titleLabel.accessibilityIdentifier = "titleLabel"
+        titleLabel.accessibilityIdentifier = "headerTitle"
     }
 }
+#endif

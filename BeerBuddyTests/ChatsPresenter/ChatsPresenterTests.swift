@@ -58,8 +58,8 @@ final class ChatsPresenterTests: XCTestCase {
         XCTAssertTrue(pinnedUser1.isPinned)
         XCTAssertTrue(pinnedUser2.isPinned)
 
-        let newUnpinIndexUser2 = presenter.viewUnpinCell(pinIndexUser2)
-        let newUnpinIndexUser1 = presenter.viewUnpinCell(pinIndexUser1)
+        let newUnpinIndexUser2 = presenter.viewToggleCellPin(pinIndexUser2)
+        let newUnpinIndexUser1 = presenter.viewToggleCellPin(pinIndexUser1)
 
         XCTAssertEqual(unpinIndexUser2, newUnpinIndexUser2)
         XCTAssertEqual(unpinIndexUser1, newUnpinIndexUser1)

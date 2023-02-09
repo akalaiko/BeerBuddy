@@ -34,9 +34,7 @@
 		F29355FA2990DB2A003DADCA /* ChatModelStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29355F92990DB2A003DADCA /* ChatModelStub.swift */; };
 		F29355FE2990ED81003DADCA /* NetworkMockForTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29355FD2990ED81003DADCA /* NetworkMockForTests.swift */; };
 		F29356002990EF7A003DADCA /* ChatsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29355FF2990EF7A003DADCA /* ChatsPresenterTests.swift */; };
-		F2C2E46E298E7F7A00051E53 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = F2C2E46D298E7F7A00051E53 /* FirebaseDatabase */; };
 		F2C2E470298E7F7D00051E53 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F2C2E46F298E7F7D00051E53 /* FirebaseAuth */; };
-		F2C2E472298E7F8000051E53 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F2C2E471298E7F8000051E53 /* FirebaseFirestore */; };
 		F2C2E477298E84F400051E53 /* DateFormatterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C2E476298E84F400051E53 /* DateFormatterHelper.swift */; };
 		F2C2E479298E859A00051E53 /* DateFormatterHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C2E478298E859A00051E53 /* DateFormatterHelperTests.swift */; };
 		F2C2E47C298E872E00051E53 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C2E47B298E872E00051E53 /* ChatsViewController.swift */; };
@@ -130,9 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2C2E46E298E7F7A00051E53 /* FirebaseDatabase in Frameworks */,
 				F2C2E470298E7F7D00051E53 /* FirebaseAuth in Frameworks */,
-				F2C2E472298E7F8000051E53 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,9 +470,7 @@
 			);
 			name = BeerBuddyTests;
 			packageProductDependencies = (
-				F2C2E46D298E7F7A00051E53 /* FirebaseDatabase */,
 				F2C2E46F298E7F7D00051E53 /* FirebaseAuth */,
-				F2C2E471298E7F8000051E53 /* FirebaseFirestore */,
 			);
 			productName = BeerBuddyTests;
 			productReference = F2C2E463298E7F5F00051E53 /* BeerBuddyTests.xctest */;
@@ -1015,20 +1009,10 @@
 			package = AF00D8012971B743005B6C5D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
-		F2C2E46D298E7F7A00051E53 /* FirebaseDatabase */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AF00D8012971B743005B6C5D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseDatabase;
-		};
 		F2C2E46F298E7F7D00051E53 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AF00D8012971B743005B6C5D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
-		};
-		F2C2E471298E7F8000051E53 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AF00D8012971B743005B6C5D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

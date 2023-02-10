@@ -20,6 +20,9 @@
 		AF7AAF7B296D54C7001DF0CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7AAF7A296D54C7001DF0CD /* ViewController.swift */; };
 		AF7AAF80296D54C9001DF0CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF7AAF7F296D54C9001DF0CD /* Assets.xcassets */; };
 		AF7AAF83296D54C9001DF0CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF7AAF81296D54C9001DF0CD /* LaunchScreen.storyboard */; };
+		EF51CE102975F87300B865E8 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF51CE0F2975F87300B865E8 /* RegistrationView.swift */; };
+		EF51CE16297730CA00B865E8 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF51CE15297730CA00B865E8 /* RegistrationViewController.swift */; };
+		EF51CE18297730E900B865E8 /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF51CE17297730E900B865E8 /* RegistrationPresenter.swift */; };
 		EF5D25CE296D922600B6F3B1 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5D25CD296D922600B6F3B1 /* UserModel.swift */; };
 		EF5D25D129705BAE00B6F3B1 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5D25D029705BAE00B6F3B1 /* UIColor+Extensions.swift */; };
 		EF5D25D3297080E400B6F3B1 /* AppStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5D25D2297080E400B6F3B1 /* AppStyles.swift */; };
@@ -84,6 +87,9 @@
 		AF7AAF7F296D54C9001DF0CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF7AAF82296D54C9001DF0CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF7AAF84296D54C9001DF0CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF51CE0F2975F87300B865E8 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		EF51CE15297730CA00B865E8 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		EF51CE17297730E900B865E8 /* RegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
 		EF5D25CD296D922600B6F3B1 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		EF5D25D029705BAE00B6F3B1 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		EF5D25D2297080E400B6F3B1 /* AppStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyles.swift; sourceTree = "<group>"; };
@@ -204,6 +210,16 @@
 				F286E3D7296D6EFB00B0D3EC /* Environments */,
 			);
 			path = BeerBuddy;
+			sourceTree = "<group>";
+		};
+		EF51CE0E2975F85F00B865E8 /* RegistrationView */ = {
+			isa = PBXGroup;
+			children = (
+				EF51CE15297730CA00B865E8 /* RegistrationViewController.swift */,
+				EF51CE0F2975F87300B865E8 /* RegistrationView.swift */,
+				EF51CE17297730E900B865E8 /* RegistrationPresenter.swift */,
+			);
+			path = RegistrationView;
 			sourceTree = "<group>";
 		};
 		EF5D25CC296D921600B6F3B1 /* UserModel */ = {
@@ -354,6 +370,7 @@
 			isa = PBXGroup;
 			children = (
 				F2C2E47A298E872500051E53 /* Chats */,
+				EF51CE0E2975F85F00B865E8 /* RegistrationView */,
 				F2E59C3D2975955D008773E8 /* Matches */,
 				AF00D80B2972B14C005B6C5D /* LoginView */,
 				EF5D25D42971D77B00B6F3B1 /* Custom Views */,
@@ -639,6 +656,7 @@
 				EF5D25D129705BAE00B6F3B1 /* UIColor+Extensions.swift in Sources */,
 				F21870092994ED9D007AF7B7 /* AppUITestBuilder.swift in Sources */,
 				F2C2E47C298E872E00051E53 /* ChatsViewController.swift in Sources */,
+				EF51CE102975F87300B865E8 /* RegistrationView.swift in Sources */,
 				AF00D81929743C17005B6C5D /* CustomButton.swift in Sources */,
 				AF00D81629742D06005B6C5D /* AppModuleBuilder.swift in Sources */,
 				AF00D80F2972B261005B6C5D /* LoginView.swift in Sources */,
@@ -646,6 +664,8 @@
 				F2E59C432975AA0E008773E8 /* MatchesPresenter.swift in Sources */,
 				F2C2E47E298E875200051E53 /* ChatsView.swift in Sources */,
 				AF7AAF7B296D54C7001DF0CD /* ViewController.swift in Sources */,
+				EF51CE18297730E900B865E8 /* RegistrationPresenter.swift in Sources */,
+				EF51CE16297730CA00B865E8 /* RegistrationViewController.swift in Sources */,
 				AF00D80D2972B16B005B6C5D /* LoginViewController.swift in Sources */,
 				F2C2E482298E87CE00051E53 /* ChatsPresenter.swift in Sources */,
 				EF5D25D72971D7DC00B6F3B1 /* CustomTextField.swift in Sources */,

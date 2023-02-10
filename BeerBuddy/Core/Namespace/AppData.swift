@@ -19,6 +19,7 @@ enum AppData {
         static var matchBeer: String { "matchBeer" }
         static var bearLogin: String { "bearLogin" }
         static var waveBackground: String { "waveBackground" }
+        static var missingPhoto: String { "missingPhoto" }
         static var location: String { "location" }
         static var noSmoking: String { "noSmoking" }
         static var noDrinking: String { "noDrinking" }

@@ -16,6 +16,14 @@ enum AppModuleBuilder {
         
         return viewController
     }
+    
+    static func registrationViewController() -> UIViewController & RegistrationViewInput {
+        let presenter = RegistrationPresenter()
+        let viewController = RegistrationViewController(presenter: presenter)
+        presenter.viewController = viewController
+        
+        return viewController
+    }
 
     static func matchesController() -> UIViewController & MatchesViewInput {
         let network = NetworkMockForTests()

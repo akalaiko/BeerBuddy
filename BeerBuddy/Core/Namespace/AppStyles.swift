@@ -43,6 +43,7 @@ extension AppStyles {
         enum verticalMargin {
             static var small: CGFloat { 8 }
             static var middle: CGFloat { 24 }
+            static var big: CGFloat { 48 }
         }
 
         enum height {

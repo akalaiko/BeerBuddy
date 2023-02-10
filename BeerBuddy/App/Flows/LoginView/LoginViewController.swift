@@ -13,7 +13,7 @@ final class LoginViewController: UIViewController {
     
     private var loginView: LoginView {
         guard let view = self.view as? LoginView else {
-            let correctView = LoginView(frame: self.view.frame)
+            let correctView = LoginView()
             self.view = correctView
             return correctView
         }
@@ -25,6 +25,7 @@ final class LoginViewController: UIViewController {
     private var presenter: LoginViewOutput?
     
     // MARK: - Init
+    
     init(presenter: LoginViewOutput) {
         super.init(nibName: nil, bundle: nil)
         self.presenter = presenter
@@ -35,6 +36,7 @@ final class LoginViewController: UIViewController {
     }
     
     // MARK: - Lifecycle
+    
     override func loadView() {
         super.loadView()
         self.view = loginView
@@ -42,6 +44,7 @@ final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.isNavigationBarHidden = true
         loginView.configureUI()
         setupActionsForButton()
     }
@@ -68,7 +71,7 @@ final class LoginViewController: UIViewController {
 
 extension LoginViewController {
     @objc func tappedLoginButton(sender: UIButton) {
-        presenter?.tappedLoginButton()
+        presenter?.tappedLoginButton(login: loginView.loginText, password: loginView.passwordText)
     }
     
     @objc func tappedRegistrationButton() {

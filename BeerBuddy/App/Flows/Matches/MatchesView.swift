@@ -12,6 +12,7 @@ class MatchesView: UIView {
 
     private lazy var headerView: HeaderView = {
         let view = HeaderView(title: "MATCHES")
+        view.font = AppStyles.font.big
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

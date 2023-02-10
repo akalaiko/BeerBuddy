@@ -160,7 +160,9 @@ class ChatsTableViewCell: UITableViewCell {
     func configure(avatar: UIImage? = nil, userName: String, lastMessage: String, date: String, pinned: Bool) {
         backgroundColor = pinned ? AppStyles.color.background.pinnedChat : AppStyles.color.background.main
         hidePinImage(!pinned)
-
+        #if DEBUG
+        setUITests(pinned)
+        #endif
         avatarImageView.image = UIImage(named: AppData.imageName.testAvatar)
         usernameLabel.text = userName
         lastMessageLabel.text = lastMessage
@@ -189,3 +191,16 @@ class ChatsTableViewCell: UITableViewCell {
         }
     }
 }
+
+// MARK: - UI Testing
+
+#if DEBUG
+extension ChatsTableViewCell {
+    /// Setting ui test Identifiers.
+    private func setUITests(_ isPinned: Bool) {
+        self.accessibilityIdentifier = "chats\(isPinned ? "Pinned" : "")Cell"
+        self.pinImageView.accessibilityIdentifier = "cellPinImage"
+        self.dateLabel.accessibilityIdentifier = "cellDate"
+    }
+}
+#endif

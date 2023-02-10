@@ -18,5 +18,14 @@ enum AppUITestBuilder {
 
         return viewController
     }
+
+    static func chatsController() -> UIViewController & ChatsViewInput {
+        let dateFormatter = DateFormatterHelper()
+        let network = NetworkMockForTests()
+        let presenter = ChatsPresenter(dateFormatter: dateFormatter, network: network)
+        let viewcController = ChatsViewController(presenter: presenter)
+        presenter.viewInput = viewcController
+        return viewcController
+    }
 }
 #endif

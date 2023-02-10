@@ -66,6 +66,10 @@ class ChatsView: UIView {
         guard let controller = controller else { preconditionFailure("No controller") }
 
         settingsTable(controller)
+
+        #if DEBUG
+        setUITests()
+        #endif
     }
 
     // MARK: - Private Methods
@@ -78,3 +82,16 @@ class ChatsView: UIView {
         tableView.register(ChatsTableViewCell.self, forCellReuseIdentifier: ChatsTableViewCell.identifier)
     }
 }
+
+// MARK: - UI Testing
+
+#if DEBUG
+extension ChatsView {
+    /// Setting ui test Identifiers.
+    private func setUITests() {
+        self.accessibilityIdentifier = "chats"
+        headerView.accessibilityIdentifier = "chatsHeader"
+        tableView.accessibilityIdentifier = "chatsTable"
+    }
+}
+#endif

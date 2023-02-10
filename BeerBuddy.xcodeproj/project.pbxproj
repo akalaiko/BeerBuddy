@@ -33,6 +33,8 @@
 		F218700D2994F1CD007AF7B7 /* UserModelStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218700C2994F1CD007AF7B7 /* UserModelStub.swift */; };
 		F218700E2994F588007AF7B7 /* NetworkMockForTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29355FD2990ED81003DADCA /* NetworkMockForTests.swift */; };
 		F21870112994FD8C007AF7B7 /* NetworkMockProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21870102994FD8C007AF7B7 /* NetworkMockProtocol.swift */; };
+		F218701829951709007AF7B7 /* ChatsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218701729951709007AF7B7 /* ChatsScreen.swift */; };
+		F218701A29951824007AF7B7 /* ChatsViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218701929951824007AF7B7 /* ChatsViewUITests.swift */; };
 		F23AF69529742A8000584F85 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23AF69429742A8000584F85 /* HeaderView.swift */; };
 		F24CC1C32982D18B003C8197 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24CC1C22982D18B003C8197 /* MainViewController.swift */; };
 		F26C37C92976E0C400E14944 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C37C82976E0C400E14944 /* UserInfoView.swift */; };
@@ -94,6 +96,8 @@
 		F21870082994ED9D007AF7B7 /* AppUITestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUITestBuilder.swift; sourceTree = "<group>"; };
 		F218700C2994F1CD007AF7B7 /* UserModelStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModelStub.swift; sourceTree = "<group>"; };
 		F21870102994FD8C007AF7B7 /* NetworkMockProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMockProtocol.swift; sourceTree = "<group>"; };
+		F218701729951709007AF7B7 /* ChatsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsScreen.swift; sourceTree = "<group>"; };
+		F218701929951824007AF7B7 /* ChatsViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewUITests.swift; sourceTree = "<group>"; };
 		F23AF69429742A8000584F85 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		F24CC1C22982D18B003C8197 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F26C37C82976E0C400E14944 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
@@ -260,6 +264,7 @@
 			children = (
 				F2186FFF2994E574007AF7B7 /* Protocol */,
 				F21870052994E60B007AF7B7 /* MatchesScreen.swift */,
+				F218701729951709007AF7B7 /* ChatsScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -276,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				F2039604297C2DAA00F655C2 /* MatchesViewUITests.swift */,
+				F218701929951824007AF7B7 /* ChatsViewUITests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -659,6 +665,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2039605297C2DAA00F655C2 /* MatchesViewUITests.swift in Sources */,
+				F218701829951709007AF7B7 /* ChatsScreen.swift in Sources */,
+				F218701A29951824007AF7B7 /* ChatsViewUITests.swift in Sources */,
 				F2039603297C2D7C00F655C2 /* AppUITestsLaunchArguments.swift in Sources */,
 				F21870012994E583007AF7B7 /* Screen.swift in Sources */,
 				F21870062994E60B007AF7B7 /* MatchesScreen.swift in Sources */,

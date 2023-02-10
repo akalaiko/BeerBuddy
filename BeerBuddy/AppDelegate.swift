@@ -44,11 +44,23 @@ extension AppDelegate {
 
         if arguments.contains(AppUITestsLaunchArguments.matchesView) {
             controller = AppUITestBuilder.matchesController()
+        } else if arguments.contains(AppUITestsLaunchArguments.chatsView) {
+            resetUserDefaults()
+            controller = AppUITestBuilder.chatsController()
         } else {
             controller = AppModuleBuilder.mainController()
         }
 
         return controller
+    }
+
+    /// Clearing UserDefaults.
+    private func resetUserDefaults() {
+        let dictionary = UserDefaults.standard.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            UserDefaults.standard.removeObject(forKey: key)
+        }
+        UserDefaults.standard.synchronize()
     }
 }
 #endif

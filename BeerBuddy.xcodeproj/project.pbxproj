@@ -33,6 +33,7 @@
 		F23AF69529742A8000584F85 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23AF69429742A8000584F85 /* HeaderView.swift */; };
 		F24CC1C32982D18B003C8197 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24CC1C22982D18B003C8197 /* MainViewController.swift */; };
 		F26C37C92976E0C400E14944 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C37C82976E0C400E14944 /* UserInfoView.swift */; };
+		F28FBE452997D96500F0BB06 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28FBE442997D96500F0BB06 /* CustomSegmentedControl.swift */; };
 		F2E59C3F29759582008773E8 /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E59C3E29759582008773E8 /* MatchesViewController.swift */; };
 		F2E59C412975962D008773E8 /* MatchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E59C402975962D008773E8 /* MatchesView.swift */; };
 		F2E59C432975AA0E008773E8 /* MatchesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E59C422975AA0E008773E8 /* MatchesPresenter.swift */; };
@@ -76,6 +77,7 @@
 		F23AF69429742A8000584F85 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		F24CC1C22982D18B003C8197 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F26C37C82976E0C400E14944 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
+		F28FBE442997D96500F0BB06 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		F2E59C3E29759582008773E8 /* MatchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
 		F2E59C402975962D008773E8 /* MatchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesView.swift; sourceTree = "<group>"; };
 		F2E59C422975AA0E008773E8 /* MatchesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesPresenter.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 		EF5D25D42971D77B00B6F3B1 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				F28FBE432997D94800F0BB06 /* SegmentedControl */,
 				F26C37C72976E09D00E14944 /* UserInfo */,
 				AF00D81729743C00005B6C5D /* CustomButton */,
 				F23AF69329742A6E00584F85 /* Header */,
@@ -294,6 +297,14 @@
 				EF5D25CC296D921600B6F3B1 /* UserModel */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		F28FBE432997D94800F0BB06 /* SegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				F28FBE442997D96500F0BB06 /* CustomSegmentedControl.swift */,
+			);
+			path = SegmentedControl;
 			sourceTree = "<group>";
 		};
 		F2E59C3D2975955D008773E8 /* Matches */ = {
@@ -478,6 +489,7 @@
 				AF7AAF77296D54C7001DF0CD /* AppDelegate.swift in Sources */,
 				F26C37C92976E0C400E14944 /* UserInfoView.swift in Sources */,
 				F2F66FDC296D81A4000CF8A8 /* AppData.swift in Sources */,
+				F28FBE452997D96500F0BB06 /* CustomSegmentedControl.swift in Sources */,
 				F24CC1C32982D18B003C8197 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

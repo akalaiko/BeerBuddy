@@ -22,10 +22,13 @@ final class LoginViewController: UIViewController {
     
     // MARK: - Properties
     
+    /// Controller's presenter.
     private var presenter: LoginViewOutput?
     
     // MARK: - Init
     
+    /// Created controller screen "Login".
+    /// - Parameter presenter: Controller's presenter.
     init(presenter: LoginViewOutput) {
         super.init(nibName: nil, bundle: nil)
         self.presenter = presenter

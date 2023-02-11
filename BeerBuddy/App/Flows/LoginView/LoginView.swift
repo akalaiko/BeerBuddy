@@ -11,6 +11,7 @@ final class LoginView: UIView {
     
     // MARK: - Private properties
     
+    /// Initilazing view's components.
     private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
@@ -101,6 +102,7 @@ final class LoginView: UIView {
     
     // MARK: - Init
 
+    /// Creates  view with zero frame.
     init() {
         super.init(frame: .zero)
     }
@@ -111,6 +113,7 @@ final class LoginView: UIView {
     
     // MARK: - Private methods
     
+    /// Setting up visual components.
     func configureUI() {
         setupBackground()
         addScrollView()
@@ -122,6 +125,7 @@ final class LoginView: UIView {
         addRegistrationButton()
     }
     
+    /// Setting up background.
     private func setupBackground() {
         self.addSubview(backgroundImageView)
         
@@ -133,6 +137,7 @@ final class LoginView: UIView {
         ])
     }
     
+    /// Setting up scroll view.
     private func addScrollView() {
         self.addSubview(scrollView)
         NSLayoutConstraint.activate([
@@ -152,6 +157,7 @@ final class LoginView: UIView {
         scrollView.contentSize = contentView.frame.size
     }
     
+    /// Setting up avatar image
     private func addAvatarImage() {
         guard let width = avatarImageView.image?.size.width,
                 let height = avatarImageView.image?.size.height else { return }
@@ -167,6 +173,7 @@ final class LoginView: UIView {
         ])
     }
     
+    /// Setting up name app label.
     private func addNameAppLabel() {
         contentView.addSubview(nameAppLabel)
 
@@ -177,6 +184,7 @@ final class LoginView: UIView {
         ])
     }
     
+    /// Setting up login textfield.
     private func addLoginTextField() {
         contentView.addSubview(loginTextField)
         
@@ -192,6 +200,7 @@ final class LoginView: UIView {
         ])
     }
 
+    /// Setting password textfield
     private func addPasswordTextField() {
         contentView.addSubview(passwordTextField)
         
@@ -204,6 +213,7 @@ final class LoginView: UIView {
         ])
     }
     
+    /// Setting login  button
     private func addLoginButton() {
         contentView.addSubview(loginButton)
         
@@ -216,6 +226,7 @@ final class LoginView: UIView {
         ])
     }
     
+    /// Setting registration button
     private func addRegistrationButton() {
         contentView.addSubview(registrationButton)
         

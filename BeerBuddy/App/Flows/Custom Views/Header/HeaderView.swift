@@ -29,7 +29,9 @@ class HeaderView: UIView {
     init(title text: String) {
         super.init(frame: .zero)
         setupUI(title: text)
+        #if DEBUG
         setUITests()
+        #endif
     }
 
     required init?(coder: NSCoder) {
@@ -48,7 +50,7 @@ class HeaderView: UIView {
     private func setupUI(title text: String) {
         titleLabel.text = text
         backgroundColor = AppStyles.color.background.main
-        
+
         addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
@@ -71,7 +73,9 @@ class HeaderView: UIView {
             let image = UIImage(named: imageName)
             button.setImage(image, for: .normal)
             button.tintColor = titleLabel.textColor
-            button.accessibilityIdentifier = "rightButton"
+            #if DEBUG
+            button.accessibilityIdentifier = "headerRightButton"
+            #endif
             return button
         }()
 
@@ -92,15 +96,16 @@ class HeaderView: UIView {
     /// Draws a line at the bottom of the view
     /// - Parameter rect: View’s bounds
     private func drawBottomSeparator(_ rect: CGRect) {
+        let lineWidth: CGFloat = 1
         let path = UIBezierPath()
-        path.move(to: .init(x: rect.maxX * 0.05, y: rect.maxY))
-        path.addLine(to: .init(x: rect.maxX * 0.95, y: rect.maxY))
+        path.move(to: .init(x: rect.maxX * 0.05, y: rect.maxY - lineWidth))
+        path.addLine(to: .init(x: rect.maxX * 0.95, y: rect.maxY - lineWidth))
         path.close()
 
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
         shapeLayer.strokeColor = titleLabel.textColor.cgColor
-        shapeLayer.lineWidth = 1.5
+        shapeLayer.lineWidth = lineWidth
 
         layer.addSublayer(shapeLayer)
     }
@@ -121,11 +126,15 @@ class HeaderView: UIView {
             }
         }
     }
+}
 
-    // MARK: - Private Methods
+// MARK: - UI Testing
 
+#if DEBUG
+extension HeaderView {
     /// Setting ui test Identifiers.
     private func setUITests() {
-        titleLabel.accessibilityIdentifier = "titleLabel"
+        titleLabel.accessibilityIdentifier = "headerTitle"
     }
 }
+#endif

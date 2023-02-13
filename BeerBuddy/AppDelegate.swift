@@ -14,15 +14,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? ) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
+        #if DEBUG
         let launchArguments = CommandLine.arguments
-
         window?.rootViewController = selectTestController(launchArguments)
+        #else
+        window?.rootViewController = AppModuleBuilder.loginViewController()
+        #endif
         window?.makeKeyAndVisible()
 
         FirebaseApp.configure()
         return true
     }
 
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        // Forced synchronization of new data when minimizing the application. Since the user can close the application.
+        UserDefaults.standard.synchronize()
+    }
+}
+
+// MARK: - UI Testing
+
+#if DEBUG
+extension AppDelegate {
     /// Selecting a controller based on launch arguments.
     /// - Parameter arguments: Launch Arguments.
     /// - Returns: Controller.
@@ -30,11 +43,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let controller: UIViewController
 
         if arguments.contains(AppUITestsLaunchArguments.matchesView) {
-            controller = AppModuleBuilder.matchesController()
+            controller = AppUITestBuilder.matchesController()
+        } else if arguments.contains(AppUITestsLaunchArguments.chatsView) {
+            resetUserDefaults()
+            controller = AppUITestBuilder.chatsController()
         } else {
             controller = UINavigationController(rootViewController: AppModuleBuilder.loginViewController())
         }
 
         return controller
     }
+
+    /// Clearing UserDefaults.
+    private func resetUserDefaults() {
+        let dictionary = UserDefaults.standard.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            UserDefaults.standard.removeObject(forKey: key)
+        }
+        UserDefaults.standard.synchronize()
+    }
 }
+#endif

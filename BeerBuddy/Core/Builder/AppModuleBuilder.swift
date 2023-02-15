@@ -9,6 +9,15 @@ import Foundation
 import UIKit
 
 enum AppModuleBuilder {
+    
+    static func onboardingViewController() -> UIViewController & OnboardingViewInput {
+        let presenter = OnboardingPresenter()
+        let viewController = OnboardingViewController(presenter: presenter)
+        presenter.viewController = viewController
+        
+        return viewController
+    }
+    
     static func loginViewController() -> UIViewController & LoginViewInput {
         let presenter = LoginPresenter()
         let viewController = LoginViewController(presenter: presenter)

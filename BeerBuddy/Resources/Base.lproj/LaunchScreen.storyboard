@@ -23,7 +23,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bearLogin" translatesAutoresizingMaskIntoConstraints="NO" id="xOb-ag-KXa">
                                 <rect key="frame" x="98.333333333333329" y="277.66666666666669" width="196.33333333333337" height="236.66666666666669"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="xOb-ag-KXa" secondAttribute="height" multiplier="778:936" id="EzB-AT-kTH"/>
+                                    <constraint firstAttribute="width" secondItem="xOb-ag-KXa" secondAttribute="height" multiplier="532:640" id="aRP-fO-7v9"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEER BUDDY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Csi-hw-6Aw">
@@ -54,7 +54,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bearLogin" width="778" height="936"/>
+        <image name="bearLogin" width="532" height="640"/>
         <image name="waveBackground" width="2049" height="3646"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

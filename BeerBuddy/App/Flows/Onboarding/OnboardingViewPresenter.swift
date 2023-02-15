@@ -32,11 +32,9 @@ extension OnboardingPresenter: OnboardingViewOutput {
     func validateAuth() {
         if FirebaseAuth.Auth.auth().currentUser != nil {
             let mainViewController = AppModuleBuilder.mainController()
-            mainViewController.modalPresentationStyle = .fullScreen
             viewController?.present(mainViewController, animated: true)
         } else {
             let mainViewController = AppModuleBuilder.loginViewController()
-            mainViewController.modalPresentationStyle = .fullScreen
             viewController?.present(mainViewController, animated: true)
         }
     }

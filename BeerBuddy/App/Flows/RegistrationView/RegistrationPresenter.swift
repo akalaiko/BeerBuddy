@@ -12,7 +12,9 @@ import UIKit
 // MARK: - Protocols 
 
 /// Controller input.
-protocol RegistrationViewInput: AnyObject {}
+protocol RegistrationViewInput: AnyObject {
+    func alertLoginError(message: String)
+}
 
 /// Controller output.
 protocol RegistrationViewOutput: AnyObject {
@@ -21,6 +23,12 @@ protocol RegistrationViewOutput: AnyObject {
 
 final class RegistrationPresenter {
     weak var viewController: (UIViewController & RegistrationViewInput)?
+    
+    // MARK: - Private methods
+    
+    private func alertLoginError(with message: String = "Please enter all info to create a new account.") {
+        viewController?.alertLoginError(message: message)
+    }
 }
 
 // MARK: - Extensions
@@ -32,7 +40,7 @@ extension RegistrationPresenter: RegistrationViewOutput {
             alertLoginError(with: "Please enter all info to create a new account.")
             return
         }
-        print("passed first guard, let's compare passwords: ", password, repeatPassword)
+        
         guard password == repeatPassword else {
             alertLoginError(with: "Please enter the same password in both fields")
             return
@@ -49,25 +57,18 @@ extension RegistrationPresenter: RegistrationViewOutput {
             
             FirebaseAuth.Auth.auth().createUser(withEmail: login, password: password) { authResult, error in
                 guard authResult != nil, error == nil else {
-                    print("error creating new user")
+                    self.alertLoginError(with: "Error while creating new user.")
                     return
                 }
                 let chatUser = ChatAppUser(name: name, emailAddress: login)
                 DatabaseManager.shared.insertUser(with: chatUser, completion: { success in
                     if success {
-                        // StorageManager should upload th profile picture to database here
+                        // StorageManager should upload the profile picture to database here
                         let mainViewController = AppModuleBuilder.mainController()
-                        mainViewController.modalPresentationStyle = .fullScreen
                         self.viewController?.present(mainViewController, animated: true)
                     }
                 })
             }
         })
-    }
-    
-    func alertLoginError(with message: String = "Please enter all info to create a new account.") {
-        let alert = UIAlertController(title: "Ooops!", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-        viewController?.present(alert, animated: true)
     }
 }

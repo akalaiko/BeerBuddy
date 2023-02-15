@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 protocol LoginViewInput: AnyObject {
+    func alertLoginError(message: String)
 }
 
 protocol LoginViewOutput: AnyObject {
@@ -26,11 +27,7 @@ final class LoginPresenter {
     // MARK: - Private functions
     
     private func alertLoginError(message: String = "Please enter all info to log in.") {
-        let alert = UIAlertController(title: "Ooops!",
-                                      message: message,
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-        viewController?.present(alert, animated: true)
+        viewController?.alertLoginError(message: message)
     }
     
 }
@@ -58,7 +55,6 @@ extension LoginPresenter: LoginViewOutput {
             print("great success", result.user)
             
             let mainViewController = AppModuleBuilder.mainController()
-            mainViewController.modalPresentationStyle = .fullScreen
             self.viewController?.present(mainViewController, animated: true)
         }
     }

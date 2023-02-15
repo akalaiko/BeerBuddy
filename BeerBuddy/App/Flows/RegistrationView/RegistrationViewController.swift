@@ -81,4 +81,10 @@ class RegistrationViewController: UIViewController {
 
 extension RegistrationViewController: RegistrationViewInput {
     
+    func alertLoginError(message: String) {
+        let alert = UIAlertController(title: "Ooops!", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+        present(alert, animated: true)
+    }
+    
 }

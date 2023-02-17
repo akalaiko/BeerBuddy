@@ -49,6 +49,7 @@ extension AppStyles {
             static var footer: CGFloat { header }
             static var textfield: CGFloat { 56 }
             static var tableCell: CGFloat { 80 }
+            static var minimalSize: CGFloat { UIScreen.main.bounds.height / 24 }
         }
     }
 }
@@ -62,5 +63,9 @@ extension AppStyles {
         static var button: UIFont = .systemFont(ofSize: 20, weight: .medium)
         static var big: UIFont = .systemFont(ofSize: 32, weight: .semibold)
         static var middle: UIFont = .systemFont(ofSize: 24, weight: .semibold)
+
+        enum pointSize {
+            static var small: Double = 14
+        }
     }
 }

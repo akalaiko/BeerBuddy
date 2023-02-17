@@ -23,12 +23,15 @@ class MatchesView: UIView {
         return view
     }()
 
+    private var controller: FilterViewDelegate?
+
     // MARK: - Initialization
 
     /// /// Creates  matches list.
     /// - Parameter controller: The controller that manages the table.
-    init(controller: UITableViewDataSource & UITableViewDelegate) {
+    init(controller: UITableViewDataSource & UITableViewDelegate & FilterViewDelegate) {
         super.init(frame: .zero)
+        self.controller = controller
         registrationTableView(controller)
     }
 
@@ -68,6 +71,21 @@ class MatchesView: UIView {
         setUITests()
     }
 
+    func addFilterView() {
+        let view = FilterView(delegate: controller)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(view)
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: topAnchor),
+            view.bottomAnchor.constraint(equalTo: bottomAnchor),
+            view.leadingAnchor.constraint(equalTo: leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+        
+        guard let buttonFrame = self.headerView.buttonFrame else { return }
+        view.appearanceAnimation(self.headerView.convert( buttonFrame, to: self))
+    }
+
     // MARK: - Public Methods
 
     /// Register a table and connect a delegation.
@@ -93,6 +111,6 @@ class MatchesView: UIView {
     /// The action of the header button.
     @objc private func filterAction() {
         headerView.rightButtonClickAnimation()
-        print("!!!!!!")
+        addFilterView()
     }
 }

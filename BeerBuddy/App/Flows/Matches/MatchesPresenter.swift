@@ -31,16 +31,32 @@ struct UserTest {
 
 /// Controller input.
 protocol MatchesViewInput: AnyObject {
-    
+
 }
 
 /// Controller output.
 protocol MatchesViewOutput: AnyObject {
     /// Data of users with whom there were matches.
     var data: [UserTest] { get }
+
+    /// User preferences.
+    var preferenceData: PreferenceRequest? { get }
+
+    /// The user has selected data filtering.
+    func viewRequestFiltering(_ preference: PreferenceRequest)
 }
 
 class MatchesPresenter: MatchesViewOutput {
+    private(set) var preferenceData: PreferenceRequest? = .init(sex: .male, smoke: false, interest: "Obj-c") {
+        willSet {
+            print(newValue)
+        }
+    }
+
+    func viewRequestFiltering(_ preference: PreferenceRequest) {
+        preferenceData = preference
+    }
+
     // MARK: - Public Properties
     weak var viewInput: MatchesViewInput?
 

@@ -21,6 +21,11 @@ class HeaderView: UIView {
 
     private var rightButton: UIButton?
 
+    /// The position and dimensions of the button, if any.
+    var buttonFrame: CGRect? {
+        rightButton?.frame
+    }
+
     // MARK: - Public Properties
     
     /// Sets font in tittle.

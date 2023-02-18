@@ -5,8 +5,8 @@
 //  Created by Polina Tikhomirova on 18.02.2023.
 //
 
-import UIKit
 import Foundation
+import UIKit
 
 class UserCardView: UIView {
     
@@ -18,7 +18,6 @@ class UserCardView: UIView {
         let view = UIView()
         view.frame.size = contentSize
         view.backgroundColor = .clear
-        
         return view
     }()
     
@@ -41,7 +40,6 @@ class UserCardView: UIView {
         view.layer.cornerRadius = 25
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
-        
         return view
     }()
     
@@ -50,7 +48,6 @@ class UserCardView: UIView {
         imageView.image = UIImage(named: "avatar")
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
         return imageView
     }()
     
@@ -59,7 +56,6 @@ class UserCardView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.tintColor = AppStyles.color.offwhite
         view.config(username: "USERNAME", age: 30, location: "SILICON VALLEY", noSmoking: true, noDrinking: true)
-        
         return view
     }()
     
@@ -67,7 +63,6 @@ class UserCardView: UIView {
         let view = UIView()
         view.backgroundColor = AppStyles.color.offwhite
         view.translatesAutoresizingMaskIntoConstraints = false
-        
         return view
     }()
     
@@ -78,7 +73,6 @@ class UserCardView: UIView {
         label.font = label.font.withSize(15)
         label.text = "INTERESTS"
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
@@ -89,7 +83,6 @@ class UserCardView: UIView {
         label.font = label.font.withSize(10)
         label.text = "Football, IT, Crypto, Politics"
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
@@ -100,7 +93,6 @@ class UserCardView: UIView {
         label.font = label.font.withSize(15)
         label.text = "ABOUT MYSELF:"
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
@@ -110,7 +102,6 @@ class UserCardView: UIView {
         label.font = label.font.withSize(10)
         label.text = "CEO of Apple. Love beer. Cheers!"
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
@@ -118,7 +109,6 @@ class UserCardView: UIView {
         let button = CustomButton(title: "SORRY")
         button.backgroundColor = AppStyles.color.sand
         button.translatesAutoresizingMaskIntoConstraints = false
-        
         return button
     }()
     
@@ -127,7 +117,6 @@ class UserCardView: UIView {
         button.backgroundColor = AppStyles.color.offwhite
         button.titleLabel?.textColor = AppStyles.color.black
         button.translatesAutoresizingMaskIntoConstraints = false
-        
         return button
     }()
     
@@ -136,13 +125,11 @@ class UserCardView: UIView {
         stackView.spacing = 16
         stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        
         return stackView
     }()
     
-    //MARK: - Initialization
+    // MARK: - Initialization
     
-    /// Creates view with zero frame.
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -198,13 +185,11 @@ class UserCardView: UIView {
         rightButton.titleLabel?.text = rightButtonTitle
     }
     
-    /// Setting up background.
     private func setupBackground() {
         self.addSubview(contentView)
         backgroundColor = AppStyles.color.offwhite
     }
     
-    /// Setting up header.
     private func setupHeader() {
         self.addSubview(headerView)
         
@@ -221,7 +206,6 @@ class UserCardView: UIView {
          ])
     }
     
-    /// Creating black view.
     private func addCardView() {
         contentView.addSubview(cardView)
         
@@ -231,7 +215,7 @@ class UserCardView: UIView {
             cardView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             cardView.widthAnchor.constraint(equalToConstant: AppStyles.size.horizontalMargin.big * 2),
             cardView.heightAnchor.constraint(greaterThanOrEqualTo: cardView.widthAnchor, multiplier: 1.5),
-            cardView.leadingAnchor.constraint(equalTo:     contentView.leadingAnchor,
+            cardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
                                               constant: AppStyles.size.horizontalMargin.small * 2),
             cardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
                                                constant: -AppStyles.size.horizontalMargin.small * 2)
@@ -261,13 +245,14 @@ class UserCardView: UIView {
             userInfoView.heightAnchor.constraint(equalToConstant: AppStyles.size.height.header),
             userInfoView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
             userInfoView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor,
-                                constant: AppStyles.size.horizontalMargin.middle),
-            userInfoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
-                                constant: -AppStyles.size.horizontalMargin.big)
+                                                  constant: AppStyles.size.horizontalMargin.middle),
+            userInfoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -AppStyles
+                .size
+                .horizontalMargin
+                .big)
         ])
     }
     
-    /// This method adds a separator line.
     private func addSeparatorLine() {
         cardView.addSubview(separatorLine)
         
@@ -288,8 +273,7 @@ class UserCardView: UIView {
         
         NSLayoutConstraint.activate([
             interestsLabel.bottomAnchor.constraint(
-                equalTo: separatorLine.topAnchor,
-                                                   constant:
+                equalTo: separatorLine.topAnchor, constant:
                     AppStyles.size.verticalMargin.middle
                 + AppStyles.size.verticalMargin.small),
             interestsLabel.widthAnchor.constraint(equalTo: cardView.widthAnchor, multiplier: 0.6),
@@ -315,7 +299,6 @@ class UserCardView: UIView {
         ])
     }
     
-    /// Setting up "About Myself" label.
     private func addAboutMyselfLabel() {
         cardView.addSubview(aboutMyselfLabel)
         
@@ -347,7 +330,6 @@ class UserCardView: UIView {
         ])
     }
     
-    /// Setting up stack view with buttons.
     private func addButtonsStackView() {
         cardView.addSubview(buttonsStackView)
         buttonsStackView.addArrangedSubview(leftButton)
@@ -372,4 +354,3 @@ class UserCardView: UIView {
         print(#function)
     }
 }
-

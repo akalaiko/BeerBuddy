@@ -9,13 +9,11 @@ import Foundation
 
 // MARK: - Protocols
 
-/// Controller input.
 protocol DiscoverViewInput: AnyObject { }
 
-/// Controller output.
 protocol DiscoverViewOutput: AnyObject {
-    func didTapSorryButton()
-    func didTapCheersButton()
+    func didTapLeftButton()
+    func didTapRightButton()
 }
 
 final class DiscoverPresenter {
@@ -25,12 +23,11 @@ final class DiscoverPresenter {
 // MARK: - Extensions
 
 extension DiscoverPresenter: DiscoverViewOutput {
-    func didTapSorryButton() {
+    func didTapLeftButton() {
         print(#function)
     }
     
-    func didTapCheersButton() {
+    func didTapRightButton() {
         print(#function)
     }
 }
-

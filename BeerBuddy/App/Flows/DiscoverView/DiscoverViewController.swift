@@ -22,13 +22,10 @@ class DiscoverViewController: UIViewController {
         return view
     }
     
-    /// Controller's presenter.
     private var presenter: DiscoverViewOutput?
     
     // MARK: - Initialization
     
-    /// Created controller screen "Discover".
-    /// - Parameter presenter : Controller's presenter.
     init(presenter: DiscoverPresenter? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.presenter = presenter
@@ -50,36 +47,25 @@ class DiscoverViewController: UIViewController {
         userCardView.configureUI()
         setupActionForButton()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-    }
 
     // MARK: - Private methods
     
     private func setupActionForButton() {
-        userCardView.rightButton.addTarget(self, action: #selector(self.didTapCheersButton), for: .touchUpInside)
-        userCardView.leftButton.addTarget(self, action: #selector(self.didTapSorryButton), for: .touchUpInside)
+        userCardView.rightButton.addTarget(self, action: #selector(self.didTapRightButton), for: .touchUpInside)
+        userCardView.leftButton.addTarget(self, action: #selector(self.didTapLeftButton), for: .touchUpInside)
     }
     
     // MARK: - Actions
     
-    @objc func didTapSorryButton(sender: UIButton) {
-        presenter?.didTapSorryButton()
+    @objc func didTapLeftButton(sender: UIButton) {
+        presenter?.didTapLeftButton()
     }
     
-    @objc func didTapCheersButton(sender: UIButton) {
-        presenter?.didTapCheersButton()
+    @objc func didTapRightButton(sender: UIButton) {
+        presenter?.didTapRightButton()
     }
 }
 
-//MARK: - Extensions
+// MARK: - Extensions
 
 extension DiscoverViewController: DiscoverViewInput { }
-

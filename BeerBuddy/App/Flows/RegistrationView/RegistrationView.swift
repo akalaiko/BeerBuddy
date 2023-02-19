@@ -46,7 +46,6 @@ class RegistrationView: UIView {
         let imageView = UIImageView()
         imageView.image = UIImage(named: AppData.imageName.missingPhoto)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
         return imageView
     }()
     

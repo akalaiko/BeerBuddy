@@ -28,5 +28,6 @@ enum AppData {
         static var search: String { "magnifyingGlass" }
         static var message: String { "message" }
         static var settings: String { "gear" }
+        static var mapIcon: String { "mapIcon" }
     }
 }

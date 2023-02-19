@@ -45,21 +45,21 @@ class MatchesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         matchesView.setupUI()
+        presenter?.viewRequestFetch()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
     }
-
-    // MARK: - Actions
-    
 }
 
 // MARK: - MatchesViewInput
 
 extension MatchesViewController: MatchesViewInput {
-    
+    func reloadTable() {
+        matchesView.reloadTable()
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -72,7 +72,7 @@ extension MatchesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MatchesTableViewCell.identifier)
                 as? MatchesTableViewCell else { preconditionFailure("MatchesTableViewCell error") }
-        let user = presenter?.data[indexPath.row] ?? .init()
+        let user = presenter?.data[indexPath.row] ?? .init(id: 0)
         cell.configure(user)
         return cell
     }
@@ -83,5 +83,9 @@ extension MatchesViewController: UITableViewDataSource {
 extension MatchesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         AppStyles.size.height.tableCell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.viewOpenUserInfo(indexPath)
     }
 }

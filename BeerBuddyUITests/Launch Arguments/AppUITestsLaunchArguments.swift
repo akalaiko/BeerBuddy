@@ -10,4 +10,5 @@ import Foundation
 /// Arguments for launching the application for testing the desired screens.
 enum AppUITestsLaunchArguments {
     static var matchesView: String { "--uitestingMatchesView" }
+    static var chatsView: String { "--uitestingChatsView" }
 }

@@ -34,7 +34,9 @@ class MatchesTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
+        #if DEBUG
         setUITests()
+        #endif
     }
 
     required init?(coder: NSCoder) {
@@ -87,7 +89,7 @@ class MatchesTableViewCell: UITableViewCell {
 
     /// Settings the cell data.
     /// - Parameter user: User informations.
-    func configure(_ user: UserTest) {
+    func configure(_ user: UserModelStub) {
         avatarImageView.image = UIImage(named: AppData.imageName.testAvatar)
         userInfoView.config(username: user.username,
                             age: user.age,
@@ -95,7 +97,7 @@ class MatchesTableViewCell: UITableViewCell {
                             noSmoking: user.noSmoking,
                             noDrinking: user.noDrinking)
     }
-
+    
     // MARK: - Private Methods
 
     /// Makes the avatar circular.
@@ -103,9 +105,15 @@ class MatchesTableViewCell: UITableViewCell {
         avatarImageView.layer.cornerRadius = avatarImageView.frame.height / 2
         avatarImageView.clipsToBounds = true
     }
+}
 
+// MARK: - UI Testing
+
+#if DEBUG
+extension MatchesTableViewCell {
     /// Setting ui test Identifiers.
     private func setUITests() {
-        self.accessibilityIdentifier = "matchesTableViewCell"
+        self.accessibilityIdentifier = "matchesCell"
     }
 }
+#endif

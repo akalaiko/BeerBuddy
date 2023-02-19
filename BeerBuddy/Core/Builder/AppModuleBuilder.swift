@@ -26,7 +26,8 @@ enum AppModuleBuilder {
     }
 
     static func matchesController() -> UIViewController & MatchesViewInput {
-        let presenter = MatchesPresenter()
+        let network = NetworkMockForTests()
+        let presenter = MatchesPresenter(newtwork: network)
         let viewController = MatchesViewController(presenter: presenter)
         presenter.viewInput = viewController
 
@@ -38,6 +39,15 @@ enum AppModuleBuilder {
         let viewController = ProfilePropertiesViewController(presenter: presenter)
         presenter.viewController = viewController
         return viewController
+    }
+
+    static func chatsController() -> UIViewController & ChatsViewInput {
+        let dateFormatter = DateFormatterHelper()
+        let network = NetworkMockForTests()
+        let presenter = ChatsPresenter(dateFormatter: dateFormatter, network: network)
+        let viewcController = ChatsViewController(presenter: presenter)
+        presenter.viewInput = viewcController
+        return viewcController
     }
 
     static func mainController() -> UIViewController {

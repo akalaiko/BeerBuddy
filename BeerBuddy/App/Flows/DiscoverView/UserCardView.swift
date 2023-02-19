@@ -45,7 +45,8 @@ class UserCardView: UIView {
     
     private(set) lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "avatar")
+        let avatarImage = "avatar"
+        imageView.image = UIImage(named: avatarImage)
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView

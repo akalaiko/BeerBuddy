@@ -13,7 +13,6 @@ class UserCardView: UIView {
     // MARK: - Private properties
     
     /// Initilazing view's components.
-    
     private(set) lazy var contentView: UIView = {
         let view = UIView()
         view.frame.size = contentSize
@@ -71,7 +70,7 @@ class UserCardView: UIView {
         let label = UILabel()
         label.textColor = AppStyles.color.offwhite
         label.font = AppStyles.font.title
-        label.font = label.font.withSize(15)
+        label.font = AppStyles.font.bigTextCard
         label.text = "INTERESTS"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -81,7 +80,7 @@ class UserCardView: UIView {
         let label = UILabel()
         label.textColor = AppStyles.color.offwhite
         label.font = AppStyles.font.button
-        label.font = label.font.withSize(10)
+        label.font = AppStyles.font.smallTextCard
         label.text = "Football, IT, Crypto, Politics"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -91,7 +90,7 @@ class UserCardView: UIView {
         let label = UILabel()
         label.textColor = AppStyles.color.offwhite
         label.font = AppStyles.font.title
-        label.font = label.font.withSize(15)
+        label.font = AppStyles.font.bigTextCard
         label.text = "ABOUT MYSELF:"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -100,7 +99,7 @@ class UserCardView: UIView {
     private(set) lazy var userBioLabel: UILabel = {
         let label = UILabel()
         label.textColor = AppStyles.color.offwhite
-        label.font = label.font.withSize(10)
+        label.font = AppStyles.font.smallTextCard
         label.text = "CEO of Apple. Love beer. Cheers!"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

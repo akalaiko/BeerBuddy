@@ -18,7 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let launchArguments = CommandLine.arguments
         window?.rootViewController = selectTestController(launchArguments)
         #else
-        window?.rootViewController = AppModuleBuilder.onboardingViewController()
+        let controller = UINavigationController(rootViewController: AppModuleBuilder.onboardingViewController())
+        controller.modalPresentationStyle = .fullScreen
+        window?.rootViewController = controller
         #endif
         window?.makeKeyAndVisible()
 

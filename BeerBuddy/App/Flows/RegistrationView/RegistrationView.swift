@@ -14,7 +14,7 @@ class RegistrationView: UIView {
     
     /// Initilazing view's components.
     
-    private(set) lazy var backgroundImage: UIImageView = {
+    private lazy var backgroundImage: UIImageView = {
         var imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(named: AppData.imageName.waveBackground)
@@ -23,7 +23,7 @@ class RegistrationView: UIView {
         return imageView
     }()
     
-    private(set) lazy var scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -36,13 +36,13 @@ class RegistrationView: UIView {
         return scrollView
     }()
     
-    private(set) lazy var contentView: UIView = {
+    private lazy var contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private(set) lazy var avatarImageView: UIImageView = {
+    private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: AppData.imageName.missingPhoto)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +50,7 @@ class RegistrationView: UIView {
         return imageView
     }()
     
-    private(set) lazy var addAvatarLabel: UILabel = {
+    private lazy var addAvatarLabel: UILabel = {
         let label = UILabel()
         label.text = "ADD"
         label.textColor = AppStyles.color.black
@@ -59,7 +59,7 @@ class RegistrationView: UIView {
         return label
     }()
     
-    private(set) lazy var nameTextField: CustomTextField = {
+    private lazy var nameTextField: CustomTextField = {
         let textField = CustomTextField(
             restriction: .lettersOnly,
             minLength: 2,
@@ -70,7 +70,7 @@ class RegistrationView: UIView {
         return textField
     }()
     
-    private(set) lazy var loginTextField: CustomTextField = {
+    private lazy var loginTextField: CustomTextField = {
         let textField = CustomTextField(
             minLength: 3,
             placeholder: "Login")
@@ -80,7 +80,7 @@ class RegistrationView: UIView {
         return textField
     }()
     
-    private(set) lazy var passwordTextField: CustomTextField = {
+    private lazy var passwordTextField: CustomTextField = {
         let textField = CustomTextField(
             minLength: 8,
             isSecure: true,
@@ -91,7 +91,7 @@ class RegistrationView: UIView {
         return textField
     }()
     
-    private(set) lazy var repeatPasswordTextField: CustomTextField = {
+    private lazy var repeatPasswordTextField: CustomTextField = {
         let textField = CustomTextField(
             minLength: 8,
             isSecure: true,
@@ -102,7 +102,7 @@ class RegistrationView: UIView {
         return textField
     }()
     
-    private(set) lazy var registrationButton: CustomButton = {
+    private lazy var registrationButton: CustomButton = {
         let button = CustomButton(title: "REGISTER")
         button.translatesAutoresizingMaskIntoConstraints = false
         

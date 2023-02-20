@@ -22,6 +22,7 @@ enum AppModuleBuilder {
         let presenter = LoginPresenter()
         let viewController = LoginViewController(presenter: presenter)
         presenter.viewController = viewController
+        viewController.modalPresentationStyle = .fullScreen
         
         return viewController
     }
@@ -47,9 +48,9 @@ enum AppModuleBuilder {
         let dateFormatter = DateFormatterHelper()
         let network = NetworkMockForTests()
         let presenter = ChatsPresenter(dateFormatter: dateFormatter, network: network)
-        let viewcController = ChatsViewController(presenter: presenter)
-        presenter.viewInput = viewcController
-        return viewcController
+        let viewController = ChatsViewController(presenter: presenter)
+        presenter.viewInput = viewController
+        return viewController
     }
 
     static func mainController() -> UIViewController {

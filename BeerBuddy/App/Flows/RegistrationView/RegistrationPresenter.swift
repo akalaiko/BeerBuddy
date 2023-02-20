@@ -25,10 +25,6 @@ final class RegistrationPresenter {
     weak var viewController: (UIViewController & RegistrationViewInput)?
     
     // MARK: - Private methods
-    
-    private func alertLoginError(with message: String = "Please enter all info to create a new account.") {
-        viewController?.alertLoginError(message: message)
-    }
 }
 
 // MARK: - Extensions
@@ -37,12 +33,12 @@ extension RegistrationPresenter: RegistrationViewOutput {
     
     func didTapRegistrationButton(name: String, login: String, password: String, repeatPassword: String) {
         guard !name.isEmpty, !login.isEmpty, !password.isEmpty, !repeatPassword.isEmpty else {
-            alertLoginError(with: "Please enter all info to create a new account.")
+            viewController?.alertLoginError(message: "Please enter all info to create a new account.")
             return
         }
         
         guard password == repeatPassword else {
-            alertLoginError(with: "Please enter the same password in both fields")
+            viewController?.alertLoginError(message: "Please enter the same password in both fields")
             return
         }
         
@@ -51,13 +47,13 @@ extension RegistrationPresenter: RegistrationViewOutput {
         DatabaseManager.shared.userExists(with: login, completion: { [weak self] exists in
             guard let self else { return }
             guard !exists else {
-                self.alertLoginError(with: "User already exists!")
+                self.viewController?.alertLoginError(message: "User already exists!")
                 return
             }
             
             FirebaseAuth.Auth.auth().createUser(withEmail: login, password: password) { authResult, error in
                 guard authResult != nil, error == nil else {
-                    self.alertLoginError(with: "Error while creating new user.")
+                    self.viewController?.alertLoginError(message: "Error while creating new user.")
                     return
                 }
                 let chatUser = ChatAppUser(name: name, emailAddress: login)

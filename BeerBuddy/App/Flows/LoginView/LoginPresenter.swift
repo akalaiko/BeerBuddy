@@ -26,10 +26,6 @@ final class LoginPresenter {
     
     // MARK: - Private functions
     
-    private func alertLoginError(message: String = "Please enter all info to log in.") {
-        viewController?.alertLoginError(message: message)
-    }
-    
 }
 
 // MARK: - LoginViewOutput
@@ -39,7 +35,7 @@ extension LoginPresenter: LoginViewOutput {
     func tappedLoginButton(login: String, password: String) {
         
         guard !login.isEmpty, !password.isEmpty else {
-            alertLoginError()
+            viewController?.alertLoginError(message: "Please enter all info to log in.")
             return
         }
         
@@ -47,7 +43,7 @@ extension LoginPresenter: LoginViewOutput {
         FirebaseAuth.Auth.auth().signIn(withEmail: login, password: password) { [weak self] authResult, error in
             guard let self else { return }
             guard let result = authResult, error == nil else {
-                self.alertLoginError(message: "Failed to log in user with login: \(login)")
+                self.viewController?.alertLoginError(message: "Failed to log in user with login: \(login)")
                 return
             }
 

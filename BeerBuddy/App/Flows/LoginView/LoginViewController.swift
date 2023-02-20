@@ -82,7 +82,7 @@ extension LoginViewController {
 // MARK: - LoginViewInput
 
 extension LoginViewController: LoginViewInput {
-    func alertLoginError(message: String) {
+    func alertLoginError(message: String = "Please enter all info to log in.") {
         let alert = UIAlertController(title: "Ooops!", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel))
         present(alert, animated: true)

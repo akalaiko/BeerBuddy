@@ -44,16 +44,12 @@ final class OnboardingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.tintColor = .black
         onboardingView.configureUI()
-        validateAuth()
+        presenter?.validateAuth()
     }
 
     // MARK: - Private methods
-    
-    private func validateAuth() {
-        presenter?.validateAuth()
-    }
+
 }
 
 // MARK: - OnboardingViewInput

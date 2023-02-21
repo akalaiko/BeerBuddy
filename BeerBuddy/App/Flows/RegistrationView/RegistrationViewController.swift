@@ -60,22 +60,31 @@ class RegistrationViewController: UIViewController {
         super.viewWillDisappear(animated)
         registrationView.unsubscribeObserver()
     }
-
+    
     // MARK: - Private methods
     
     private func setupActionForButton() {
-        registrationView.registrationButton.addTarget(self,
-                                                      action: #selector(self.didTapRegistrationButton),
-                                                      for: .touchUpInside)
+        registrationView.addRegistrationButtonTarget(self, action: #selector(didTapRegistrationButton))
     }
     
     // MARK: - Actions
     
     @objc func didTapRegistrationButton(sender: UIButton) {
-        presenter?.didTapRegistrationButton()
+        presenter?.didTapRegistrationButton(name: registrationView.nameText,
+                                            login: registrationView.loginText,
+                                            password: registrationView.passwordText,
+                                            repeatPassword: registrationView.repeatPasswordText)
     }
 }
 
 // MARK: - Extensions
 
-extension RegistrationViewController: RegistrationViewInput { }
+extension RegistrationViewController: RegistrationViewInput {
+    
+    func alertLoginError(message: String) {
+        let alert = UIAlertController(title: "Ooops!", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+        present(alert, animated: true)
+    }
+    
+}

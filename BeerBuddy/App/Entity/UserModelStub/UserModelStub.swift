@@ -27,3 +27,19 @@ struct UserModelStub {
         ["Moscow Red Square", "Berlin Brandenburg Gate", "Kazan Kremlin" ]
     }
 }
+
+struct ChatAppUser {
+    
+    let name: String
+    let emailAddress: String
+    
+    var safeEmail: String {
+        var email = emailAddress.replacingOccurrences(of: ".", with: "-")
+        email = email.replacingOccurrences(of: "@", with: "-")
+        return email
+    }
+    
+    var profilePictureFileName: String {
+        return "\(safeEmail)_profile_picture.png"
+    }
+}

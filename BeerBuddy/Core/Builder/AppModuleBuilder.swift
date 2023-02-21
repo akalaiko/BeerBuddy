@@ -9,10 +9,20 @@ import Foundation
 import UIKit
 
 enum AppModuleBuilder {
+    
+    static func onboardingViewController() -> UIViewController & OnboardingViewInput {
+        let presenter = OnboardingPresenter()
+        let viewController = OnboardingViewController(presenter: presenter)
+        presenter.viewController = viewController
+        
+        return viewController
+    }
+    
     static func loginViewController() -> UIViewController & LoginViewInput {
         let presenter = LoginPresenter()
         let viewController = LoginViewController(presenter: presenter)
         presenter.viewController = viewController
+        viewController.modalPresentationStyle = .fullScreen
         
         return viewController
     }
@@ -38,12 +48,14 @@ enum AppModuleBuilder {
         let dateFormatter = DateFormatterHelper()
         let network = NetworkMockForTests()
         let presenter = ChatsPresenter(dateFormatter: dateFormatter, network: network)
-        let viewcController = ChatsViewController(presenter: presenter)
-        presenter.viewInput = viewcController
-        return viewcController
+        let viewController = ChatsViewController(presenter: presenter)
+        presenter.viewInput = viewController
+        return viewController
     }
 
     static func mainController() -> UIViewController {
+        let mainViewController = MainViewController()
+        mainViewController.modalPresentationStyle = .fullScreen
         return MainViewController()
     }
 

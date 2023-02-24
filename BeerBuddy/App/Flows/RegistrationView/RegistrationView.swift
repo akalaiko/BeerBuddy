@@ -42,21 +42,21 @@ class RegistrationView: UIView {
         return view
     }()
     
-    private lazy var avatarImageView: UIImageView = {
+    lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: AppData.imageName.missingPhoto)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
         return imageView
     }()
     
-    private lazy var addAvatarLabel: UILabel = {
-        let label = UILabel()
-        label.text = "ADD"
-        label.textColor = AppStyles.color.black
-        label.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var addAvatarButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("ADD", for: .normal)
+        button.setTitleColor(AppStyles.color.black, for: .normal)
+        button.backgroundColor = .clear
+        button.translatesAutoresizingMaskIntoConstraints = false
         
-        return label
+        return button
     }()
     
     private lazy var nameTextField: CustomTextField = {
@@ -144,11 +144,16 @@ class RegistrationView: UIView {
         addScrollView()
         addNameTextField()
         addAvatarImage()
-        createAddLabel()
+        createAddAvatarButton()
         addLoginTextField()
         addPasswordTextField()
         addRepeatPasswordTextField()
         addRegistrationButton()
+    }
+    
+    func makeAvatarCircular() {
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
+        avatarImageView.layer.masksToBounds = true
     }
     
     // MARK: - Private methods
@@ -217,12 +222,12 @@ class RegistrationView: UIView {
     /// Setting up "add" label.
     ///
     ///  By tapping on this label you can add a user avatar.
-    private func createAddLabel() {
-        avatarImageView.addSubview(addAvatarLabel)
+    private func createAddAvatarButton() {
+        contentView.addSubview(addAvatarButton)
         
         NSLayoutConstraint.activate([
-            addAvatarLabel.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor),
-            addAvatarLabel.centerXAnchor.constraint(equalTo: avatarImageView.centerXAnchor)
+            addAvatarButton.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor),
+            addAvatarButton.centerXAnchor.constraint(equalTo: avatarImageView.centerXAnchor)
         ])
     }
     
@@ -294,12 +299,15 @@ class RegistrationView: UIView {
     
     func unsubscribeObserver() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func addRegistrationButtonTarget(_ target: Any, action: Selector) {
         registrationButton.addTarget(target, action: action, for: .touchUpInside)
+    }
+    
+    func addAvatarButtonTarget(_ target: Any, action: Selector) {
+        addAvatarButton.addTarget(target, action: action, for: .touchUpInside)
     }
     
     // MARK: - Actions

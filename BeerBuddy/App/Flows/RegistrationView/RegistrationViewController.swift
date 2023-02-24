@@ -12,8 +12,7 @@ class RegistrationViewController: UIViewController {
     // MARK: - Private properties
     
     private var registrationView: RegistrationView {
-        guard
-            let view = self.view as? RegistrationView
+        guard let view = self.view as? RegistrationView
         else {
             let correctView = RegistrationView()
             self.view = correctView
@@ -51,6 +50,11 @@ class RegistrationViewController: UIViewController {
         setupActionForButton()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        registrationView.makeAvatarCircular()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         registrationView.subscribeObserver()
@@ -65,15 +69,22 @@ class RegistrationViewController: UIViewController {
     
     private func setupActionForButton() {
         registrationView.addRegistrationButtonTarget(self, action: #selector(didTapRegistrationButton))
+        registrationView.addAvatarButtonTarget(self, action: #selector(didTapAddAvatarButton))
     }
     
     // MARK: - Actions
     
     @objc func didTapRegistrationButton(sender: UIButton) {
+        guard let avatar = registrationView.avatarImageView.image else { return }
         presenter?.didTapRegistrationButton(name: registrationView.nameText,
                                             login: registrationView.loginText,
                                             password: registrationView.passwordText,
-                                            repeatPassword: registrationView.repeatPasswordText)
+                                            repeatPassword: registrationView.repeatPasswordText,
+                                            avatar: avatar)
+    }
+    
+    @objc func didTapAddAvatarButton(sender: UIButton) {
+        presentPhotoActionSheet()
     }
 }
 
@@ -86,5 +97,39 @@ extension RegistrationViewController: RegistrationViewInput {
         alert.addAction(UIAlertAction(title: "OK", style: .cancel))
         present(alert, animated: true)
     }
+}
+
+extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
     
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        picker.dismiss(animated: true)
+        guard let image = info[.editedImage] as? UIImage else { return }
+        registrationView.avatarImageView.image = image
+    }
+    
+    func presentPhotoActionSheet() {
+        let ac = UIAlertController(title: "Profile picture",
+                                   message: "How would you like to select a picture?",
+                                   preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        ac.addAction(UIAlertAction(title: "Take Photo", style: .default) { [weak self] _ in
+            self?.pickImage(from: .camera)
+        })
+        ac.addAction(UIAlertAction(title: "Choose Photo", style: .default) { [weak self] _ in
+            self?.pickImage(from: .photoLibrary)
+        })
+        present(ac, animated: true)
+    }
+    
+    func pickImage(from source: UIImagePickerController.SourceType) {
+        let vc = UIImagePickerController()
+        vc.sourceType = source
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc, animated: true)
+    }
 }

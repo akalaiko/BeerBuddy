@@ -12,8 +12,8 @@ import Foundation
 protocol DiscoverViewInput: AnyObject { }
 
 protocol DiscoverViewOutput: AnyObject {
-    func didTapLeftButton()
-    func didTapRightButton()
+    func didTapRejectButton()
+    func didTapAcceptButton()
 }
 
 final class DiscoverPresenter {
@@ -23,11 +23,11 @@ final class DiscoverPresenter {
 // MARK: - Extensions
 
 extension DiscoverPresenter: DiscoverViewOutput {
-    func didTapLeftButton() {
+    func didTapRejectButton() {
         print(#function)
     }
     
-    func didTapRightButton() {
+    func didTapAcceptButton() {
         print(#function)
     }
 }

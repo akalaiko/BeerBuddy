@@ -11,11 +11,11 @@ class DiscoverViewController: UIViewController {
     
     // MARK: - Private properties
     
-    private var userCardView: UserCardView {
+    private var userCardView: DiscoverView {
         guard
-            let view = self.view as? UserCardView
+            let view = self.view as? DiscoverView
         else {
-            let correctView = UserCardView(frame: self.view.frame)
+            let correctView = DiscoverView()
             self.view = correctView
             return correctView
         }
@@ -26,7 +26,7 @@ class DiscoverViewController: UIViewController {
     
     // MARK: - Initialization
     
-    init(presenter: DiscoverPresenter? = nil) {
+    init(presenter: DiscoverViewOutput) {
         super.init(nibName: nil, bundle: nil)
         self.presenter = presenter
     }
@@ -47,22 +47,26 @@ class DiscoverViewController: UIViewController {
         userCardView.configureUI()
         setupActionForButton()
     }
-
+    
     // MARK: - Private methods
     
     private func setupActionForButton() {
-        userCardView.rightButton.addTarget(self, action: #selector(self.didTapRightButton), for: .touchUpInside)
-        userCardView.leftButton.addTarget(self, action: #selector(self.didTapLeftButton), for: .touchUpInside)
+        userCardView.cardView.acceptButton.addTarget(self,
+                                                     action: #selector(self.didTapAcceptButton),
+                                                     for: .touchUpInside)
+        userCardView.cardView.rejectButton.addTarget(self,
+                                                     action: #selector(self.didTapRejectButton),
+                                                     for: .touchUpInside)
     }
     
     // MARK: - Actions
     
-    @objc func didTapLeftButton(sender: UIButton) {
-        presenter?.didTapLeftButton()
+    @objc func didTapRejectButton(sender: UIButton) {
+        presenter?.didTapRejectButton()
     }
     
-    @objc func didTapRightButton(sender: UIButton) {
-        presenter?.didTapRightButton()
+    @objc func didTapAcceptButton(sender: UIButton) {
+        presenter?.didTapAcceptButton()
     }
 }
 

@@ -2,7 +2,7 @@
 //  UserCardView.swift
 //  BeerBuddy
 //
-//  Created by Polina Tikhomirova on 18.02.2023.
+//  Created by Polina Tikhomirova on 22.02.2023.
 //
 
 import Foundation
@@ -13,26 +13,6 @@ class UserCardView: UIView {
     // MARK: - Private properties
     
     /// Initilazing view's components.
-    private(set) lazy var contentView: UIView = {
-        let view = UIView()
-        view.frame.size = contentSize
-        view.backgroundColor = .clear
-        return view
-    }()
-    
-    private var contentSize: CGSize {
-        CGSize(
-            width: frame.size.width,
-            height: frame.size.height)
-    }
-    
-    private lazy var headerView: HeaderView = {
-            let view = HeaderView(title: "DISCOVER")
-            view.backgroundColor = AppStyles.color.offwhite
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }()
-    
     private(set) lazy var cardView: UIView = {
         let view = UIView()
         view.backgroundColor = AppStyles.color.black
@@ -54,18 +34,45 @@ class UserCardView: UIView {
     private(set) lazy var userInfoView: UserInfoView = {
         let view = UserInfoView(color: AppStyles.color.offwhite)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.tintColor = AppStyles.color.offwhite
         view.config(username: "USERNAME", age: 30, location: "SILICON VALLEY", noSmoking: true, noDrinking: true)
         return view
     }()
     
-    private(set) lazy var separatorLine: UIView = {
+    private(set) lazy var userInterestsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 1
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private(set) lazy var userBioStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 1
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private(set) lazy var userInfoStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 8
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private(set) lazy var userInfoCardView: UIView = {
         let view = UIView()
-        view.backgroundColor = AppStyles.color.offwhite
+        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     private(set) lazy var interestsLabel: UILabel = {
         let label = UILabel()
         label.textColor = AppStyles.color.offwhite
@@ -105,14 +112,14 @@ class UserCardView: UIView {
         return label
     }()
     
-    private(set) lazy var leftButton: CustomButton = {
+    private(set) lazy var rejectButton: CustomButton = {
         let button = CustomButton(title: "SORRY")
         button.backgroundColor = AppStyles.color.sand
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    private(set) lazy var rightButton: CustomButton = {
+    private(set) lazy var acceptButton: CustomButton = {
         let button = CustomButton(title: "CHEERS!", isDarkMode: true)
         button.backgroundColor = AppStyles.color.offwhite
         button.titleLabel?.textColor = AppStyles.color.black
@@ -124,6 +131,7 @@ class UserCardView: UIView {
         let stackView = UIStackView()
         stackView.spacing = 16
         stackView.distribution = .fillEqually
+        stackView.axis = .horizontal
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -132,93 +140,65 @@ class UserCardView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        prepareForReuse()
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(userAvatar: UIImage,
-         interestsList: String,
-         userBio: String,
-         leftButtonTitle: String,
-         rightButtonTitle: String) {
-        super.init(frame: .zero)
-        
-        setupUI(
-            userAvatar: userAvatar,
-            interestsList: interestsList,
-            userBio: userBio,
-            leftButtonTitle: leftButtonTitle,
-            rightButtonTitle: rightButtonTitle)
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        drawSeparator(rect)
     }
     
     // MARK: - Views
     
     /// Setting up visual components.
     public func configureUI() {
-        setupBackground()
-        setupHeader()
         addCardView()
         addImageView()
         addUserInfoView()
-        addSeparatorLine()
-        addInterestsLabel()
-        addInterestsListingLabel()
-        addAboutMyselfLabel()
-        addUserBioLabel()
+        addUserInfoCardView()
         addButtonsStackView()
+    }
+    
+    // MARK: - Public Methods
+    
+    func configure(userAvatar: UIImage,
+                   interestsList: String,
+                   userBio: String,
+                   rejectButtonTitle: String,
+                   acceptButtonTitle: String) {
+        imageView.image = userAvatar
+        interestsListingLabel.text = interestsList
+        userBioLabel.text = userBio
+        rejectButton.setTitle(rejectButtonTitle, for: .normal)
+        acceptButton.setTitle(acceptButtonTitle, for: .normal)
     }
     
     // MARK: - Private methods
     
-    /// Setting up UI components.
-    private func setupUI(userAvatar: UIImage,
-                         interestsList: String,
-                         userBio: String,
-                         leftButtonTitle: String,
-                         rightButtonTitle: String) {
-        imageView.image = userAvatar
-        interestsListingLabel.text = interestsList
-        userBioLabel.text = userBio
-        leftButton.titleLabel?.text = leftButtonTitle
-        rightButton.titleLabel?.text = rightButtonTitle
-    }
-    
-    private func setupBackground() {
-        self.addSubview(contentView)
-        backgroundColor = AppStyles.color.offwhite
-    }
-    
-    private func setupHeader() {
-        self.addSubview(headerView)
-        
-        headerView.setRightButton(
-            imageName: AppData.imageName.slider,
-            target: self,
-            action: #selector(filterAction))
-        
-        NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            headerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            headerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: AppStyles.size.height.header)
-         ])
+    private func prepareForReuse() {
+        imageView.image = nil
+        interestsListingLabel.text = nil
+        userBioLabel.text = nil
+        rejectButton.titleLabel?.text = nil
+        acceptButton.titleLabel?.text = nil
     }
     
     private func addCardView() {
-        contentView.addSubview(cardView)
+        self.addSubview(cardView)
         
         NSLayoutConstraint.activate([
-            cardView.topAnchor.constraint(equalTo: headerView.bottomAnchor,
-                                          constant: AppStyles.size.verticalMargin.middle),
-            cardView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            cardView.widthAnchor.constraint(equalToConstant: AppStyles.size.horizontalMargin.big * 2),
-            cardView.heightAnchor.constraint(greaterThanOrEqualTo: cardView.widthAnchor, multiplier: 1.5),
-            cardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
-                                              constant: AppStyles.size.horizontalMargin.small * 2),
-            cardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
-                                               constant: -AppStyles.size.horizontalMargin.small * 2)
+            cardView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
+                                          constant: AppStyles.size.verticalMargin.small),
+            cardView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -AppStyles.size.verticalMargin.small),
+            cardView.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                              constant: AppStyles.size.horizontalMargin.middle),
+            cardView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                               constant: -AppStyles.size.horizontalMargin.middle)
         ])
     }
     
@@ -228,11 +208,9 @@ class UserCardView: UIView {
         
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: cardView.topAnchor),
-            imageView.widthAnchor.constraint(equalTo: cardView.widthAnchor),
             imageView.heightAnchor.constraint(equalTo: cardView.heightAnchor, multiplier: 0.6),
             imageView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor)
+            imageView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor)
         ])
     }
     
@@ -242,115 +220,61 @@ class UserCardView: UIView {
             
         NSLayoutConstraint.activate([
             userInfoView.topAnchor.constraint(greaterThanOrEqualTo: imageView.topAnchor),
-            userInfoView.heightAnchor.constraint(equalToConstant: AppStyles.size.height.header),
+            userInfoView.heightAnchor.constraint(equalTo: cardView.heightAnchor, multiplier: 0.15),
             userInfoView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
             userInfoView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor,
                                                   constant: AppStyles.size.horizontalMargin.middle),
-            userInfoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -AppStyles
-                .size
-                .horizontalMargin
-                .big)
+            userInfoView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                   constant: -AppStyles.size.horizontalMargin.big)
         ])
     }
     
-    private func addSeparatorLine() {
-        cardView.addSubview(separatorLine)
+    /// Setting up view which consists of stack views with user interests and bio labels.
+    private func addUserInfoCardView() {
+        cardView.addSubview(userInfoCardView)
+        userInfoCardView.addSubview(userInfoStackView)
+        userInfoStackView.addArrangedSubview(userInterestsStackView)
+        userInfoStackView.addArrangedSubview(userBioStackView)
+        userInterestsStackView.addArrangedSubview(interestsLabel)
+        userInterestsStackView.addArrangedSubview(interestsListingLabel)
+        userBioStackView.addArrangedSubview(aboutMyselfLabel)
+        userBioStackView.addArrangedSubview(userBioLabel)
         
         NSLayoutConstraint.activate([
-            separatorLine.topAnchor.constraint(equalTo: userInfoView.bottomAnchor,
-                                               constant: AppStyles.size.verticalMargin.middle),
-            separatorLine.heightAnchor.constraint(equalToConstant: 1),
-            separatorLine.leadingAnchor.constraint(equalTo: cardView.leadingAnchor,
-                                                   constant: AppStyles.size.verticalMargin.middle),
-            separatorLine.trailingAnchor.constraint(equalTo: cardView.trailingAnchor,
-                                                    constant: -AppStyles.size.verticalMargin.middle)
+            userInfoCardView.topAnchor.constraint(equalTo: userInfoView.bottomAnchor),
+            userInfoCardView.heightAnchor.constraint(equalTo: userInfoStackView.heightAnchor),
+            userInfoStackView.leadingAnchor.constraint(greaterThanOrEqualTo: userInfoCardView.trailingAnchor,
+                                                       constant: AppStyles.size.horizontalMargin.middle),
+            userInfoStackView.widthAnchor.constraint(equalTo: userInfoView.widthAnchor),
+            userInfoStackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor)
         ])
     }
     
-    /// Setting up "Interests" label.
-    private func addInterestsLabel() {
-        cardView.addSubview(interestsLabel)
-        
-        NSLayoutConstraint.activate([
-            interestsLabel.bottomAnchor.constraint(
-                equalTo: separatorLine.topAnchor, constant:
-                    AppStyles.size.verticalMargin.middle
-                + AppStyles.size.verticalMargin.small),
-            interestsLabel.widthAnchor.constraint(equalTo: cardView.widthAnchor, multiplier: 0.6),
-            interestsLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor,
-                                                    constant:
-                                                        AppStyles.size.horizontalMargin.middle
-                                                    + AppStyles.size.horizontalMargin.small * 2)
-        ])
-    }
-    
-    /// Setting up user interests listing label.
-    private func addInterestsListingLabel() {
-        cardView.addSubview(interestsListingLabel)
-        
-        NSLayoutConstraint.activate([
-            interestsListingLabel.bottomAnchor.constraint(equalTo: interestsLabel.bottomAnchor,
-                                                          constant: AppStyles.size.verticalMargin.small * 2),
-            interestsListingLabel.widthAnchor.constraint(equalTo: cardView.widthAnchor, multiplier: 0.6),
-            interestsListingLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor,
-                                                           constant:
-                                                            AppStyles.size.horizontalMargin.middle
-                                                           + AppStyles.size.horizontalMargin.small * 2)
-        ])
-    }
-    
-    private func addAboutMyselfLabel() {
-        cardView.addSubview(aboutMyselfLabel)
-        
-        NSLayoutConstraint.activate([
-            aboutMyselfLabel.bottomAnchor.constraint(equalTo: interestsListingLabel.bottomAnchor,
-                                                     constant:
-                                                        AppStyles.size.horizontalMargin.middle
-                                                     + AppStyles.size.verticalMargin.small),
-            aboutMyselfLabel.widthAnchor.constraint(equalTo: cardView.widthAnchor, multiplier: 0.6),
-            aboutMyselfLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor,
-                                                      constant:
-                                                        AppStyles.size.horizontalMargin.middle
-                                                      + AppStyles.size.horizontalMargin.small * 2)
-        ])
-    }
-    
-    /// Setting up user information label.
-    private func addUserBioLabel() {
-        cardView.addSubview(userBioLabel)
-        
-        NSLayoutConstraint.activate([
-            userBioLabel.bottomAnchor.constraint(equalTo: aboutMyselfLabel.bottomAnchor,
-                                                 constant: AppStyles.size.verticalMargin.small * 2),
-            userBioLabel.widthAnchor.constraint(equalTo: cardView.widthAnchor, multiplier: 0.6),
-            userBioLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor,
-                                                  constant:
-                                                    AppStyles.size.horizontalMargin.middle
-                                                  + AppStyles.size.horizontalMargin.small * 2)
-        ])
+    private func drawSeparator(_ rect: CGRect) {
+        let layer = CAShapeLayer()
+        layer.path = UIBezierPath(
+            rect: CGRect(
+                x: userInfoStackView.frame.minX,
+                y: userInfoStackView.frame.width * 0.10,
+                width: userInfoStackView.frame.width * 1.00,
+                height: 1)).cgPath
+        layer.lineWidth = 1
+        layer.strokeColor = AppStyles.color.offwhite.cgColor
+        userInfoCardView.layer.addSublayer(layer)
     }
     
     private func addButtonsStackView() {
         cardView.addSubview(buttonsStackView)
-        buttonsStackView.addArrangedSubview(leftButton)
-        buttonsStackView.addArrangedSubview(rightButton)
+        buttonsStackView.addArrangedSubview(rejectButton)
+        buttonsStackView.addArrangedSubview(acceptButton)
         
         NSLayoutConstraint.activate([
-            buttonsStackView.bottomAnchor.constraint(equalTo: userBioLabel.bottomAnchor,
-                                                     constant: AppStyles.size.height.textfield),
-            leftButton.widthAnchor.constraint(equalTo: cardView.widthAnchor, multiplier: 0.33),
-            rightButton.widthAnchor.constraint(equalTo: cardView.widthAnchor, multiplier: 0.33),
+            buttonsStackView.topAnchor.constraint(equalTo: userInfoStackView.bottomAnchor,
+                                                  constant: AppStyles.size.verticalMargin.middle),
+            buttonsStackView.widthAnchor.constraint(equalTo: cardView.widthAnchor, multiplier: 0.66),
             buttonsStackView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor,
                                                      constant: -AppStyles.size.verticalMargin.middle),
             buttonsStackView.centerXAnchor.constraint(equalTo: cardView.centerXAnchor)
         ])
-    }
-    
-    // MARK: - Actions
-    
-    /// The action of the header button.
-    @objc private func filterAction() {
-        headerView.rightButtonClickAnimation()
-        print(#function)
     }
 }

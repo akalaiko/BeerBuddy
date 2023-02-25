@@ -5,8 +5,8 @@
 //  Created by Tim on 22.02.2023.
 //
 
-import UIKit
 import MessageKit
+import UIKit
 
 struct Media: MediaItem {
     var url: URL?

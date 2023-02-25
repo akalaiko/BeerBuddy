@@ -13,6 +13,8 @@
 		AF00D8112972F171005B6C5D /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF00D8102972F171005B6C5D /* LoginPresenter.swift */; };
 		AF00D81629742D06005B6C5D /* AppModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF00D81529742D06005B6C5D /* AppModuleBuilder.swift */; };
 		AF00D81929743C17005B6C5D /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF00D81829743C17005B6C5D /* CustomButton.swift */; };
+		AF15F38F29AA03110019C4AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF15F38E29AA03110019C4AB /* ViewController.swift */; };
+		AF15F39129AA4E830019C4AB /* MatchesCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF15F39029AA4E830019C4AB /* MatchesCellModel.swift */; };
 		AF32474E29A8CDDE00A594BE /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = AF32474D29A8CDDE00A594BE /* MessageKit */; };
 		AF32475629A8CEC700A594BE /* LatestMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF32474F29A8CEC600A594BE /* LatestMessage.swift */; };
 		AF32475729A8CEC700A594BE /* MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF32475029A8CEC600A594BE /* MediaItem.swift */; };
@@ -96,6 +98,8 @@
 		AF00D8102972F171005B6C5D /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		AF00D81529742D06005B6C5D /* AppModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModuleBuilder.swift; sourceTree = "<group>"; };
 		AF00D81829743C17005B6C5D /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		AF15F38E29AA03110019C4AB /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AF15F39029AA4E830019C4AB /* MatchesCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesCellModel.swift; sourceTree = "<group>"; };
 		AF32474F29A8CEC600A594BE /* LatestMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestMessage.swift; sourceTree = "<group>"; };
 		AF32475029A8CEC600A594BE /* MediaItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaItem.swift; sourceTree = "<group>"; };
 		AF32475129A8CEC600A594BE /* Sender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
@@ -256,6 +260,7 @@
 			children = (
 				F286E3D4296D6E1300B0D3EC /* App */,
 				AF7AAF76296D54C7001DF0CD /* AppDelegate.swift */,
+				AF15F38E29AA03110019C4AB /* ViewController.swift */,
 				F286E3D5296D6E2000B0D3EC /* Core */,
 				F286E3D6296D6E2800B0D3EC /* Resources */,
 				F286E3D7296D6EFB00B0D3EC /* Environments */,
@@ -287,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				EF5D25CD296D922600B6F3B1 /* User.swift */,
+				AF15F39029AA4E830019C4AB /* MatchesCellModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -731,6 +737,7 @@
 				AF32475B29A8CEC700A594BE /* SearchResult.swift in Sources */,
 				F2C2E47C298E872E00051E53 /* ChatsViewController.swift in Sources */,
 				AFFD985B299CF46000CB196B /* OnboardingView.swift in Sources */,
+				AF15F39129AA4E830019C4AB /* MatchesCellModel.swift in Sources */,
 				EF51CE102975F87300B865E8 /* RegistrationView.swift in Sources */,
 				AF00D81929743C17005B6C5D /* CustomButton.swift in Sources */,
 				AF00D81629742D06005B6C5D /* AppModuleBuilder.swift in Sources */,
@@ -744,6 +751,7 @@
 				AF32475829A8CEC700A594BE /* Sender.swift in Sources */,
 				EF51CE16297730CA00B865E8 /* RegistrationViewController.swift in Sources */,
 				AF00D80D2972B16B005B6C5D /* LoginViewController.swift in Sources */,
+				AF15F38F29AA03110019C4AB /* ViewController.swift in Sources */,
 				AF32475729A8CEC700A594BE /* MediaItem.swift in Sources */,
 				F2C2E482298E87CE00051E53 /* ChatsPresenter.swift in Sources */,
 				EF5D25D72971D7DC00B6F3B1 /* CustomTextField.swift in Sources */,

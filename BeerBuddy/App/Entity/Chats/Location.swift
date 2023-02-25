@@ -5,8 +5,8 @@
 //  Created by Tim on 22.02.2023.
 //
 
-import Foundation
 import CoreLocation
+import Foundation
 import MessageKit
 
 struct Location: LocationItem {

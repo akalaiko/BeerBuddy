@@ -66,13 +66,13 @@ extension MatchesViewController: MatchesViewInput {
 
 extension MatchesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.data.count ?? 0
+        return presenter?.matchesCellModels.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MatchesTableViewCell.identifier)
                 as? MatchesTableViewCell else { preconditionFailure("MatchesTableViewCell error") }
-        let user = presenter?.data[indexPath.row] ?? .init(id: 0)
+        let user = presenter?.matchesCellModels[indexPath.row]
         cell.configure(user)
         return cell
     }

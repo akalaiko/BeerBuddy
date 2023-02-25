@@ -62,11 +62,12 @@ extension RegistrationPresenter: RegistrationViewOutput {
                     self?.viewController?.alertLoginError(message: "Error while creating new user.")
                     return
                 }
-                let chatUser = User(name: name, emailAddress: login)
-                DatabaseManager.shared.insertUser(with: chatUser, completion: { success in
+//                let chatUser = User(name: name, emailAddress: login)
+                let mockChatUser = User(mockName: name, emailAddress: login)
+                DatabaseManager.shared.insertUser(with: mockChatUser, completion: { success in
                     if success {
                         guard let data = avatar.pngData() else { return }
-                        let fileName = chatUser.profilePictureFileName
+                        let fileName = mockChatUser.profilePictureFileName
                         StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName) { result in
                             switch result {
                             case .success(let downloadURL):

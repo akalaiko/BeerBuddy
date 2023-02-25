@@ -11,8 +11,7 @@ import UIKit
 
 enum AppUITestBuilder {
     static func matchesController() -> UIViewController & MatchesViewInput {
-        let network = NetworkMockForTests()
-        let presenter = MatchesPresenter(newtwork: network)
+        let presenter = MatchesPresenter()
         let viewController = MatchesViewController(presenter: presenter)
         presenter.viewInput = viewController
 

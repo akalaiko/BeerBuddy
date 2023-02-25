@@ -4,7 +4,6 @@
 //
 //  Created by Polina Tikhomirova on 10.01.2023.
 //
-// swiftlint: disable identifier_name
 
 import UIKit
 
@@ -32,12 +31,20 @@ struct User {
         return email
     }
     
+    var interestsStrings: [String] {
+        interests.compactMap({ $0.rawValue })
+    }
+    
+    var alcoholStrings: [String] {
+        alcohols.compactMap({ $0.rawValue })
+    }
+    
     var profilePictureFileName: String {
         return "\(safeEmail)_profile_picture.png"
     }
     
     var registrationComplete: Bool {
-        return false
+        return !interests.isEmpty && !alcohols.isEmpty
     }
     
     var noSmoking: Bool {
@@ -59,6 +66,42 @@ struct User {
         possibleMatches = []
         rejectedUsers = []
     }
+    
+    init(mockName: String, emailAddress: String) {
+        self.name = mockName
+        self.emailAddress = emailAddress
+        sex = .female
+        birthDate = 716947200
+        smoking = .noSmoking
+        interests = [.football, .fantasy, .adventure]
+        alcohols = [.beer, .tequila, .gin]
+        matches = ["some first match", "some second match", "some third match"]
+        possibleMatches = ["some possible first match", "some possiblesecond match"]
+        rejectedUsers = ["some first rejected", "some second rejected"]
+    }
+    
+    init(name: String,
+         emailAddress: String,
+         sex: String,
+         birthDate: Double,
+         smoking: String,
+         interestsStrings: [String],
+         matches: [String],
+         alcoholStrings: [String],
+         possibleMatches: [String],
+         rejectedUsers: [String]) {
+        
+        self.name = name
+        self.emailAddress = emailAddress
+        self.sex = Sex(rawValue: sex) ?? .other
+        self.birthDate = birthDate
+        self.smoking = Smoking(rawValue: smoking) ?? .noSmoking
+        self.interests = interestsStrings.compactMap({ Interests(rawValue: $0) })
+        self.alcohols = alcoholStrings.compactMap({ Alcohol(rawValue: $0) })
+        self.matches = matches
+        self.possibleMatches = possibleMatches
+        self.rejectedUsers = rejectedUsers
+    }
 }
 
 enum Smoking: String {
@@ -73,13 +116,7 @@ enum Sex: String {
     case other
 }
 
-indirect enum Interests {
-    case Sport(Sport)
-    case Music(Music)
-    case Movies(Movies)
-}
-
-enum Sport: String {
+enum Interests: String {
     case football
     case hockey
     case tennis
@@ -89,9 +126,7 @@ enum Sport: String {
     case cycling
     case running
     case golf
-}
 
-enum Music: String {
     case rock
     case metal
     case punk
@@ -103,9 +138,7 @@ enum Music: String {
     case jazz
     case soul
     case pop
-}
 
-enum Movies: String {
     case action
     case adventure
     case comedy

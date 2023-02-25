@@ -89,11 +89,12 @@ class MatchesTableViewCell: UITableViewCell {
 
     /// Settings the cell data.
     /// - Parameter user: User informations.
-    func configure(_ user: UserModelStub) {
-        avatarImageView.image = UIImage(named: AppData.imageName.testAvatar)
-        userInfoView.config(username: user.username,
+    func configure(_ user: MatchesCellModel?) {
+        guard let user else { return }
+        avatarImageView.image = UIImage(data: user.avatarData)
+        userInfoView.config(username: user.name,
                             age: user.age,
-                            location: user.location,
+                            location: "Kyiv",
                             noSmoking: user.noSmoking,
                             noDrinking: user.noDrinking)
     }
@@ -101,7 +102,7 @@ class MatchesTableViewCell: UITableViewCell {
     // MARK: - Private Methods
 
     /// Makes the avatar circular.
-    private func  circleAvatar() {
+    private func circleAvatar() {
         avatarImageView.layer.cornerRadius = avatarImageView.frame.height / 2
         avatarImageView.clipsToBounds = true
     }

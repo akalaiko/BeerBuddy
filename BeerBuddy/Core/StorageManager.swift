@@ -62,4 +62,11 @@ final class StorageManager {
             completion(.success(url.absoluteString))
         })
     }
+    
+    public func downloadImage(from url: URL, completion: @escaping (Data) -> Void) {
+        URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+            guard let data, error == nil else { return }
+            completion(data)
+        }).resume()
+    }
 }

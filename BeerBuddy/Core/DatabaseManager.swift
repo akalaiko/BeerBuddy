@@ -287,8 +287,8 @@ extension DatabaseManager {
                                          "sex": user.sex.rawValue,
                                          "birthDate": user.birthDate,
                                          "smoking": user.smoking.rawValue,
-                                         "interests": user.interests,
-                                         "alcohols": user.alcohols,
+                                         "interests": user.interestsStrings,
+                                         "alcohols": user.alcoholStrings,
                                          "matches": user.matches,
                                          "possibleMatches": user.possibleMatches,
                                          "rejectedUsers": user.rejectedUsers
@@ -322,6 +322,53 @@ extension DatabaseManager {
             completion(.success(value))
         })
     }
+    
+    public func getAllMatches(for email: String, completion: @escaping (Result<[String], Error>) -> Void) {
+        let safeEmail = DatabaseManager.safeEmail(email: email)
+        
+        database.child("\(safeEmail)/matches").observe(.value, with: { snapshot in
+            guard let value = snapshot.value as? [String] else {
+                return completion(.failure(DatabaseError.failed))
+            }
+            completion(.success(value))
+        })
+    }
+    
+    public func getUser(with email: String, completion: @escaping (Result<User, Error>) -> Void) {
+        let safeEmail = DatabaseManager.safeEmail(email: email)
+        
+        database.child("\(safeEmail)").observe(.value, with: { snapshot in
+            guard let dictionary = snapshot.value as? [String: Any] else {
+                return completion(.failure(DatabaseError.failed))
+            }
+            guard let name = dictionary["name"] as? String,
+                  let email = dictionary["email"] as? String,
+                  let sex = dictionary["sex"] as? String,
+                  let birthDate = dictionary["birthDate"] as? Double,
+                  let smoking = dictionary["smoking"] as? String,
+                  let interests = dictionary["interests"] as? [String],
+                  let alcohols = dictionary["alcohols"] as? [String],
+                  let matches = dictionary["matches"] as? [String],
+                  let possibleMatches = dictionary["possibleMatches"] as? [String],
+                  let rejectedUsers = dictionary["rejectedUsers"] as? [String]
+            else {
+                return completion(.failure(DatabaseError.failed))
+            }
+            
+            let user = User(name: name,
+                            emailAddress: email,
+                            sex: sex,
+                            birthDate: birthDate,
+                            smoking: smoking,
+                            interestsStrings: interests,
+                            matches: matches,
+                            alcoholStrings: alcohols,
+                            possibleMatches: possibleMatches,
+                            rejectedUsers: rejectedUsers)
+            completion(.success(user))
+        })
+    }
+    
 }
 
 extension DatabaseManager {
@@ -363,8 +410,7 @@ extension DatabaseManager {
             
             if let existingConversation = collection.first( where: {
                 guard let targetSenderEmail = $0["other_user_email"] as? String else { return false }
-                return safeSenderEmail == targetSenderEmail })
-            {
+                return safeSenderEmail == targetSenderEmail }) {
                 guard let id = existingConversation["id"] as? String else {
                     return completion(.failure(DatabaseError.failed))
                 }

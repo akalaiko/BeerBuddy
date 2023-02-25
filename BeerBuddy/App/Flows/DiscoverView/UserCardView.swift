@@ -72,6 +72,13 @@ class UserCardView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    private(set) lazy var separatorLine: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        return view
+    }()
 
     private(set) lazy var interestsLabel: UILabel = {
         let label = UILabel()
@@ -146,11 +153,6 @@ class UserCardView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        drawSeparator(rect)
     }
     
     // MARK: - Views
@@ -232,6 +234,7 @@ class UserCardView: UIView {
     /// Setting up view which consists of stack views with user interests and bio labels.
     private func addUserInfoCardView() {
         cardView.addSubview(userInfoCardView)
+        userInfoCardView.addSubview(separatorLine)
         userInfoCardView.addSubview(userInfoStackView)
         userInfoStackView.addArrangedSubview(userInterestsStackView)
         userInfoStackView.addArrangedSubview(userBioStackView)
@@ -241,26 +244,21 @@ class UserCardView: UIView {
         userBioStackView.addArrangedSubview(userBioLabel)
         
         NSLayoutConstraint.activate([
-            userInfoCardView.topAnchor.constraint(equalTo: userInfoView.bottomAnchor),
+            separatorLine.topAnchor.constraint(equalTo: imageView.bottomAnchor,
+                                               constant: AppStyles.size.verticalMargin.middle),
+            separatorLine.widthAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 0.9),
+            separatorLine.heightAnchor.constraint(equalToConstant: 2),
+            separatorLine.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+            separatorLine.bottomAnchor.constraint(equalTo: userInfoStackView.topAnchor,
+                                                  constant: -AppStyles.size.verticalMargin.small),
+            userInfoCardView.topAnchor.constraint(equalTo: separatorLine.bottomAnchor),
             userInfoCardView.heightAnchor.constraint(equalTo: userInfoStackView.heightAnchor),
+            userInfoStackView.topAnchor.constraint(equalTo: separatorLine.bottomAnchor),
             userInfoStackView.leadingAnchor.constraint(greaterThanOrEqualTo: userInfoCardView.trailingAnchor,
                                                        constant: AppStyles.size.horizontalMargin.middle),
             userInfoStackView.widthAnchor.constraint(equalTo: userInfoView.widthAnchor),
             userInfoStackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor)
         ])
-    }
-    
-    private func drawSeparator(_ rect: CGRect) {
-        let layer = CAShapeLayer()
-        layer.path = UIBezierPath(
-            rect: CGRect(
-                x: userInfoStackView.frame.minX,
-                y: userInfoStackView.frame.width * 0.10,
-                width: userInfoStackView.frame.width * 1.00,
-                height: 1)).cgPath
-        layer.lineWidth = 1
-        layer.strokeColor = AppStyles.color.offwhite.cgColor
-        userInfoCardView.layer.addSublayer(layer)
     }
     
     private func addButtonsStackView() {

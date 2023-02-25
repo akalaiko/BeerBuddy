@@ -48,6 +48,11 @@ class DiscoverViewController: UIViewController {
         setupActionForButton()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     // MARK: - Private methods
     
     private func setupActionForButton() {

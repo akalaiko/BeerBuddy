@@ -12,6 +12,7 @@ struct User {
     let emailAddress: String
     let sex: Sex
     let birthDate: Double
+    let location: String
     let smoking: Smoking
     let interests: [Interests]
     let alcohols: [Alcohol]
@@ -60,6 +61,7 @@ struct User {
         sex = .other
         birthDate = 0
         smoking = .ok
+        location = ""
         interests = []
         alcohols = []
         matches = []
@@ -73,6 +75,7 @@ struct User {
         sex = .female
         birthDate = 716947200
         smoking = .noSmoking
+        location = "Kyiv"
         interests = [.football, .fantasy, .adventure]
         alcohols = [.beer, .tequila, .gin]
         matches = ["some first match", "some second match", "some third match"]
@@ -85,6 +88,7 @@ struct User {
          sex: String,
          birthDate: Double,
          smoking: String,
+         location: String,
          interestsStrings: [String],
          matches: [String],
          alcoholStrings: [String],
@@ -96,6 +100,7 @@ struct User {
         self.sex = Sex(rawValue: sex) ?? .other
         self.birthDate = birthDate
         self.smoking = Smoking(rawValue: smoking) ?? .noSmoking
+        self.location = location
         self.interests = interestsStrings.compactMap({ Interests(rawValue: $0) })
         self.alcohols = alcoholStrings.compactMap({ Alcohol(rawValue: $0) })
         self.matches = matches

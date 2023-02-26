@@ -16,9 +16,11 @@ final class DateFormatterHelper: DateFormatterProtocol {
     // MARK: - Private Properties
 
     /// A formatter that converts between dates and their textual representations.
-    private let dateFormatter: DateFormatter = {
+    static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.locale = Locale.current
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .long
+        formatter.locale = Locale(identifier: "en_US")
         return formatter
     }()
 
@@ -74,15 +76,15 @@ final class DateFormatterHelper: DateFormatterProtocol {
         }
 
         if calendar.isDateInToday(currentDay) {
-            dateFormatter.dateFormat = "HH:mm"
+            DateFormatterHelper.dateFormatter.dateFormat = "HH:mm"
         } else if let interval = calendar.dateInterval(of: .weekOfMonth, for: Date()),
                   interval.contains(currentDay) {
-            dateFormatter.dateFormat = "EEE, d"
+            DateFormatterHelper.dateFormatter.dateFormat = "EEE, d"
         } else {
-            dateFormatter.dateStyle = .short
+            DateFormatterHelper.dateFormatter.dateStyle = .short
         }
 
-        let stringDate = dateFormatter.string(from: currentDay)
+        let stringDate = DateFormatterHelper.dateFormatter.string(from: currentDay)
         datesTextCache[date] = stringDate
         return stringDate
     }

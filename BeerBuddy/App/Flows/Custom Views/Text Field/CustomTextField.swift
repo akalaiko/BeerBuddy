@@ -42,6 +42,8 @@ final class CustomTextField: UITextField {
             self.minLength = minLength
             self.isSecure = isSecure
             self.placeholder = placeholder
+            self.autocorrectionType = .no
+            self.autocapitalizationType = .none
 
         setupUI()
     }

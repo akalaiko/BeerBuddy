@@ -18,7 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let launchArguments = CommandLine.arguments
         window?.rootViewController = selectTestController(launchArguments)
         #else
-        window?.rootViewController = AppModuleBuilder.loginViewController()
+        let controller = UINavigationController(rootViewController: AppModuleBuilder.onboardingViewController())
+        controller.modalPresentationStyle = .fullScreen
+        window?.rootViewController = controller
         #endif
         window?.makeKeyAndVisible()
 
@@ -48,7 +50,7 @@ extension AppDelegate {
             resetUserDefaults()
             controller = AppUITestBuilder.chatsController()
         } else {
-            controller = UINavigationController(rootViewController: AppModuleBuilder.loginViewController())
+            controller = UINavigationController(rootViewController: AppModuleBuilder.onboardingViewController())
         }
 
         return controller

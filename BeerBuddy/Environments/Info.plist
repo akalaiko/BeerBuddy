@@ -8,10 +8,10 @@
 	<string>This app uses your location to personalize your app experience.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
-		<key>UISceneConfigurations</key>
-		<dict/>
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
+		<key>UISceneConfigurations</key>
+		<dict/>
 	</dict>
 </dict>
 </plist>

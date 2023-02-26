@@ -13,7 +13,6 @@ final class LoginView: UIView {
     
     private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.image = UIImage(named: AppData.imageName.waveBackground)
@@ -100,7 +99,7 @@ final class LoginView: UIView {
     }
     
     // MARK: - Init
-
+    
     init() {
         super.init(frame: .zero)
     }
@@ -141,23 +140,23 @@ final class LoginView: UIView {
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
-
+        
         scrollView.addSubview(contentView)
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(greaterThanOrEqualTo: scrollView.topAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.bottomAnchor.constraint(lessThanOrEqualTo: scrollView.bottomAnchor)
         ])
-
+        
         scrollView.contentSize = contentView.frame.size
     }
     
     private func addAvatarImage() {
         guard let width = avatarImageView.image?.size.width,
-                let height = avatarImageView.image?.size.height else { return }
-
+              let height = avatarImageView.image?.size.height else { return }
+        
         let multiplierHeight = height / width
-
+        
         contentView.addSubview(avatarImageView)
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -169,7 +168,7 @@ final class LoginView: UIView {
     
     private func addNameAppLabel() {
         contentView.addSubview(nameAppLabel)
-
+        
         NSLayoutConstraint.activate([
             nameAppLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor,
                                               constant: AppStyles.size.verticalMargin.small),
@@ -191,7 +190,7 @@ final class LoginView: UIView {
             loginTextField.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
         ])
     }
-
+    
     private func addPasswordTextField() {
         contentView.addSubview(passwordTextField)
         
@@ -269,18 +268,18 @@ extension LoginView {
         guard let keyboardValue = notification
             .userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
         else { return }
-
+        
         let keyboardScreenEndFrame = keyboardValue.cgRectValue
         let keyboardViewEndFrame = convert(keyboardScreenEndFrame, from: window)
-
+        
         let contentInsets = UIEdgeInsets(top: -contentView.frame.minY + safeAreaInsets.top,
                                          left: 0,
                                          bottom: keyboardViewEndFrame.height,
                                          right: 0)
-
+        
         self.scrollView.contentInset = contentInsets
         self.scrollView.scrollIndicatorInsets = contentInsets
-
+        
         scrollView.setContentOffset(.init(x: contentView.frame.minX,
                                           y: contentView.frame.maxY - keyboardViewEndFrame.minY),
                                     animated: true)
@@ -288,7 +287,7 @@ extension LoginView {
     
     @objc func keyboardWillBeHidden(notification: Notification) {
         let contentInsets: UIEdgeInsets = .zero
-
+        
         self.scrollView.contentInset = contentInsets
         self.scrollView.scrollIndicatorInsets = contentInsets
     }

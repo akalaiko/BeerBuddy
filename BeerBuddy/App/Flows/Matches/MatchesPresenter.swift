@@ -5,7 +5,7 @@
 //  Created by Ke4a on 16.01.2023.
 //
 
-import Foundation
+import UIKit
 
 // MARK: - Protocols
 
@@ -17,32 +17,92 @@ protocol MatchesViewInput: AnyObject {
 /// Controller output.
 protocol MatchesViewOutput: AnyObject {
     /// Data of users with whom there were matches.
-    var data: [UserModelStub] { get }
+    var data: [User] { get }
+    var matchesCellModels: [MatchesCellModel] { get }
     /// Fetch information from the network.
     func viewRequestFetch()
-
-    func viewOpenUserInfo(_ index: IndexPath)
+    func openConversation(_ index: IndexPath)
 }
 
 class MatchesPresenter: MatchesViewOutput {
+    
     // MARK: - Public Properties
-    weak var viewInput: MatchesViewInput?
-
-    private(set) lazy var data: [UserModelStub] = []
-
-    private let newtwork: NetworkMockProtocol
-
-    init(newtwork: NetworkMockProtocol) {
-        self.newtwork = newtwork
-    }
-
+    weak var viewInput: (UIViewController & MatchesViewInput)?
+    
+    private let senderEmail = UserDefaults.standard.value(forKey: "email") as? String
+    
+    private(set) lazy var data: [User] = []
+    private(set) lazy var matchesCellModels: [MatchesCellModel] = []
+    
     func viewRequestFetch() {
-        self.data = newtwork.fetchMatches()
-        viewInput?.reloadTable()
+        let safeEmail = DatabaseManager.safeEmail(email: senderEmail)
+        DatabaseManager.shared.getAllMatches(for: safeEmail) { [weak self] result in
+            switch result {
+            case .success(let matches):
+                matches.forEach({ match in
+                    DatabaseManager.shared.getUser(with: match) { result in
+                        switch result {
+                        case .success(let user):
+                            self?.data.append(user)
+                            self?.configureCellModels(with: user)
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                })
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func configureCellModels(with user: User) {
+        let path = DatabaseManager.getProfilePicturePath(email: user.safeEmail)
+        StorageManager.shared.downloadURL(for: path) { [weak self] result in
+            switch result {
+            case .success(let urlString):
+                guard let url = URL(string: urlString) else { return }
+                StorageManager.shared.downloadImage(from: url) { avatarData in
+                    let model = MatchesCellModel(name: user.name,
+                                                 safeEmail: user.safeEmail,
+                                                 age: user.age,
+                                                 noSmoking: user.noSmoking,
+                                                 noDrinking: user.noDrinking,
+                                                 avatarData: avatarData)
+                    self?.matchesCellModels.append(model)
+                    DispatchQueue.main.async {
+                        self?.viewInput?.reloadTable()
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
-    func viewOpenUserInfo(_ index: IndexPath) {
-        let user = data[index.row]
-        print(user.id)
+    func openConversation(_ indexPath: IndexPath) {
+        let user = matchesCellModels[indexPath.row]
+        let name = user.name
+        let safeEmail = user.safeEmail
+        
+        DatabaseManager.shared.conversationExists(with: safeEmail, completion: { [weak self] result in
+            switch result {
+            case .success(let conversationId):
+                let vc = ChatViewController(with: safeEmail, id: conversationId)
+                let nav = UINavigationController(rootViewController: vc)
+                vc.isNewConversation = false
+                vc.title = name
+                vc.navigationItem.largeTitleDisplayMode = .never
+                vc.modalPresentationStyle = .fullScreen
+                self?.viewInput?.present(nav, animated: true)
+            case .failure(_):
+                let vc = ChatViewController(with: safeEmail, id: nil)
+                vc.isNewConversation = true
+                vc.title = name
+                vc.navigationItem.largeTitleDisplayMode = .never
+                vc.modalPresentationStyle = .fullScreen
+                self?.viewInput?.present(vc, animated: true)
+            }
+        })
     }
 }

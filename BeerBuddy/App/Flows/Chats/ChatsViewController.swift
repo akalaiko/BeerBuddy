@@ -37,7 +37,7 @@ class ChatsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         chatsView.setupUI()
-        presenter?.viewRequestFetch()
+        presenter?.startListeningForConversations()
     }
 
     // MARK: - Private Methods
@@ -102,7 +102,8 @@ extension ChatsViewController: UITableViewDataSource {
         guard let presenter = presenter else { preconditionFailure("No presenter") }
 
         let data = presenter.viewRequestCellData(indexPath)
-        cell.configure(userName: data.username, lastMessage: data.lastMessage,
+        
+        cell.configure(email: data.email, userName: data.username, lastMessage: data.lastMessage,
                        date: data.date, pinned: data.isPinned)
         return cell
     }

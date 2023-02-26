@@ -14,7 +14,7 @@ class RegistrationView: UIView {
     
     /// Initilazing view's components.
     
-    private(set) lazy var backgroundImage: UIImageView = {
+    private lazy var backgroundImage: UIImageView = {
         var imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(named: AppData.imageName.waveBackground)
@@ -23,7 +23,7 @@ class RegistrationView: UIView {
         return imageView
     }()
     
-    private(set) lazy var scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -35,30 +35,31 @@ class RegistrationView: UIView {
         
         return scrollView
     }()
-
-    private(set) lazy var contentView: UIView = {
+    
+    private lazy var contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
-    private(set) lazy var avatarImageView: UIImageView = {
+    
+    lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: AppData.imageName.missingPhoto)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    private(set) lazy var addAvatarLabel: UILabel = {
-        let label = UILabel()
-        label.text = "ADD"
-        label.textColor = AppStyles.color.black
-        label.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var addAvatarButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("ADD", for: .normal)
+        button.setTitleColor(AppStyles.color.black, for: .normal)
+        button.backgroundColor = .clear
+        button.translatesAutoresizingMaskIntoConstraints = false
         
-        return label
+        return button
     }()
     
-    private(set) lazy var nameTextField: CustomTextField = {
+    private lazy var nameTextField: CustomTextField = {
         let textField = CustomTextField(
             restriction: .lettersOnly,
             minLength: 2,
@@ -69,7 +70,7 @@ class RegistrationView: UIView {
         return textField
     }()
     
-    private(set) lazy var loginTextField: CustomTextField = {
+    private lazy var loginTextField: CustomTextField = {
         let textField = CustomTextField(
             minLength: 3,
             placeholder: "Login")
@@ -79,7 +80,7 @@ class RegistrationView: UIView {
         return textField
     }()
     
-    private(set) lazy var passwordTextField: CustomTextField = {
+    private lazy var passwordTextField: CustomTextField = {
         let textField = CustomTextField(
             minLength: 8,
             isSecure: true,
@@ -90,7 +91,7 @@ class RegistrationView: UIView {
         return textField
     }()
     
-    private(set) lazy var repeatPasswordTextField: CustomTextField = {
+    private lazy var repeatPasswordTextField: CustomTextField = {
         let textField = CustomTextField(
             minLength: 8,
             isSecure: true,
@@ -101,12 +102,28 @@ class RegistrationView: UIView {
         return textField
     }()
     
-    private(set) lazy var registrationButton: CustomButton = {
+    private lazy var registrationButton: CustomButton = {
         let button = CustomButton(title: "REGISTER")
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()
+    
+    var nameText: String {
+        nameTextField.text ?? ""
+    }
+    
+    var loginText: String {
+        loginTextField.text ?? ""
+    }
+    
+    var passwordText: String {
+        passwordTextField.text ?? ""
+    }
+    
+    var repeatPasswordText: String {
+        repeatPasswordTextField.text ?? ""
+    }
     
     // MARK: - Initialization
     
@@ -127,11 +144,16 @@ class RegistrationView: UIView {
         addScrollView()
         addNameTextField()
         addAvatarImage()
-        createAddLabel()
+        createAddAvatarButton()
         addLoginTextField()
         addPasswordTextField()
         addRepeatPasswordTextField()
         addRegistrationButton()
+    }
+    
+    func makeAvatarCircular() {
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
+        avatarImageView.layer.masksToBounds = true
     }
     
     // MARK: - Private methods
@@ -157,21 +179,21 @@ class RegistrationView: UIView {
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
-
+        
         scrollView.addSubview(contentView)
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(greaterThanOrEqualTo: scrollView.topAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.bottomAnchor.constraint(lessThanOrEqualTo: scrollView.bottomAnchor)
         ])
-
+        
         scrollView.contentSize = contentView.frame.size
     }
-
+    
     /// Setting up name textfield.
     private func addNameTextField() {
         contentView.addSubview(nameTextField)
-
+        
         NSLayoutConstraint.activate([
             nameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
                                                    constant: AppStyles.size.horizontalMargin.big),
@@ -180,13 +202,13 @@ class RegistrationView: UIView {
             nameTextField.heightAnchor.constraint(equalToConstant: AppStyles.size.height.textfield)
         ])
     }
-
+    
     /// Setting up user's avatar image.
     ///
     /// By tapping on this image you can add a user avatar.
     private func addAvatarImage() {
         contentView.addSubview(avatarImageView)
-
+        
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             avatarImageView.bottomAnchor.constraint(equalTo: nameTextField.topAnchor,
@@ -196,23 +218,23 @@ class RegistrationView: UIView {
             avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor)
         ])
     }
-
+    
     /// Setting up "add" label.
     ///
     ///  By tapping on this label you can add a user avatar.
-    private func createAddLabel() {
-        avatarImageView.addSubview(addAvatarLabel)
-
+    private func createAddAvatarButton() {
+        contentView.addSubview(addAvatarButton)
+        
         NSLayoutConstraint.activate([
-            addAvatarLabel.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor),
-            addAvatarLabel.centerXAnchor.constraint(equalTo: avatarImageView.centerXAnchor)
+            addAvatarButton.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor),
+            addAvatarButton.centerXAnchor.constraint(equalTo: avatarImageView.centerXAnchor)
         ])
     }
-
+    
     /// Setting up login textfield.
     private func addLoginTextField() {
         contentView.addSubview(loginTextField)
-
+        
         NSLayoutConstraint.activate([
             loginTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor,
                                                 constant: AppStyles.size.verticalMargin.small),
@@ -222,11 +244,11 @@ class RegistrationView: UIView {
             loginTextField.heightAnchor.constraint(equalTo: nameTextField.heightAnchor)
         ])
     }
-
+    
     /// Setting up password textfield.
     private func addPasswordTextField() {
         contentView.addSubview(passwordTextField)
-
+        
         NSLayoutConstraint.activate([
             passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor,
                                                    constant: AppStyles.size.verticalMargin.small),
@@ -235,11 +257,11 @@ class RegistrationView: UIView {
             passwordTextField.heightAnchor.constraint(equalTo: loginTextField.heightAnchor)
         ])
     }
-
+    
     /// Setting up repeat password textfield.
     private func addRepeatPasswordTextField() {
         contentView.addSubview(repeatPasswordTextField)
-
+        
         NSLayoutConstraint.activate([
             repeatPasswordTextField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor,
                                                          constant: AppStyles.size.verticalMargin.small),
@@ -248,11 +270,11 @@ class RegistrationView: UIView {
             repeatPasswordTextField.heightAnchor.constraint(equalTo: passwordTextField.heightAnchor)
         ])
     }
-
+    
     /// Setting up registration button.
     private func addRegistrationButton() {
         contentView.addSubview(registrationButton)
-
+        
         NSLayoutConstraint.activate([
             registrationButton.topAnchor.constraint(equalTo: repeatPasswordTextField.bottomAnchor,
                                                     constant: AppStyles.size.verticalMargin.big),
@@ -262,7 +284,7 @@ class RegistrationView: UIView {
             registrationButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
-
+    
     // MARK: - Public methods
     
     func subscribeObserver() {
@@ -277,8 +299,15 @@ class RegistrationView: UIView {
     
     func unsubscribeObserver() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func addRegistrationButtonTarget(_ target: Any, action: Selector) {
+        registrationButton.addTarget(target, action: action, for: .touchUpInside)
+    }
+    
+    func addAvatarButtonTarget(_ target: Any, action: Selector) {
+        addAvatarButton.addTarget(target, action: action, for: .touchUpInside)
     }
     
     // MARK: - Actions
@@ -292,18 +321,18 @@ class RegistrationView: UIView {
         guard let keyboardValue = notification
             .userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
         else { return }
-
+        
         let keyboardScreenEndFrame = keyboardValue.cgRectValue
         let keyboardViewEndFrame = convert(keyboardScreenEndFrame, from: window)
-
+        
         let contentInsets = UIEdgeInsets(top: -contentView.frame.minY + safeAreaInsets.top,
                                          left: 0,
                                          bottom: keyboardViewEndFrame.height,
                                          right: 0)
-
+        
         self.scrollView.contentInset = contentInsets
         self.scrollView.scrollIndicatorInsets = contentInsets
-
+        
         scrollView.setContentOffset(.init(x: contentView.frame.minX,
                                           y: contentView.frame.maxY - keyboardViewEndFrame.minY),
                                     animated: true)
@@ -311,7 +340,7 @@ class RegistrationView: UIView {
     
     @objc func keyboardWillBeHidden(notification: Notification) {
         let contentInsets: UIEdgeInsets = .zero
-
+        
         self.scrollView.contentInset = contentInsets
         self.scrollView.scrollIndicatorInsets = contentInsets
     }

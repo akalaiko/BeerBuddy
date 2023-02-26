@@ -33,6 +33,7 @@ extension OnboardingPresenter: OnboardingViewOutput {
         if FirebaseAuth.Auth.auth().currentUser != nil {
             let mainViewController = AppModuleBuilder.mainController()
             viewController?.navigationController?.setViewControllers([mainViewController], animated: true)
+            NotificationCenter.default.post(Notification(name: Notification.Name("didLogInNotification")))
 //            let navigationController = UINavigationController(rootViewController: mainViewController)
 //            navigationController.modalPresentationStyle = .fullScreen
 //            viewController?.present(navigationController, animated: true)

@@ -49,7 +49,7 @@ extension LoginPresenter: LoginViewOutput {
             // here we should get data for user from database
             let safeEmail = DatabaseManager.safeEmail(email: login)
             
-            DatabaseManager.shared.getDataFor(path: safeEmail, completion: { result in
+            DatabaseManager.shared.getDataFor(path: "users/\(safeEmail)", completion: { result in
                 switch result {
                 case .success(let data):
                     guard let userData = data as? [String: Any],
@@ -59,6 +59,7 @@ extension LoginPresenter: LoginViewOutput {
                     }
                     UserDefaults.standard.set(login, forKey: "email")
                     UserDefaults.standard.set(name, forKey: "name")
+                    NotificationCenter.default.post(Notification(name: Notification.Name("didLogInNotification")))
                     
                 case .failure(let error):
                     print("failed to read data with error:", error)

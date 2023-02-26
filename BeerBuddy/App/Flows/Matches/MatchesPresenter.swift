@@ -35,6 +35,8 @@ class MatchesPresenter: MatchesViewOutput {
     private(set) lazy var matchesCellModels: [MatchesCellModel] = []
     
     func viewRequestFetch() {
+        data = []
+        matchesCellModels = []
         let safeEmail = DatabaseManager.safeEmail(email: senderEmail)
         DatabaseManager.shared.getAllMatches(for: safeEmail) { [weak self] result in
             switch result {
@@ -58,6 +60,7 @@ class MatchesPresenter: MatchesViewOutput {
     
     private func configureCellModels(with user: User) {
         let path = DatabaseManager.getProfilePicturePath(email: user.safeEmail)
+        print(path)
         StorageManager.shared.downloadURL(for: path) { [weak self] result in
             switch result {
             case .success(let urlString):
@@ -92,16 +95,15 @@ class MatchesPresenter: MatchesViewOutput {
                 let nav = UINavigationController(rootViewController: vc)
                 vc.isNewConversation = false
                 vc.title = name
-                vc.navigationItem.largeTitleDisplayMode = .never
-                vc.modalPresentationStyle = .fullScreen
+                nav.isNavigationBarHidden = false
                 self?.viewInput?.present(nav, animated: true)
-            case .failure(_):
+            case .failure:
                 let vc = ChatViewController(with: safeEmail, id: nil)
+                let nav = UINavigationController(rootViewController: vc)
                 vc.isNewConversation = true
                 vc.title = name
-                vc.navigationItem.largeTitleDisplayMode = .never
-                vc.modalPresentationStyle = .fullScreen
-                self?.viewInput?.present(vc, animated: true)
+                nav.isNavigationBarHidden = false
+                self?.viewInput?.present(nav, animated: true)
             }
         })
     }

@@ -79,6 +79,7 @@ extension RegistrationPresenter: RegistrationViewOutput {
                         }
                         UserDefaults.standard.set(login, forKey: "email")
                         UserDefaults.standard.set(name, forKey: "name")
+                        NotificationCenter.default.post(Notification(name: Notification.Name("didLogInNotification")))
                         let mainViewController = AppModuleBuilder.mainController()
                         self?.viewController?.navigationController?.setViewControllers([mainViewController],
                                                                                        animated: true)

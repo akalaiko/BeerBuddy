@@ -56,8 +56,7 @@ class MatchesView: UIView {
 
         addSubview(tableView)
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor,
-                                           constant: 1),
+            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
@@ -68,7 +67,9 @@ class MatchesView: UIView {
             target: self,
             action: #selector(filterAction))
 
+        #if DEBUG
         setUITests()
+        #endif
     }
 
     func addFilterView() {
@@ -97,15 +98,6 @@ class MatchesView: UIView {
         tableView.delegate = controller
     }
 
-    // MARK: - Private Methods
-
-    /// Setting ui test Identifiers.
-    private func setUITests() {
-        self.accessibilityIdentifier = "matchesView"
-        headerView.accessibilityIdentifier = "headerView"
-        tableView.accessibilityIdentifier = "tableView"
-    }
-
     // MARK: - Actions
 
     /// The action of the header button.
@@ -114,3 +106,24 @@ class MatchesView: UIView {
         addFilterView()
     }
 }
+
+// MARK: - MatchesViewInput
+
+extension MatchesView: MatchesViewInput {
+    func reloadTable() {
+        tableView.reloadData()
+    }
+}
+
+// MARK: - UI Testing
+
+#if DEBUG
+extension MatchesView {
+    /// Setting ui test Identifiers.
+    private func setUITests() {
+        self.accessibilityIdentifier = "matches"
+        headerView.accessibilityIdentifier = "matchesHeader"
+        tableView.accessibilityIdentifier = "matchesTable"
+    }
+}
+#endif

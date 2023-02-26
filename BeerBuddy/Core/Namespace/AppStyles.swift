@@ -16,12 +16,14 @@ enum AppStyles {
         static let sand = UIColor(hex: 0xDEAC8B),
                    swamp = UIColor(hex: 0x3D4632),
                    light = UIColor(hex: 0xF3EBE0),
+                   lightDark = UIColor(hex: 0xEEE3D3),
                    brown = UIColor(hex: 0x734E33),
                    black = UIColor(hex: 0x000000),
                    offwhite = UIColor(hex: 0xFFFFFF)
 
         enum background {
             static var main: UIColor { light }
+            static var pinnedChat: UIColor { lightDark }
         }
     }
 }

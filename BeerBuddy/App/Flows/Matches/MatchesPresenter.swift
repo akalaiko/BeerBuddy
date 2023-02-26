@@ -7,63 +7,59 @@
 
 import Foundation
 
-// FIXME: Only for tests, remove after connecting firebase.
-
-struct UserTest {
-    let username: String = UserTest.names.randomElement() ?? "Error name"
-    let age: Int = Int.random(in: 18...79)
-    let location: String = UserTest.locations.randomElement() ?? "Error location"
-    let noSmoking: Bool = Bool.random()
-    let noDrinking: Bool = Bool.random()
-
-    static var names: [String] {
-        ["Valentina", "Jacques", "Guillermo",
-         "Freddie", "Jaela", "Aden",
-         "Viviana", "Leyla", "Priscila"]
-    }
-
-    static var locations: [String] {
-        ["Moscow Red Square", "Berlin Brandenburg Gate", "Kazan Kremlin" ]
-    }
-}
-
 // MARK: - Protocols
 
 /// Controller input.
 protocol MatchesViewInput: AnyObject {
-
+    func reloadTable()
 }
 
 /// Controller output.
 protocol MatchesViewOutput: AnyObject {
     /// Data of users with whom there were matches.
-    var data: [UserTest] { get }
+    var data: [UserModelStub] { get }
 
     /// User preferences.
     var preferenceData: PreferenceRequest? { get }
 
     /// The user has selected data filtering.
     func viewRequestFiltering(_ preference: PreferenceRequest)
+    
+    /// Fetch information from the network.
+    func viewRequestFetch()
+
+    func viewOpenUserInfo(_ index: IndexPath)
 }
 
 class MatchesPresenter: MatchesViewOutput {
+    // MARK: - Public Properties
+    
+    weak var viewInput: MatchesViewInput?
+
+    private(set) lazy var data: [UserModelStub] = []
     private(set) var preferenceData: PreferenceRequest? = .init(sex: .male, smoke: false, interest: "Obj-c") {
         willSet {
             print(newValue)
         }
+    }
+    
+    private let newtwork: NetworkMockProtocol
+
+    init(newtwork: NetworkMockProtocol) {
+        self.newtwork = newtwork
     }
 
     func viewRequestFiltering(_ preference: PreferenceRequest) {
         preferenceData = preference
     }
 
-    // MARK: - Public Properties
-    weak var viewInput: MatchesViewInput?
+    func viewRequestFetch() {
+        self.data = newtwork.fetchMatches()
+        viewInput?.reloadTable()
+    }
 
-    private(set) lazy var data: [UserTest] = [
-        .init(), .init(), .init(), .init(),
-        .init(), .init(), .init(), .init(),
-        .init(), .init(), .init(), .init(),
-        .init(), .init(), .init(), .init()
-    ]
+    func viewOpenUserInfo(_ index: IndexPath) {
+        let user = data[index.row]
+        print(user.id)
+    }
 }

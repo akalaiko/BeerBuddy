@@ -29,5 +29,8 @@ enum AppData {
         static var message: String { "message" }
         static var settings: String { "gear" }
         static var close: String { "close" }
+        static var pin: String { "pin" }
+        static var pinCircle: String { "pin-circle" }
+        static var unpin: String { "unpin" }
     }
 }

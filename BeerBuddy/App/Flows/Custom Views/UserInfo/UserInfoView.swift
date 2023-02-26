@@ -37,7 +37,7 @@ class UserInfoView: UIView {
 
     private lazy var locationLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .light)
+        label.font = AppStyles.font.smallTextCell
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

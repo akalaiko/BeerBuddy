@@ -440,6 +440,8 @@
 				F28FBE442997D96500F0BB06 /* CustomSegmentedControl.swift */,
 			);
 			path = SegmentedControl;
+            sourceTree = "<group>";
+        };
 		F29355F52990D9E5003DADCA /* Network */ = {
 			isa = PBXGroup;
 			children = (

@@ -14,6 +14,7 @@ class ChatsView: UIView {
 
     private lazy var headerView: HeaderView = {
         let header = HeaderView(title: "CHATS")
+        header.font = AppStyles.font.big
         header.translatesAutoresizingMaskIntoConstraints = false
         return header
     }()

@@ -16,7 +16,7 @@ protocol FilterViewDelegate: AnyObject {
     func sendFiltrationData(_ data: PreferenceRequest)
 }
 
-class FilterView: UIView {
+final class FilterView: UIView {
     // MARK: - Visual Components
 
     private lazy var boxView: UIView = {

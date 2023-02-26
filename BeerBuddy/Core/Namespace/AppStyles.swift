@@ -65,7 +65,8 @@ extension AppStyles {
         static var button: UIFont = .systemFont(ofSize: 20, weight: .medium)
         static var big: UIFont = .systemFont(ofSize: 32, weight: .semibold)
         static var middle: UIFont = .systemFont(ofSize: 24, weight: .semibold)
-
+        static var smallTextCell: UIFont = .systemFont(ofSize: 16, weight: .light)
+        
         enum pointSize {
             static var small: Double = 14
         }

@@ -19,7 +19,7 @@ class ChatsTableViewCell: UITableViewCell {
 
     private lazy var usernameLabel: UILabel = {
         let label = UILabel()
-        label.font = AppStyles.font.username
+        label.font = AppStyles.font.middle
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

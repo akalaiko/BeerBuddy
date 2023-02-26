@@ -240,6 +240,31 @@ final class ProfilePropertiesView: UIView {
         return button
     }()
     
+    //    private lazy var alertController: UIAlertController = {
+    //        let message = "You need to grant access to the location in Settings"
+    //        let alertContoller = UIAlertController(title: "Oooops", message: message, preferredStyle: .alert)
+    //        let action = UIAlertAction(title: "OK", style: .cancel)
+    //        alertContoller.addAction(action)
+    //        return alertContoller
+    //    }()
+    
+    private lazy var alertController: UIAlertController = {
+        let alertController = UIAlertController(title: "Location Permission Required",
+                                                message: "Please enable location permissions in settings.",
+                                                preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Settings", style: .default, handler: {(cAlertAction) in
+            //Redirect to Settings app
+            UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(cancelAction)
+        
+        alertController.addAction(okAction)
+        return alertController
+    }()
+    
     // MARK: - Init
     
     init() {
@@ -274,7 +299,7 @@ final class ProfilePropertiesView: UIView {
         ]
         let attributedString = NSAttributedString(string: title, attributes: attributes)
         return attributedString
-      }
+    }
     
     func configureUI() {
         addScrollView()
@@ -327,12 +352,12 @@ final class ProfilePropertiesView: UIView {
     
     private func addAvatarImage() {
         guard let width = avatarImageView.image?.size.width,
-                let height = avatarImageView.image?.size.height else { return }
-
+              let height = avatarImageView.image?.size.height else { return }
+        
         let multiplierHeight = height / width
-
+        
         contentView.addSubview(avatarImageView)
-
+        
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             avatarImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -346,7 +371,7 @@ final class ProfilePropertiesView: UIView {
         
         NSLayoutConstraint.activate([
             avatarButton.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor,
-                                                constant: -AppStyles.size.verticalMargin.small),
+                                                 constant: -AppStyles.size.verticalMargin.small),
             avatarButton.centerXAnchor.constraint(equalTo: avatarImageView.centerXAnchor)
         ])
     }
@@ -356,7 +381,7 @@ final class ProfilePropertiesView: UIView {
         
         NSLayoutConstraint.activate([
             nameView.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor,
-                                           constant: AppStyles.size.verticalMargin.middle),
+                                          constant: AppStyles.size.verticalMargin.middle),
             nameView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
                                               constant: AppStyles.size.horizontalMargin.big),
             nameView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
@@ -412,7 +437,7 @@ final class ProfilePropertiesView: UIView {
         NSLayoutConstraint.activate([
             birthdayDatePicker.centerYAnchor.constraint(equalTo: birthdayLabel.centerYAnchor),
             birthdayDatePicker.leadingAnchor.constraint(equalTo: birthdayLabel.trailingAnchor,
-                                                        constant: AppStyles.size.horizontalMargin.big),
+                                                        constant: AppStyles.size.horizontalMargin.middle),
             birthdayDatePicker.heightAnchor.constraint(equalTo: birthdayLabel.heightAnchor)
         ])
     }
@@ -432,10 +457,9 @@ final class ProfilePropertiesView: UIView {
         
         NSLayoutConstraint.activate([
             locationButton.centerYAnchor.constraint(equalTo: locationLabel.centerYAnchor),
-            locationButton.leadingAnchor.constraint(equalTo: locationLabel.trailingAnchor,
-                                                    constant: AppStyles.size.horizontalMargin.big),
+            locationButton.leadingAnchor.constraint(equalTo: birthdayDatePicker.leadingAnchor),
             locationButton.heightAnchor.constraint(equalTo: birthdayDatePicker.heightAnchor)
-            ])
+        ])
     }
     
     private func addMapIconButton() {
@@ -618,6 +642,10 @@ final class ProfilePropertiesView: UIView {
         locationButton.setAttributedTitle(attributedString(title: city), for: .normal)
         mapIconButton.isHidden = true
     }
+    
+    func presentAlertController() -> UIAlertController {
+        return alertController
+    }
 }
 
 // MARK: - Obj-c methods
@@ -681,13 +709,13 @@ extension ProfilePropertiesView {
 extension ProfilePropertiesView {
     private func flipView(_ frontView: UIView, _ backView: UIView) {
         let transitionOptions: UIView.AnimationOptions = [.transitionFlipFromRight]
-
-            UIView.transition(with: nameView, duration: 1.0, options: transitionOptions, animations: {
-                frontView.isHidden = true
-            })
-
-            UIView.transition(with: nameView, duration: 1.0, options: transitionOptions, animations: {
-                backView.isHidden = false
-            })
+        
+        UIView.transition(with: nameView, duration: 1.0, options: transitionOptions, animations: {
+            frontView.isHidden = true
+        })
+        
+        UIView.transition(with: nameView, duration: 1.0, options: transitionOptions, animations: {
+            backView.isHidden = false
+        })
     }
 }

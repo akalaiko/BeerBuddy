@@ -117,6 +117,12 @@ final class CustomSegmentedControl: UIControl {
         super.layoutSubviews()
 
         settingsStackView()
+
+        if highlightingView.frame == .zero && selectedSegmentIndex >= 0 {
+            DispatchQueue.main.async {
+                self.selectSegment(currentIndex: -1, newIndex: self.selectedSegmentIndex)
+            }
+        }
     }
 
     // MARK: - Setting UI Methods
@@ -163,8 +169,13 @@ final class CustomSegmentedControl: UIControl {
 
     /// Setting stackview , used after frame are acquired.
     private func settingsStackView() {
-        stackView.layer.cornerRadius = stackView.frame.height / 2
-        stackView.clipsToBounds = true
+        if #available(iOS 14.0, *) {
+            stackView.layer.cornerRadius = stackView.frame.height / 2
+            stackView.clipsToBounds = true
+        } else {
+            stackView.layer.sublayers?.first?.cornerRadius = stackView.frame.height / 2
+        }
+        
         drawSegmentsSeparators(color: separatorColor)
     }
 
@@ -219,6 +230,8 @@ final class CustomSegmentedControl: UIControl {
     ///   - currentIndex: The current index of the selected segment.
     ///   - newIndex: The new index to highlight as selected.
     private func selectSegment(currentIndex: Int, newIndex: Int) {
+        guard currentIndex >= 0 || newIndex >= 0 else { return }
+
         guard newIndex >= 0 else {
             highlightingView.isHidden = true
 
@@ -230,10 +243,13 @@ final class CustomSegmentedControl: UIControl {
             return
         }
 
+        let newSegment = stackView.arrangedSubviews[newIndex]
+
+        guard newSegment.frame != .zero else { return }
+
         highlightingView.isHidden = false
 
         let animateDuration = currentIndex >= 0 ? 0.5 : nil
-        let newSegment = stackView.arrangedSubviews[newIndex]
         newSegment.isUserInteractionEnabled = false
         self.moveHighlightingView(newSegment.frame, index: newIndex, animate: animateDuration)
         self.switchHideSegmentSeparators(hideIndex: newIndex, visableIndex: currentIndex >= 0 ? currentIndex : nil,

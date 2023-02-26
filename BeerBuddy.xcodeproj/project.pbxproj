@@ -63,8 +63,10 @@
 		F21870112994FD8C007AF7B7 /* NetworkMockProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21870102994FD8C007AF7B7 /* NetworkMockProtocol.swift */; };
 		F218701829951709007AF7B7 /* ChatsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218701729951709007AF7B7 /* ChatsScreen.swift */; };
 		F218701A29951824007AF7B7 /* ChatsViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218701929951824007AF7B7 /* ChatsViewUITests.swift */; };
+		F20F1634299F8F630079EF92 /* PreferenceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20F1633299F8F630079EF92 /* PreferenceRequest.swift */; };
 		F23AF69529742A8000584F85 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23AF69429742A8000584F85 /* HeaderView.swift */; };
 		F24CC1C32982D18B003C8197 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24CC1C22982D18B003C8197 /* MainViewController.swift */; };
+		F25625FD29965C980059972C /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25625FC29965C980059972C /* FilterView.swift */; };
 		F26C37C92976E0C400E14944 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C37C82976E0C400E14944 /* UserInfoView.swift */; };
 		F28FBE452997D96500F0BB06 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28FBE442997D96500F0BB06 /* CustomSegmentedControl.swift */; };
 		F29355FA2990DB2A003DADCA /* ChatModelStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29355F92990DB2A003DADCA /* ChatModelStub.swift */; };
@@ -149,8 +151,10 @@
 		F21870102994FD8C007AF7B7 /* NetworkMockProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMockProtocol.swift; sourceTree = "<group>"; };
 		F218701729951709007AF7B7 /* ChatsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsScreen.swift; sourceTree = "<group>"; };
 		F218701929951824007AF7B7 /* ChatsViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewUITests.swift; sourceTree = "<group>"; };
+		F20F1633299F8F630079EF92 /* PreferenceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceRequest.swift; sourceTree = "<group>"; };
 		F23AF69429742A8000584F85 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		F24CC1C22982D18B003C8197 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		F25625FC29965C980059972C /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		F26C37C82976E0C400E14944 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		F28FBE442997D96500F0BB06 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		F29355F92990DB2A003DADCA /* ChatModelStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModelStub.swift; sourceTree = "<group>"; };
@@ -360,6 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				F28FBE432997D94800F0BB06 /* SegmentedControl */,
+				F25625FB29965C3D0059972C /* FilterView */,
 				F26C37C72976E09D00E14944 /* UserInfo */,
 				AF00D81729743C00005B6C5D /* CustomButton */,
 				F23AF69329742A6E00584F85 /* Header */,
@@ -435,6 +440,14 @@
 				F23AF69429742A8000584F85 /* HeaderView.swift */,
 			);
 			path = Header;
+			sourceTree = "<group>";
+		};
+		F25625FB29965C3D0059972C /* FilterView */ = {
+			isa = PBXGroup;
+			children = (
+				F25625FC29965C980059972C /* FilterView.swift */,
+			);
+			path = FilterView;
 			sourceTree = "<group>";
 		};
 		F26C37C72976E09D00E14944 /* UserInfo */ = {
@@ -519,6 +532,8 @@
 				AF32475D29A8CF1500A594BE /* Chats */,
 				AF32475E29A8CF3000A594BE /* Conversation */,
 				EF5D25CC296D921600B6F3B1 /* User */,
+				EF5D25CC296D921600B6F3B1 /* UserModel */,
+				F20F1633299F8F630079EF92 /* PreferenceRequest.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -795,6 +810,7 @@
 				AFFD985D299CF47900CB196B /* OnboardingViewController.swift in Sources */,
 				F218700D2994F1CD007AF7B7 /* UserModelStub.swift in Sources */,
 				F2E59C412975962D008773E8 /* MatchesView.swift in Sources */,
+				F25625FD29965C980059972C /* FilterView.swift in Sources */,
 				EF5D25D3297080E400B6F3B1 /* AppStyles.swift in Sources */,
 				AFD26B8029AB7A3700555B5F /* ChatViewController.swift in Sources */,
 				EF5D25D129705BAE00B6F3B1 /* UIColor+Extensions.swift in Sources */,
@@ -817,6 +833,7 @@
 				F2C2E47E298E875200051E53 /* ChatsView.swift in Sources */,
 				EF51CE18297730E900B865E8 /* RegistrationPresenter.swift in Sources */,
 				AF32475829A8CEC700A594BE /* Sender.swift in Sources */,
+				F20F1634299F8F630079EF92 /* PreferenceRequest.swift in Sources */,
 				EF51CE16297730CA00B865E8 /* RegistrationViewController.swift in Sources */,
 				AFB2337C2997CF6F00B3318E /* ProfilePropertiesView.swift in Sources */,
 				AFD26B8129AB7A3700555B5F /* LocationPickerViewController.swift in Sources */,

@@ -35,8 +35,22 @@ enum AppModuleBuilder {
     }
     
     static func profilePropertiesViewController() -> UIViewController & ProfilePropertiesViewInput {
+        
+        // TODO: - Delete UserModel after update
+        
+        let userModel = UserModel(id: UUID(),
+                                  firstName: "test",
+                                  lastName: "test",
+                                  username: "Test",
+                                  matches: [UUID(), UUID()],
+                                  sex: .male,
+                                  birthDate: 850343400,
+                                  location: nil,
+                                  interests: [.Movies(.comedy), .Sport(.basketball)],
+                                  favAlcohol: [.beer, .vodka])
+        
         let locationManager = LocationManager()
-        let presenter = ProfilePropertiesPresenter(locationManager: locationManager)
+        let presenter = ProfilePropertiesPresenter(locationManager: locationManager, userModel: userModel)
         let viewController = ProfilePropertiesViewController(presenter: presenter)
         presenter.viewController = viewController
         return viewController

@@ -58,7 +58,7 @@ final class ProfilePropertiesView: UIView {
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "USERNAME"
+//        label.text = "USERNAME"
         label.font = AppStyles.font.username
         label.textColor = AppStyles.color.black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +74,7 @@ final class ProfilePropertiesView: UIView {
     }()
     
     private lazy var nameTextField: CustomTextField = {
-        let textField = CustomTextField(placeholder: "Username")
+        let textField = CustomTextField(placeholder: nameLabel.text ?? "")
         textField.isHidden = true
         textField.backgroundColor = .white
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -240,28 +240,20 @@ final class ProfilePropertiesView: UIView {
         return button
     }()
     
-    //    private lazy var alertController: UIAlertController = {
-    //        let message = "You need to grant access to the location in Settings"
-    //        let alertContoller = UIAlertController(title: "Oooops", message: message, preferredStyle: .alert)
-    //        let action = UIAlertAction(title: "OK", style: .cancel)
-    //        alertContoller.addAction(action)
-    //        return alertContoller
-    //    }()
-    
     private lazy var alertController: UIAlertController = {
-        let alertController = UIAlertController(title: "Location Permission Required",
+        let alertController = UIAlertController(title: "Ooops",
                                                 message: "Please enable location permissions in settings.",
                                                 preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "Settings", style: .default, handler: {(cAlertAction) in
-            //Redirect to Settings app
-            UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
+        let okAction = UIAlertAction(title: "Settings", style: .default, handler: { _ in
+            guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+            UIApplication.shared.open(url)
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         alertController.addAction(cancelAction)
-        
         alertController.addAction(okAction)
+        
         return alertController
     }()
     
@@ -327,6 +319,26 @@ final class ProfilePropertiesView: UIView {
         addDescribeLabel()
         addDescribeTextView()
         addSaveButton()
+//        addMenuAction(title: <#T##String#>)
+    }
+    
+    func setPropterties(userModel: UserModel) {
+        nameLabel.text = userModel.username
+        birthdayDatePicker.date = Date(timeIntervalSince1970: userModel.birthDate)
+        genderSegmentedControl.selectedSegmentIndex = 0
+        smokingSegmentedControl.selectedSegmentIndex = 0
+        alcoholTextView.text = ""
+        for (index, element) in userModel.favAlcohol.enumerated() {
+            if index == userModel.favAlcohol.endIndex - 1 {
+                alcoholTextView.text.append("\(element)".capitalized)
+            } else {
+                alcoholTextView.text.append("\(element), ".capitalized)
+            }
+        }
+        interestTextView.text = ""
+        userModel.interests.forEach { interest in
+            interestTextView.text.append("\(interest), ")
+        }
     }
     
     private func addScrollView() {
@@ -616,9 +628,27 @@ final class ProfilePropertiesView: UIView {
         ])
     }
     
+    @objc private func addMenuItems() {
+        
+        let alcohols = [Alcohol]()
+        
+        
+        let menuItems = UIMenu(options: .displayInline, children: [])
+    }
+    
+    private func addMenuAction(title: String) -> UIAction {
+        return UIAction(title: title) { _ in
+           print(1)
+        }
+    }
+    
     func addLocationButtonTarget(_ target: Any, action: Selector) {
         locationButton.addTarget(target, action: action, for: .touchUpInside)
         mapIconButton.addTarget(target, action: action, for: .touchUpInside)
+    }
+    
+    func addAvatarButtonTarget(_ target: Any, action: Selector) {
+        avatarButton.addTarget(target, action: action, for: .touchUpInside)
     }
     
     func subscribeObserver() {
@@ -645,6 +675,10 @@ final class ProfilePropertiesView: UIView {
     
     func presentAlertController() -> UIAlertController {
         return alertController
+    }
+    
+    func setAvatarImage(image: UIImage) {
+        avatarImageView.image = image
     }
 }
 
@@ -691,7 +725,6 @@ extension ProfilePropertiesView {
             showTextField = false
             nameTextField.text = nameLabel.text
             nameButton.setImage(UIImage(named: AppData.imageName.doneIcon), for: .normal)
-            print(showTextField)
         } else {
             nameTextField.isHidden = true
             nameLabel.isHidden = false
@@ -699,7 +732,6 @@ extension ProfilePropertiesView {
             nameLabel.text = nameTextField.text
             nameButton.setImage(UIImage(named: AppData.imageName.pencil), for: .normal)
             showTextField = true
-            print(showTextField)
         }
     }
 }

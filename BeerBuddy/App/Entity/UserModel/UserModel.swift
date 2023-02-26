@@ -15,6 +15,7 @@ struct UserModel {
     var matches: [UUID]
     let sex: Sex
     let birthDate: Double
+    var location: String?
     var age: Int {
         let now = Date()
         let calendar = Calendar.current

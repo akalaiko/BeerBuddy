@@ -73,6 +73,7 @@ final class MainViewController: UIViewController {
 
     /// Adds the selected controllers to the controller array. Displays the starting controller on the screen.
     private func setupControllers() {
+        
         controllers = [
             createController(with: AppModuleBuilder.matchesController, imageName: AppData.imageName.search),
             createController(with: AppModuleBuilder.matchesController, imageName: AppData.imageName.beer),

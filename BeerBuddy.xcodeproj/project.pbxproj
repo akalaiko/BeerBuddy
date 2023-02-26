@@ -230,6 +230,13 @@
 			path = Location;
 			sourceTree = "<group>";
 		};
+		AFA1CDC229ABB9E3009279A2 /* AlcoholViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AlcoholViewModel;
+			sourceTree = "<group>";
+		};
 		AFB2337A2997CF5400B3318E /* ProfilePropertiesVIew */ = {
 			isa = PBXGroup;
 			children = (
@@ -421,6 +428,7 @@
 		F286E3DA296D6F5100B0D3EC /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				AFA1CDC229ABB9E3009279A2 /* AlcoholViewModel */,
 				F218700B2994F1BB007AF7B7 /* UserModelStub */,
 				F29355F82990DB0A003DADCA /* ChatModelStub */,
 				EF5D25CC296D921600B6F3B1 /* UserModel */,
@@ -901,7 +909,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -932,7 +940,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

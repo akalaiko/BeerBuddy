@@ -40,7 +40,7 @@ class HeaderView: UIView {
     /// - Parameter text: Text title.
     init(title text: String, backgroundIsDark: Bool = false) {
         super.init(frame: .zero)
-        setupUI(title: text)
+        setupUI(title: text, backgroundIsDark: backgroundIsDark)
         
         #if DEBUG
         setUITests()

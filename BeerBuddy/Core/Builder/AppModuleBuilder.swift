@@ -34,7 +34,7 @@ enum AppModuleBuilder {
         return viewController
     }
     
-    static func profilePropertiesViewController() -> UIViewController {
+    static func profilePropertiesViewController() -> UIViewController & ProfilePropertiesViewInput {
         let presenter = ProfilePropertiesPresenter()
         let viewController = ProfilePropertiesViewController(presenter: presenter)
         presenter.viewController = viewController

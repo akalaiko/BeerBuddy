@@ -32,5 +32,8 @@ enum AppData {
         static var pin: String { "pin" }
         static var pinCircle: String { "pin-circle" }
         static var unpin: String { "unpin" }
+        static var plusCircle: String { "plusCircle" }
+        static var pencil: String { "pencil" }
+        static var doneIcon: String { "endEditIcon" }
     }
 }

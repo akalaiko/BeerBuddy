@@ -48,7 +48,7 @@ extension AppDelegate {
             resetUserDefaults()
             controller = AppUITestBuilder.chatsController()
         } else {
-            controller = UINavigationController(rootViewController: AppModuleBuilder.mainController())
+            controller = UINavigationController(rootViewController: AppModuleBuilder.loginViewController())
         }
 
         return controller

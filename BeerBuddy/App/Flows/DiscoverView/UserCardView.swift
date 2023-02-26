@@ -13,7 +13,7 @@ class UserCardView: UIView {
     // MARK: - Private properties
     
     /// Initilazing view's components.
-    private(set) lazy var cardView: UIView = {
+    private lazy var cardView: UIView = {
         let view = UIView()
         view.backgroundColor = AppStyles.color.black
         view.layer.cornerRadius = 25
@@ -22,7 +22,7 @@ class UserCardView: UIView {
         return view
     }()
     
-    private(set) lazy var imageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         let avatarImage = "avatar"
         imageView.image = UIImage(named: avatarImage)
@@ -31,14 +31,14 @@ class UserCardView: UIView {
         return imageView
     }()
     
-    private(set) lazy var userInfoView: UserInfoView = {
+    private lazy var userInfoView: UserInfoView = {
         let view = UserInfoView(color: AppStyles.color.offwhite)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.config(username: "USERNAME", age: 30, location: "SILICON VALLEY", noSmoking: true, noDrinking: true)
         return view
     }()
     
-    private(set) lazy var userInterestsStackView: UIStackView = {
+    private lazy var userInterestsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 1
         stackView.distribution = .fillEqually
@@ -47,7 +47,7 @@ class UserCardView: UIView {
         return stackView
     }()
     
-    private(set) lazy var userBioStackView: UIStackView = {
+    private lazy var userBioStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 1
         stackView.distribution = .fillEqually
@@ -56,7 +56,7 @@ class UserCardView: UIView {
         return stackView
     }()
     
-    private(set) lazy var userInfoStackView: UIStackView = {
+    private lazy var userInfoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 8
         stackView.distribution = .fillEqually
@@ -66,21 +66,21 @@ class UserCardView: UIView {
         return stackView
     }()
     
-    private(set) lazy var userInfoCardView: UIView = {
+    private lazy var userInfoCardView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private(set) lazy var separatorLine: UIView = {
+    private lazy var separatorLine: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         return view
     }()
 
-    private(set) lazy var interestsLabel: UILabel = {
+    private lazy var interestsLabel: UILabel = {
         let label = UILabel()
         label.textColor = AppStyles.color.offwhite
         label.font = AppStyles.font.title
@@ -90,7 +90,7 @@ class UserCardView: UIView {
         return label
     }()
     
-    private(set) lazy var interestsListingLabel: UILabel = {
+    private lazy var interestsListingLabel: UILabel = {
         let label = UILabel()
         label.textColor = AppStyles.color.offwhite
         label.font = AppStyles.font.button
@@ -100,7 +100,7 @@ class UserCardView: UIView {
         return label
     }()
     
-    private(set) lazy var aboutMyselfLabel: UILabel = {
+    private lazy var aboutMyselfLabel: UILabel = {
         let label = UILabel()
         label.textColor = AppStyles.color.offwhite
         label.font = AppStyles.font.title
@@ -110,7 +110,7 @@ class UserCardView: UIView {
         return label
     }()
     
-    private(set) lazy var userBioLabel: UILabel = {
+    private lazy var userBioLabel: UILabel = {
         let label = UILabel()
         label.textColor = AppStyles.color.offwhite
         label.font = AppStyles.font.smallTextCard
@@ -134,7 +134,7 @@ class UserCardView: UIView {
         return button
     }()
     
-    private(set) lazy var buttonsStackView: UIStackView = {
+    private lazy var buttonsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 16
         stackView.distribution = .fillEqually

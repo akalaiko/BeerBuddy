@@ -58,7 +58,7 @@ final class ProfilePropertiesView: UIView {
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-//        label.text = "USERNAME"
+        //        label.text = "USERNAME"
         label.font = AppStyles.font.username
         label.textColor = AppStyles.color.black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -319,26 +319,31 @@ final class ProfilePropertiesView: UIView {
         addDescribeLabel()
         addDescribeTextView()
         addSaveButton()
-//        addMenuAction(title: <#T##String#>)
+        //        addMenuAction(title: <#T##String#>)
     }
     
-    func setPropterties(userModel: UserModel) {
-        nameLabel.text = userModel.username
+    func setPropterties(userModel: User) {
+        nameLabel.text = userModel.name
         birthdayDatePicker.date = Date(timeIntervalSince1970: userModel.birthDate)
         genderSegmentedControl.selectedSegmentIndex = 0
         smokingSegmentedControl.selectedSegmentIndex = 0
         alcoholTextView.text = ""
-        for (index, element) in userModel.favAlcohol.enumerated() {
-            if index == userModel.favAlcohol.endIndex - 1 {
-                alcoholTextView.text.append("\(element)".capitalized)
+        for (index, element) in userModel.alcohols.enumerated() {
+            if index == userModel.alcohols.endIndex - 1 {
+                alcoholTextView.text.append("\(element).".capitalized)
             } else {
                 alcoholTextView.text.append("\(element), ".capitalized)
             }
         }
         interestTextView.text = ""
-        userModel.interests.forEach { interest in
-            interestTextView.text.append("\(interest), ")
+        for (index, element) in userModel.interestsStrings.enumerated() {
+            if index == userModel.alcohols.endIndex - 1 {
+                interestTextView.text.append("\(element).".capitalized)
+            } else {
+                interestTextView.text.append("\(element), ".capitalized)
+            }
         }
+        
     }
     
     private func addScrollView() {
@@ -638,7 +643,7 @@ final class ProfilePropertiesView: UIView {
     
     private func addMenuAction(title: String) -> UIAction {
         return UIAction(title: title) { _ in
-           print(1)
+            print(1)
         }
     }
     

@@ -47,16 +47,7 @@ enum AppModuleBuilder {
         
         // TODO: - Delete UserModel after update
         
-        let userModel = UserModel(id: UUID(),
-                                  firstName: "test",
-                                  lastName: "test",
-                                  username: "Test",
-                                  matches: [UUID(), UUID()],
-                                  sex: .male,
-                                  birthDate: 850343400,
-                                  location: nil,
-                                  interests: [.Movies(.comedy), .Sport(.basketball)],
-                                  favAlcohol: [.beer, .vodka])
+        let userModel = User(mockName: "Test", emailAddress: "test@test.com")
         
         let locationManager = LocationManager()
         let presenter = ProfilePropertiesPresenter(locationManager: locationManager, userModel: userModel)

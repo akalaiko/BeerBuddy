@@ -16,16 +16,16 @@ protocol ProfilePropertiesViewInput: AnyObject {
 protocol ProfilePropertiesViewOutput: AnyObject {
     func getCityName()
     func stopLocationUpdate()
-    func getUserModel() -> UserModel?
+    func getUserModel() -> User?
 }
 
 final class ProfilePropertiesPresenter: NSObject {
     weak var viewController: (UIViewController & ProfilePropertiesViewInput)?
     var locationManager: LocationManager?
     
-    private var userModel: UserModel?
+    private var userModel: User?
     
-    init(locationManager: LocationManager?, userModel: UserModel?) {
+    init(locationManager: LocationManager?, userModel: User?) {
         super.init()
         self.locationManager = locationManager
         self.userModel = userModel
@@ -47,7 +47,7 @@ extension ProfilePropertiesPresenter: ProfilePropertiesViewOutput {
         locationManager?.stopUpdateLocation()
     }
     
-    func getUserModel() -> UserModel? {
+    func getUserModel() -> User? {
         guard
             let userModel = userModel
         else {

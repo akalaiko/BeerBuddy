@@ -86,6 +86,7 @@ extension MatchesViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.viewOpenUserInfo(indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
+        presenter?.openConversation(indexPath)
     }
 }

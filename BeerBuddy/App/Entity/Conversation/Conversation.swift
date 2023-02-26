@@ -12,6 +12,7 @@ struct Conversation {
     let name: String
     let otherUserEmail: String
     let latestMessage: LatestMessage
+    var isPinned: Bool
 }
 
 extension Conversation: Equatable {

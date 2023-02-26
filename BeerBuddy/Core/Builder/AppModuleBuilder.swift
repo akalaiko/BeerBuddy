@@ -44,9 +44,9 @@ enum AppModuleBuilder {
     }
 
     static func chatsController() -> UIViewController & ChatsViewInput {
-        let dateFormatter = DateFormatterHelper()
-        let network = NetworkMockForTests()
-        let presenter = ChatsPresenter(dateFormatter: dateFormatter, network: network)
+//        let dateFormatter = DateFormatterHelper()
+//        let network = NetworkMockForTests()
+        let presenter = ChatsPresenter()
         let viewController = ChatsViewController(presenter: presenter)
         presenter.viewInput = viewController
         return viewController

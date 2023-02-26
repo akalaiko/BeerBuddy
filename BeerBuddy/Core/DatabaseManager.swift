@@ -48,7 +48,7 @@ extension DatabaseManager {
         
         let conversationId = "conversation_\(firstMessage.messageId)"
         let newMessage: [String: Any] = [:]
-        let newConversation: [String: Any] = ["messages": newMessage]
+        let newConversation: [String: Any] = ["messages": newMessage, "isPinned": false]
         
         database.child(conversationId).setValue(newConversation, withCompletionBlock: { [weak self] error, _ in
             guard error == nil else { return completion(false) }
@@ -74,7 +74,8 @@ extension DatabaseManager {
                       let otherUserEmail = dictionary["other_user_email"] as? String,
                       let latestMessage = dictionary["latest_message"] as? [String: Any],
                       let date = latestMessage["date"] as? String,
-                      let message = latestMessage["message"] as? String
+                      let message = latestMessage["message"] as? String,
+                      let isPinned = dictionary["isPinned"] as? Bool
                 else {
                     return nil
                 }
@@ -82,7 +83,8 @@ extension DatabaseManager {
                 return Conversation(id: id,
                                     name: name,
                                     otherUserEmail: otherUserEmail,
-                                    latestMessage: latestMessageObject)
+                                    latestMessage: latestMessageObject,
+                                    isPinned: isPinned)
             })
             completion(.success(conversations))
         })
@@ -188,6 +190,7 @@ extension DatabaseManager {
             "id": conversation,
             "other_user_email": otherUserEmail,
             "name": name,
+            "isPinned": false,
             "latest_message": [
                 "date": messageDateString,
                 "message": content
@@ -198,6 +201,7 @@ extension DatabaseManager {
             "id": conversation,
             "other_user_email": safeEmail,
             "name": currentName,
+            "isPinned": false,
             "latest_message": [
                 "date": messageDateString,
                 "message": content

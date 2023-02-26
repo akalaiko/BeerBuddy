@@ -21,14 +21,13 @@ protocol MatchesViewOutput: AnyObject {
     var matchesCellModels: [MatchesCellModel] { get }
     /// Fetch information from the network.
     func viewRequestFetch()
-    
-    func viewOpenUserInfo(_ index: IndexPath)
+    func openConversation(_ index: IndexPath)
 }
 
 class MatchesPresenter: MatchesViewOutput {
     
     // MARK: - Public Properties
-    weak var viewInput: MatchesViewInput?
+    weak var viewInput: (UIViewController & MatchesViewInput)?
     
     private let senderEmail = UserDefaults.standard.value(forKey: "email") as? String
     
@@ -80,9 +79,30 @@ class MatchesPresenter: MatchesViewOutput {
             }
         }
     }
-    
-    func viewOpenUserInfo(_ index: IndexPath) {
-        let user = matchesCellModels[index.row]
-        print(user.safeEmail)
+
+    func openConversation(_ indexPath: IndexPath) {
+        let user = matchesCellModels[indexPath.row]
+        let name = user.name
+        let safeEmail = user.safeEmail
+        
+        DatabaseManager.shared.conversationExists(with: safeEmail, completion: { [weak self] result in
+            switch result {
+            case .success(let conversationId):
+                let vc = ChatViewController(with: safeEmail, id: conversationId)
+                let nav = UINavigationController(rootViewController: vc)
+                vc.isNewConversation = false
+                vc.title = name
+                vc.navigationItem.largeTitleDisplayMode = .never
+                vc.modalPresentationStyle = .fullScreen
+                self?.viewInput?.present(nav, animated: true)
+            case .failure(_):
+                let vc = ChatViewController(with: safeEmail, id: nil)
+                vc.isNewConversation = true
+                vc.title = name
+                vc.navigationItem.largeTitleDisplayMode = .never
+                vc.modalPresentationStyle = .fullScreen
+                self?.viewInput?.present(vc, animated: true)
+            }
+        })
     }
 }

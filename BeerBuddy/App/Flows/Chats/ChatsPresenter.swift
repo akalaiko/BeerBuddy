@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ChatsViewInput: AnyObject {
-
+    var loginObserver: NSObjectProtocol? { get }
 }
 
 protocol ChatsViewOutput: AnyObject {
@@ -44,7 +44,7 @@ class ChatsPresenter: ChatsViewOutput {
         data.count
     }
 
-    weak var viewInput: ChatsViewInput?
+    weak var viewInput: (UIViewController & ChatsViewInput)?
 
     // MARK: - Private Properties
 
@@ -79,25 +79,23 @@ class ChatsPresenter: ChatsViewOutput {
     func startListeningForConversations() {
         print("at least here")
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else { return }
-//
-//        if let loginObserver {
-//            NotificationCenter.default.removeObserver(loginObserver)
-//        }
+
+        if let loginObserver = viewInput?.loginObserver {
+            NotificationCenter.default.removeObserver(loginObserver)
+        }
         
         let safeEmail = DatabaseManager.safeEmail(email: email)
         print("we are here, safe email is:", safeEmail)
         DatabaseManager.shared.getAllConversations(for: safeEmail, completion: { [weak self] result in
             switch result {
             case .success(let fetchedConversations):
-                print("fetched convos")
-                guard !fetchedConversations.isEmpty else { return print("convos empty")}
+                guard !fetchedConversations.isEmpty else { return }
 //                guard let distributData = self?.distributDataFromUserdefaults(fetchedConversations) else { return }
                 self?.data = fetchedConversations
                 
-                print(fetchedConversations)
-//                DispatchQueue.main.async {
-//                    self?.tableView.reloadData()
-//                }
+                DispatchQueue.main.async {
+                    self?.viewInput?.view.reloadInputViews()
+                }
             case .failure(let error):
                 print("listen", error)
             }
@@ -150,11 +148,6 @@ class ChatsPresenter: ChatsViewOutput {
         return item.isPinned
     }
 
-    func viewOpenScreenChat(_ indexPath: IndexPath) {
-        let id = data[indexPath.row].id
-        print(id)
-    }
-
     // MARK: - Private Methods
 
     /// Updating the fixation data in userdefaults.
@@ -195,5 +188,16 @@ class ChatsPresenter: ChatsViewOutput {
 
             return  item1.latestMessage.date > item2.latestMessage.date
         })
+    }
+    
+    func viewOpenScreenChat(_ indexPath: IndexPath) {
+        let conversation = data[indexPath.row]
+        
+        let vc = ChatViewController(with: conversation.otherUserEmail, id: conversation.id)
+        let nav = UINavigationController(rootViewController: vc)
+        vc.isNewConversation = false
+        vc.title = conversation.name
+        nav.isNavigationBarHidden = false
+        viewInput?.present(nav, animated: true)
     }
 }

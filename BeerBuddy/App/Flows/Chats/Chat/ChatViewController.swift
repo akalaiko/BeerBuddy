@@ -188,6 +188,7 @@ class ChatViewController: MessagesViewController {
             case .success(let messages):
                 guard !messages.isEmpty else { return }
                 self?.messages = messages
+                print(messages)
                 DispatchQueue.main.async {
                     self?.messagesCollectionView.reloadDataAndKeepOffset()
                     if shouldScrollToBottom {
@@ -227,10 +228,11 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
             guard let conversationId else { return }
             DatabaseManager.shared.sendMessage(to: conversationId,
                                                otherUserEmail: otherUserEmail,
-                                               name: title ?? "User",
+                                               name: selfSender.displayName,
                                                message: message,
                                                completion: { [weak self] success in
                 if success {
+                    self?.listenForMessages(id: conversationId, shouldScrollToBottom: true)
                     self?.messageInputBar.inputTextView.text = nil
                 } else {
                     print("failed to send a message in existing convo")

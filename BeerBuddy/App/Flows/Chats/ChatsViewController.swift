@@ -15,6 +15,8 @@ class ChatsViewController: UIViewController {
     }
 
     private var presenter: ChatsViewOutput?
+    
+    var loginObserver: NSObjectProtocol?
 
     // MARK: - Initialization
 
@@ -38,6 +40,13 @@ class ChatsViewController: UIViewController {
         super.viewDidLoad()
         chatsView.setupUI()
         presenter?.startListeningForConversations()
+        
+        loginObserver = NotificationCenter.default.addObserver(forName: Notification.Name("didLogInNotification"),
+                                                               object: nil,
+                                                               queue: .main,
+                                                               using: { [weak self] _ in
+            self?.presenter?.startListeningForConversations()
+        })
     }
 
     // MARK: - Private Methods
@@ -131,6 +140,7 @@ extension ChatsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         presenter?.viewOpenScreenChat(indexPath)
     }
 }

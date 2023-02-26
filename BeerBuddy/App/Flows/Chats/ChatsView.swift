@@ -71,6 +71,10 @@ class ChatsView: UIView {
         setUITests()
         #endif
     }
+    
+    override func reloadInputViews() {
+        tableView.reloadData()
+    }
 
     // MARK: - Private Methods
 
@@ -81,6 +85,7 @@ class ChatsView: UIView {
         tableView.dataSource = controller
         tableView.register(ChatsTableViewCell.self, forCellReuseIdentifier: ChatsTableViewCell.identifier)
     }
+
 }
 
 // MARK: - UI Testing

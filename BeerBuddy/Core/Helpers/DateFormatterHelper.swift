@@ -23,6 +23,13 @@ final class DateFormatterHelper: DateFormatterProtocol {
         formatter.locale = Locale(identifier: "en_US")
         return formatter
     }()
+    
+    public static let dateFormatterJustHours: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        formatter.locale = Locale(identifier: "en_US")
+        return formatter
+    }()
 
     /// Application start time.
     private let appStartDate = Date()

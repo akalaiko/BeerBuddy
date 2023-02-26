@@ -94,7 +94,7 @@ class MatchesTableViewCell: UITableViewCell {
         avatarImageView.image = UIImage(data: user.avatarData)
         userInfoView.config(username: user.name,
                             age: user.age,
-                            location: "Kyiv",
+                            location: user.location,
                             noSmoking: user.noSmoking,
                             noDrinking: user.noDrinking)
     }

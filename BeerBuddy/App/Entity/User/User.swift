@@ -116,7 +116,7 @@ enum Sex: String {
     case other
 }
 
-enum Interests: String {
+enum Interests: String, CaseIterable {
     case football
     case hockey
     case tennis
@@ -153,7 +153,7 @@ enum Interests: String {
     case thriller
 }
 
-enum Alcohol: String {
+enum Alcohol: String, CaseIterable {
     case beer
     case wine
     case cider

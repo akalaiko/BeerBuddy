@@ -62,8 +62,8 @@ class MatchesViewController: UIViewController {
 extension MatchesViewController: MatchesViewInput {
     func reloadTable() {
         matchesView.reloadTable()
+    }
 }
-
 // MARK: - FilterViewDelegate
 
 extension MatchesViewController: FilterViewDelegate {

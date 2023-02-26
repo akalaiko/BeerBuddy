@@ -168,6 +168,7 @@ final class ProfilePropertiesView: UIView {
         let button = UIButton()
         button.setImage(UIImage(named: AppData.imageName.plusCircle), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.showsMenuAsPrimaryAction = true
         return button
     }()
     
@@ -196,6 +197,7 @@ final class ProfilePropertiesView: UIView {
     private lazy var interestsButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: AppData.imageName.plusCircle), for: .normal)
+        button.showsMenuAsPrimaryAction = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -291,59 +293,6 @@ final class ProfilePropertiesView: UIView {
         ]
         let attributedString = NSAttributedString(string: title, attributes: attributes)
         return attributedString
-    }
-    
-    func configureUI() {
-        addScrollView()
-        addAvatarImage()
-        addAvatarLabel()
-        addNameView()
-        addUsernameLabel()
-        addNameTextField()
-        addNameButton()
-        addBirthdayLabel()
-        addDatePicker()
-        addLocationLabel()
-        addSetLocationButton()
-        addMapIconButton()
-        addGenderLabel()
-        addGenderSegmenterControl()
-        addSmokingLabel()
-        addSmokingSegmentedControl()
-        addAlcoholLabel()
-        addAlcoholButton()
-        addAlcoholTextView()
-        addInterestLabel()
-        addInterestsButton()
-        addInterestTextView()
-        addDescribeLabel()
-        addDescribeTextView()
-        addSaveButton()
-        //        addMenuAction(title: <#T##String#>)
-    }
-    
-    func setPropterties(userModel: User) {
-        nameLabel.text = userModel.name
-        birthdayDatePicker.date = Date(timeIntervalSince1970: userModel.birthDate)
-        genderSegmentedControl.selectedSegmentIndex = 0
-        smokingSegmentedControl.selectedSegmentIndex = 0
-        alcoholTextView.text = ""
-        for (index, element) in userModel.alcohols.enumerated() {
-            if index == userModel.alcohols.endIndex - 1 {
-                alcoholTextView.text.append("\(element).".capitalized)
-            } else {
-                alcoholTextView.text.append("\(element), ".capitalized)
-            }
-        }
-        interestTextView.text = ""
-        for (index, element) in userModel.interestsStrings.enumerated() {
-            if index == userModel.alcohols.endIndex - 1 {
-                interestTextView.text.append("\(element).".capitalized)
-            } else {
-                interestTextView.text.append("\(element), ".capitalized)
-            }
-        }
-        
     }
     
     private func addScrollView() {
@@ -633,17 +582,131 @@ final class ProfilePropertiesView: UIView {
         ])
     }
     
-    @objc private func addMenuItems() {
-        
-        let alcohols = [Alcohol]()
-        
-        
-        let menuItems = UIMenu(options: .displayInline, children: [])
+    // MARK: - Methods
+    
+    func configureUI() {
+        addScrollView()
+        addAvatarImage()
+        addAvatarLabel()
+        addNameView()
+        addUsernameLabel()
+        addNameTextField()
+        addNameButton()
+        addBirthdayLabel()
+        addDatePicker()
+        addLocationLabel()
+        addSetLocationButton()
+        addMapIconButton()
+        addGenderLabel()
+        addGenderSegmenterControl()
+        addSmokingLabel()
+        addSmokingSegmentedControl()
+        addAlcoholLabel()
+        addAlcoholButton()
+        addAlcoholTextView()
+        addInterestLabel()
+        addInterestsButton()
+        addInterestTextView()
+        addDescribeLabel()
+        addDescribeTextView()
+        addSaveButton()
+        addAlcoholMenuItems()
+        addInterestsMenuItems()
     }
     
-    private func addMenuAction(title: String) -> UIAction {
-        return UIAction(title: title) { _ in
-            print(1)
+    func setPropterties(userModel: User) {
+        nameLabel.text = userModel.name
+        birthdayDatePicker.date = Date(timeIntervalSince1970: userModel.birthDate)
+        setGenderSegment(userModel.sex)
+        setSmokingSegment(userModel.smoking)
+        setAlcoholTextView(userModel.alcohols)
+        setInterestTextView(userModel.interests)
+    }
+    
+    private func setGenderSegment(_ sex: Sex) {
+        var chooseSegment = -1
+        
+        switch sex {
+        case .male:
+           chooseSegment = 0
+        case .female:
+            chooseSegment = 1
+        case .other:
+            chooseSegment = 2
+        }
+        genderSegmentedControl.selectedSegmentIndex = chooseSegment
+    }
+    
+    private func setSmokingSegment(_ smoking: Smoking) {
+        var chooseSegment = -1
+        
+        switch smoking {
+        case .smoking:
+           chooseSegment = 0
+        case .ok:
+            chooseSegment = 1
+        case .noSmoking:
+            chooseSegment = 2
+        }
+        smokingSegmentedControl.selectedSegmentIndex = chooseSegment
+    }
+    
+    private func setAlcoholTextView(_ alcohols: [Alcohol]) {
+        guard !alcohols.isEmpty else { return }
+        
+        alcoholTextView.text = ""
+        for (index, element) in alcohols.enumerated() {
+            if index == alcohols.endIndex - 1 {
+                alcoholTextView.text.append("\(element)".capitalized)
+            } else {
+                alcoholTextView.text.append("\(element), ".capitalized)
+            }
+        }
+    }
+    
+    private func setInterestTextView(_ interests: [Interests]) {
+        guard !interests.isEmpty else { return }
+        
+        interestTextView.text = ""
+        for (index, element) in interests.enumerated() {
+            if index == interests.endIndex - 1 {
+                interestTextView.text.append("\(element)".capitalized)
+            } else {
+                interestTextView.text.append("\(element), ".capitalized)
+            }
+        }
+    }
+    
+    private func addAlcoholMenuItems() {
+        var childrens = [UIAction]()
+        for alcohol in Alcohol.allCases {
+            childrens.append(addMenuAction(title: alcohol.rawValue, forTextView: alcoholTextView))
+        }
+        let menuItems = UIMenu(options: .displayInline, children: childrens)
+        alcoholButton.menu = menuItems
+    }
+    
+    private func addInterestsMenuItems() {
+        var childrens = [UIAction]()
+        for interest in Interests.allCases {
+            childrens.append(addMenuAction(title: interest.rawValue, forTextView: interestTextView))
+        }
+        let menuItems = UIMenu(options: .displayInline, children: childrens)
+        interestsButton.menu = menuItems
+    }
+    
+    private func addMenuAction(title: String, forTextView textView: UITextView) -> UIAction {
+//        var image = UIImage()
+        return UIAction(title: title.capitalized) { _ in
+            print(title.capitalized)
+            var text = ""
+            if !textView.text.isEmpty {
+                text = ", " + title.capitalized
+            } else {
+                text = title.capitalized
+            }
+            textView.text.append(text)
+//            image = UIImage(named: AppData.imageName.doneIcon) ?? UIImage()
         }
     }
     

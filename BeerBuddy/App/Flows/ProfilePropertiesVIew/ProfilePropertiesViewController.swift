@@ -99,8 +99,8 @@ extension ProfilePropertiesViewController: UIImagePickerControllerDelegate, UINa
     
     func presentPhotoActionSheet() {
         let alertContoller = UIAlertController(title: "Profile picture",
-                                   message: "How would you like to select a picture?",
-                                   preferredStyle: .actionSheet)
+                                               message: "How would you like to select a picture?",
+                                               preferredStyle: .actionSheet)
         alertContoller.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alertContoller.addAction(UIAlertAction(title: "Take Photo", style: .default) { [weak self] _ in
             self?.pickImage(from: .camera)

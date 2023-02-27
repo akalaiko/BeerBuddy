@@ -45,8 +45,8 @@ class HeaderView: UIView {
     /// - Parameter text: Text title.
     init(title text: String, backgroundIsDark: Bool = false) {
         super.init(frame: .zero)
+
         setupUI(title: text, backgroundIsDark: backgroundIsDark)
-        
         #if DEBUG
         setUITests()
         #endif
@@ -67,8 +67,11 @@ class HeaderView: UIView {
     /// - Parameter title: Title text.
     private func setupUI(title text: String, backgroundIsDark: Bool ) {
         titleLabel.text = text
-        backgroundColor = AppStyles.color.background.main
 
+        if backgroundIsDark {
+            titleLabel.textColor = AppStyles.color.background.main
+        }
+        
         addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor),

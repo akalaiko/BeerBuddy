@@ -28,6 +28,7 @@ enum AppData {
         static var search: String { "magnifyingGlass" }
         static var message: String { "message" }
         static var settings: String { "gear" }
+        static var close: String { "close" }
         static var mapIcon: String { "mapIcon" }
         static var pin: String { "pin" }
         static var pinCircle: String { "pin-circle" }
@@ -35,6 +36,5 @@ enum AppData {
         static var plusCircle: String { "plusCircle" }
         static var pencil: String { "pencil" }
         static var doneIcon: String { "endEditIcon" }
-        static var close: String { "close" }
     }
 }

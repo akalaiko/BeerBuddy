@@ -25,20 +25,25 @@ class ChatViewController: MessagesViewController {
     private let currentUserName = UserDefaults.standard.value(forKey: "name") as? String
     
     private var selfSender: Sender? {
+        guard let network = network else { preconditionFailure("missing network layer") }
+
         guard let currentUserEmail,
-                let currentUserName else { return nil }
-        let safeEmail = DatabaseManager.safeEmail(email: currentUserEmail)
+              let currentUserName else { return nil }
+        let safeEmail = network.safeEmail(email: currentUserEmail)
         let sender = Sender(senderId: safeEmail,
                             displayName: currentUserName,
                             photoURL: "")
         return sender
     }
-    
-    init(with email: String, id: String?) {
+
+    private var network: NetworkProtocol?
+
+    init(with email: String, id: String?, network: NetworkProtocol) {
         otherUserEmail = email
         conversationId = id
         super.init(nibName: nil, bundle: nil)
-        
+        self.network = network
+
         if let conversationId {
             listenForMessages(id: conversationId, shouldScrollToBottom: true)
         }
@@ -164,10 +169,10 @@ class ChatViewController: MessagesViewController {
                                   sentDate: Date(),
                                   kind: .location(locationItem))
             
-            DatabaseManager.shared.sendMessage(to: conversationId,
-                                               otherUserEmail: otherUserEmail,
-                                               name: name,
-                                               message: message) { _ in }
+            self?.network?.sendMessage(to: conversationId,
+                                       otherUserEmail: otherUserEmail,
+                                       name: name,
+                                       message: message) { _ in }
         }
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .popover
@@ -175,15 +180,17 @@ class ChatViewController: MessagesViewController {
     }
     
     private func createMessageId() -> String? {
+        guard let network = network else { preconditionFailure("missing network layer") }
+
         guard let currentUserEmail else { return nil }
-        let safeEmail = DatabaseManager.safeEmail(email: currentUserEmail)
+        let safeEmail = network.safeEmail(email: currentUserEmail)
         let dateString = DateFormatterHelper.dateFormatter.string(from: Date())
         let newId = otherUserEmail + safeEmail + dateString
         return newId
     }
     
     private func listenForMessages(id: String, shouldScrollToBottom: Bool) {
-        DatabaseManager.shared.getAllMessagesForConversation(with: id, completion: { [weak self] result in
+        network?.getAllMessagesForConversation(with: id, completion: { [weak self] result in
             switch result {
             case .success(let messages):
                 guard !messages.isEmpty else { return }
@@ -210,10 +217,10 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         
         if isNewConversation {
             print("we are sending to new conversation")
-            DatabaseManager.shared.createNewConversation(with: otherUserEmail,
-                                                         name: title ?? "User",
-                                                         firstMessage: message,
-                                                         completion: { [weak self] success in
+            network?.createNewConversation(with: otherUserEmail,
+                                           name: title ?? "User",
+                                           firstMessage: message,
+                                           completion: { [weak self] success in
                 if success {
                     self?.isNewConversation = false
                     let newConversationId = "conversation_\(message.messageId)"
@@ -227,11 +234,11 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         } else {
             guard let conversationId else { return }
             print("we are sending to existing conversation")
-            DatabaseManager.shared.sendMessage(to: conversationId,
-                                               otherUserEmail: otherUserEmail,
-                                               name: selfSender.displayName,
-                                               message: message,
-                                               completion: { [weak self] success in
+            network?.sendMessage(to: conversationId,
+                                 otherUserEmail: otherUserEmail,
+                                 name: selfSender.displayName,
+                                 message: message,
+                                 completion: { [weak self] success in
                 if success {
                     self?.listenForMessages(id: conversationId, shouldScrollToBottom: true)
                     self?.messageInputBar.inputTextView.text = nil
@@ -345,8 +352,9 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     }
 
     func setAvatar(for email: String?, to view: UIImageView, completion: @escaping () -> Void) {
+        guard let network = network else { preconditionFailure("missing network layer") }
         guard let email else { return }
-        let path = DatabaseManager.getProfilePicturePath(email: email)
+        let path = network.getProfilePicturePath(email: email)
         StorageManager.shared.downloadURL(for: path, completion: { result in
             switch result {
             case.success(let urlString):
@@ -400,10 +408,10 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                                           messageId: messageId,
                                           sentDate: Date(),
                                           kind: .photo(media))
-                    DatabaseManager.shared.sendMessage(to: conversationId,
-                                                       otherUserEmail: self.otherUserEmail,
-                                                       name: name,
-                                                       message: message) { _ in }
+                    self.network?.sendMessage(to: conversationId,
+                                              otherUserEmail: self.otherUserEmail,
+                                              name: name,
+                                              message: message) { _ in }
                 case .failure(let error):
                     print(error)
                 }
@@ -427,10 +435,10 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                                           messageId: messageId,
                                           sentDate: Date(),
                                           kind: .video(media))
-                    DatabaseManager.shared.sendMessage(to: conversationId,
-                                                       otherUserEmail: self.otherUserEmail,
-                                                       name: name,
-                                                       message: message) { _ in }
+                    self.network?.sendMessage(to: conversationId,
+                                              otherUserEmail: self.otherUserEmail,
+                                              name: name,
+                                              message: message) { _ in }
                 case .failure(let error):
                     print(error)
                 }

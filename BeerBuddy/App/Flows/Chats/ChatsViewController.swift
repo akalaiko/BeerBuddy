@@ -94,14 +94,18 @@ class ChatsViewController: UIViewController {
 // MARK: - ChatsViewInput
 
 extension ChatsViewController: ChatsViewInput {
-
+    func reloadRow(_ index: IndexPath) {
+        DispatchQueue.main.async {
+            self.chatsView.reloadRow(index)
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
 
 extension ChatsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter?.dataCount ?? 0
+        presenter?.data.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -110,10 +114,11 @@ extension ChatsViewController: UITableViewDataSource {
         else { preconditionFailure("No cell") }
         guard let presenter = presenter else { preconditionFailure("No presenter") }
 
-        let data = presenter.viewRequestCellData(indexPath)
-        
-        cell.configure(email: data.email, userName: data.username, lastMessage: data.lastMessage,
-                       date: data.date, pinned: data.isPinned)
+        let model = presenter.data[indexPath.row]
+        if model.imageData == nil {
+            presenter.viewRequestImage(indexPath)
+        }
+        cell.configure(model)
         return cell
     }
 }

@@ -23,6 +23,12 @@ protocol UserProfileViewOutput: AnyObject {
 final class UserProfilePresenter {
     weak var viewController: (UIViewController & UserProfileViewInput)?
     let email = UserDefaults.standard.value(forKey: "email") as? String
+
+    let network: NetworkProtocol
+
+    init(network: NetworkProtocol) {
+        self.network = network
+    }
 }
 
 // MARK: - Extensions
@@ -49,11 +55,12 @@ extension UserProfilePresenter: UserProfileViewOutput {
     }
     
     func getUserData() {
-        let safeEmail = DatabaseManager.safeEmail(email: email)
-        DatabaseManager.shared.getUser(with: safeEmail, completion: { [weak self] result in
+        let safeEmail = network.safeEmail(email: email)
+        network.getUser(with: safeEmail, completion: { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let user):
-                let path = DatabaseManager.getProfilePicturePath(email: safeEmail)
+                let path = self.network.getProfilePicturePath(email: safeEmail)
                 StorageManager.shared.downloadURL(for: path) { [weak self] result in
                     switch result {
                     case .success(let urlString):
@@ -62,12 +69,13 @@ extension UserProfilePresenter: UserProfileViewOutput {
                             guard let avatar = UIImage(data: avatarData) else { return }
                             DispatchQueue.main.async {
                                 let model = UserCardViewModel(userAvatar: avatar,
-                                                      interestsList: user.interestsStrings.joined(separator: ", "),
-                                                      userBio: "",
-                                                      rejectButtonTitle: "",
-                                                      acceptButtonTitle: "",
-                                                      name: user.name,
-                                                      age: user.age)
+                                                              interestsList: user.interestsStrings
+                                                                                            .joined(separator: ", "),
+                                                              userBio: "",
+                                                              rejectButtonTitle: "",
+                                                              acceptButtonTitle: "",
+                                                              name: user.name,
+                                                              age: user.age)
                                 print(model)
                                 self?.viewController?.updateViewWithUserData(model: model)
                             }

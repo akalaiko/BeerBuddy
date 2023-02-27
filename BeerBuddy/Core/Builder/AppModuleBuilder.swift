@@ -72,7 +72,8 @@ enum AppModuleBuilder {
     }
     
     static func userProfileViewController() -> UIViewController & UserProfileViewInput {
-        let presenter = UserProfilePresenter()
+        let network = FirebaseNetwork()
+        let presenter = UserProfilePresenter(network: network)
         let viewController = UserProfileViewController(presenter: presenter)
         presenter.viewController = viewController
         return viewController

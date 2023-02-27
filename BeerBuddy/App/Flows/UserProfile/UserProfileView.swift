@@ -8,26 +8,26 @@
 import Foundation
 import UIKit
 
-class DiscoverView: UIView {
+class UserProfileView: UIView {
     
     // MARK: - Private properties
     
     /// Initilazing view's components.
     private lazy var headerView: HeaderView = {
-            let view = HeaderView(title: "DISCOVER")
+            let view = HeaderView(title: "PROFILE")
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()
     
     private(set) lazy var cardView: UserCardView = {
         let view = UserCardView()
-        view.configure(userAvatar: UIImage(named: "avatar") ?? UIImage(),
-                       interestsList: "Football, IT, Crypto, Politics",
-                       userBio: "CEO of Apple. Love beer. Cheers!",
-                       rejectButtonTitle: "SORRY",
-                       acceptButtonTitle: "CHEERS",
-                       name: "USERNAME",
-                       age: 30)
+        view.configure(userAvatar: UIImage(),
+                       interestsList: "...",
+                       userBio: "...",
+                       rejectButtonTitle: "LOG OUT",
+                       acceptButtonTitle: "EDIT",
+                       name: "...",
+                       age: 0)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -35,9 +35,19 @@ class DiscoverView: UIView {
     // MARK: - Views
     
     /// Setting up visual components.
-    public func configureUI() {
+    public func configureUI(model: UserCardViewModel?) {
         setupBackground()
         setupHeader()
+        if let model {
+            cardView.configure(userAvatar: model.userAvatar,
+                               interestsList: model.interestsList,
+                               userBio: "CEO of Apple. Love beer. Cheers!",
+                               rejectButtonTitle: "LOG OUT",
+                               acceptButtonTitle: "EDIT",
+                               name: model.name,
+                               age: model.age
+            )
+        }
         addCardView()
     }
     
@@ -49,12 +59,12 @@ class DiscoverView: UIView {
     
     private func setupHeader() {
         self.addSubview(headerView)
-        
-        headerView.setRightButton(
-            imageName: AppData.imageName.slider,
-            target: self,
-            action: #selector(filterAction))
-        
+//        
+//        headerView.setRightButton(
+//            imageName: AppData.imageName.slider,
+//            target: self,
+//            action: #selector(filterAction))
+//        
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             headerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),

@@ -26,7 +26,7 @@ class MatchesViewController: UIViewController {
 
     /// Create controller screen "Matches"
     /// - Parameter presenter: Controller presenter.
-    init(presenter: MatchesViewOutput) {
+    required init(presenter: MatchesViewOutput) {
         super.init(nibName: nil, bundle: nil)
         self.presenter = presenter
     }
@@ -52,6 +52,9 @@ class MatchesViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
     }
+
+    // MARK: - Actions
+
 }
 
 // MARK: - MatchesViewInput
@@ -59,6 +62,17 @@ class MatchesViewController: UIViewController {
 extension MatchesViewController: MatchesViewInput {
     func reloadTable() {
         matchesView.reloadTable()
+    }
+}
+// MARK: - FilterViewDelegate
+
+extension MatchesViewController: FilterViewDelegate {
+    var userPreference: PreferenceRequest? {
+        presenter?.preferenceData
+    }
+
+    func sendFiltrationData(_ data: PreferenceRequest) {
+        presenter?.viewRequestFiltering(data)
     }
 }
 

@@ -51,6 +51,7 @@ extension AppStyles {
             static var footer: CGFloat { header }
             static var textfield: CGFloat { 56 }
             static var tableCell: CGFloat { 80 }
+            static var minimalSize: CGFloat { UIScreen.main.bounds.height / 24 }
         }
     }
 }
@@ -62,6 +63,8 @@ extension AppStyles {
     enum font {
         static var logo: UIFont = .systemFont(ofSize: 44, weight: .bold)
         static var button: UIFont = .systemFont(ofSize: 20, weight: .medium)
+        static var big: UIFont = .systemFont(ofSize: 32, weight: .semibold)
+        static var middle: UIFont = .systemFont(ofSize: 24, weight: .semibold)
         static var title: UIFont = .systemFont(ofSize: 32, weight: .semibold)
         static var username: UIFont = .systemFont(ofSize: 24, weight: .semibold)
         static var smallTextCell: UIFont = .systemFont(ofSize: 16, weight: .light)
@@ -69,5 +72,15 @@ extension AppStyles {
             .systemFont(ofSize: 10, weight:
             .light)
         static var bigTextCard: UIFont = .systemFont(ofSize: 15, weight: .medium)
+
+        enum pointSize {
+            static var small: Double = 14
+        }
+    }
+}
+
+extension AppStyles {
+    enum cornerRadius {
+        static let textView: CGFloat = 10
     }
 }

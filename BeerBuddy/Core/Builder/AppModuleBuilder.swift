@@ -45,6 +45,15 @@ enum AppModuleBuilder {
 
         return viewController
     }
+    
+    static func profilePropertiesViewController() -> UIViewController & ProfilePropertiesViewInput {
+        let locationManager = LocationManager()
+        let network = FirebaseNetwork()
+        let presenter = ProfilePropertiesPresenter(locationManager: locationManager, network: network)
+        let viewController = ProfilePropertiesViewController(presenter: presenter)
+        presenter.viewController = viewController
+        return viewController
+    }
 
     static func chatsController() -> UIViewController & ChatsViewInput {
 //        let dateFormatter = DateFormatterHelper()

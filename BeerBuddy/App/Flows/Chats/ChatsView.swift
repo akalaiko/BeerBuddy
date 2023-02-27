@@ -76,6 +76,10 @@ class ChatsView: UIView {
         tableView.reloadData()
     }
 
+    func reloadRow(_ index: IndexPath) {
+        tableView.reloadRows(at: [index], with: .automatic)
+    }
+
     // MARK: - Private Methods
 
     /// Settings the table.

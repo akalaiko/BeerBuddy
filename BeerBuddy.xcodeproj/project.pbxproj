@@ -65,6 +65,7 @@
 		F26C37C92976E0C400E14944 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C37C82976E0C400E14944 /* UserInfoView.swift */; };
 		F29355FA2990DB2A003DADCA /* ChatModelStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29355F92990DB2A003DADCA /* ChatModelStub.swift */; };
 		F29356002990EF7A003DADCA /* ChatsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29355FF2990EF7A003DADCA /* ChatsPresenterTests.swift */; };
+		F2C1E97B29AD09A9004ABB2A /* ChatsCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C1E97A29AD09A9004ABB2A /* ChatsCellModel.swift */; };
 		F2C2E477298E84F400051E53 /* DateFormatterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C2E476298E84F400051E53 /* DateFormatterHelper.swift */; };
 		F2C2E479298E859A00051E53 /* DateFormatterHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C2E478298E859A00051E53 /* DateFormatterHelperTests.swift */; };
 		F2C2E47C298E872E00051E53 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C2E47B298E872E00051E53 /* ChatsViewController.swift */; };
@@ -148,6 +149,7 @@
 		F29355F92990DB2A003DADCA /* ChatModelStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModelStub.swift; sourceTree = "<group>"; };
 		F29355FD2990ED81003DADCA /* NetworkMockForTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMockForTests.swift; sourceTree = "<group>"; };
 		F29355FF2990EF7A003DADCA /* ChatsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsPresenterTests.swift; sourceTree = "<group>"; };
+		F2C1E97A29AD09A9004ABB2A /* ChatsCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsCellModel.swift; sourceTree = "<group>"; };
 		F2C2E463298E7F5F00051E53 /* BeerBuddyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerBuddyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C2E476298E84F400051E53 /* DateFormatterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterHelper.swift; sourceTree = "<group>"; };
 		F2C2E478298E859A00051E53 /* DateFormatterHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterHelperTests.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				AF32475229A8CEC600A594BE /* Message.swift */,
 				AF32475429A8CEC600A594BE /* SearchResult.swift */,
 				AF32475129A8CEC600A594BE /* Sender.swift */,
+				F2C1E97A29AD09A9004ABB2A /* ChatsCellModel.swift */,
 			);
 			path = Chats;
 			sourceTree = "<group>";
@@ -798,6 +801,7 @@
 				F2F66FDC296D81A4000CF8A8 /* AppData.swift in Sources */,
 				AF32475629A8CEC700A594BE /* LatestMessage.swift in Sources */,
 				F24CC1C32982D18B003C8197 /* MainViewController.swift in Sources */,
+				F2C1E97B29AD09A9004ABB2A /* ChatsCellModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

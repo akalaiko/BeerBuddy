@@ -9,18 +9,13 @@ import UIKit
 
 protocol ChatsViewInput: AnyObject {
     var loginObserver: NSObjectProtocol? { get }
+    func reloadRow(_ index: IndexPath)
 }
 
 protocol ChatsViewOutput: AnyObject {
-    typealias CellData = (email: String, username: String, lastMessage: String, date: String, isPinned: Bool)
-    /// Quantity of cell to build the table.
-    var dataCount: Int { get }
+    var data: [ChatsCellModel] { get }
     /// Requesting data from the network.
     func startListeningForConversations()
-    /// Getting cell data by index.
-    /// - Parameter indexPath: Index path.
-    /// - Returns: Data for cell configuration.
-    func viewRequestCellData(_ indexPath: IndexPath) -> CellData
     /// Pins the cell from the table.
     /// - Parameter indexPath: Index path.
     /// - Returns: New cell index in the table.
@@ -35,14 +30,11 @@ protocol ChatsViewOutput: AnyObject {
     /// Open the chat screen.
     /// - Parameter indexPath: Index path.
     func viewOpenScreenChat(_ indexPath: IndexPath)
+    func viewRequestImage(_ indexPath: IndexPath)
 }
 
 class ChatsPresenter: ChatsViewOutput {
     // MARK: - Public Properties
-
-    var dataCount: Int {
-        data.count
-    }
 
     weak var viewInput: (UIViewController & ChatsViewInput)?
 
@@ -53,18 +45,18 @@ class ChatsPresenter: ChatsViewOutput {
             updateFixationsInUserDefaults()
         }
     }
-    private lazy var data: [Conversation] = []
+    private(set) lazy var data: [ChatsCellModel] = []
 
-//    private let dateFormatter: DateFormatterProtocol
-//    private let network: NetworkMockProtocol
-//    private lazy var userDefaults = UserDefaults.standard
+    //    private let dateFormatter: DateFormatterProtocol
+    //    private let network: NetworkMockProtocol
+    //    private lazy var userDefaults = UserDefaults.standard
 
     // MARK: - Initialization
 
-//    init(dateFormatter: DateFormatterProtocol, network: NetworkMockProtocol) {
-//        self.dateFormatter = dateFormatter
-//        self.network = network
-//    }
+    //    init(dateFormatter: DateFormatterProtocol, network: NetworkMockProtocol) {
+    //        self.dateFormatter = dateFormatter
+    //        self.network = network
+    //    }
 
     private let network: NetworkProtocol
 
@@ -74,13 +66,13 @@ class ChatsPresenter: ChatsViewOutput {
 
     // MARK: - Public Methods
 
-//    func viewRequestFetch() {
-//        
-//        startListeningForConversations()
-//        let response = network.fetchChats()
-//        let distributData = distributDataFromUserdefaults(response)
-//        self.data = sortData(distributData)
-//    }
+    //    func viewRequestFetch() {
+    //
+    //        startListeningForConversations()
+    //        let response = network.fetchChats()
+    //        let distributData = distributDataFromUserdefaults(response)
+    //        self.data = sortData(distributData)
+    //    }
     
     func startListeningForConversations() {
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else { return }
@@ -95,8 +87,13 @@ class ChatsPresenter: ChatsViewOutput {
             switch result {
             case .success(let fetchedConversations):
                 guard !fetchedConversations.isEmpty else { return }
-//                guard let distributData = self?.distributDataFromUserdefaults(fetchedConversations) else { return }
-                self?.data = fetchedConversations
+                //                guard let distributData = self?.distributDataFromUserdefaults(fetchedConversations) else { return }
+                self?.data = fetchedConversations.map({ ChatsCellModel(id: $0.id,
+                                                                           email: $0.otherUserEmail,
+                                                                           username: $0.name,
+                                                                           lastMessage: $0.latestMessage.text,
+                                                                           date: $0.latestMessage.date,
+                                                                           isPinned: $0.isPinned)})
                 
                 DispatchQueue.main.async {
                     self?.viewInput?.view.reloadInputViews()
@@ -105,16 +102,6 @@ class ChatsPresenter: ChatsViewOutput {
                 print("listen", error)
             }
         })
-    }
-
-    func viewRequestCellData(_ indexPath: IndexPath) -> CellData {
-        
-        let item = data[indexPath.row]
-        return (email: item.otherUserEmail,
-                username: item.name,
-                lastMessage: item.latestMessage.text,
-                date: item.latestMessage.date,
-                isPinned: item.isPinned)
     }
 
     func viewDeleteCell(_ indexPath: IndexPath) {
@@ -137,9 +124,9 @@ class ChatsPresenter: ChatsViewOutput {
                 pinnedItems.remove(at: pinsIndex)
             }
             guard  let index = self.data.firstIndex(where: {
-                $0.latestMessage.date < item.latestMessage.date && !$0.isPinned }) else {
+                $0.date < item.date && !$0.isPinned }) else {
                 self.data.append(item)
-                return .init(row: dataCount - 1, section: 0)
+                return .init(row: data.count - 1, section: 0)
             }
             newIndex = IndexPath(row: index, section: 0)
         }
@@ -197,11 +184,29 @@ class ChatsPresenter: ChatsViewOutput {
     
     func viewOpenScreenChat(_ indexPath: IndexPath) {
         let conversation = data[indexPath.row]
-        let vc = ChatViewController(with: conversation.otherUserEmail, id: conversation.id, network: network)
+        let vc = ChatViewController(with: conversation.email, id: conversation.id, network: network)
         let nav = UINavigationController(rootViewController: vc)
         vc.isNewConversation = false
-        vc.title = conversation.name
+        vc.title = conversation.username
         nav.isNavigationBarHidden = false
         viewInput?.present(nav, animated: true)
+    }
+
+    func viewRequestImage(_ indexPath: IndexPath) {
+        DispatchQueue.global().async {
+            let path = self.network.getProfilePicturePath(email: self.data[indexPath.row].email)
+            StorageManager.shared.downloadURL(for: path) { [weak self] result in
+                switch result {
+                case .success(let urlString):
+                    guard let url = URL(string: urlString) else { return }
+                    StorageManager.shared.downloadImage(from: url) { [weak self] avatarData in
+                        self?.data[indexPath.row].imageData = avatarData
+                        self?.viewInput?.reloadRow(indexPath)
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
     }
 }

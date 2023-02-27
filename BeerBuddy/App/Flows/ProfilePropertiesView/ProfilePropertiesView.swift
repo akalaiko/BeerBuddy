@@ -676,9 +676,10 @@ final class ProfilePropertiesView: UIView {
             }
         })
     }
-    
-    // MARK: - Methods
-    
+}
+    // MARK: - Public Methods
+
+extension ProfilePropertiesView {
     func configureUI() {
         addScrollView()
         addAvatarImage()
@@ -715,6 +716,10 @@ final class ProfilePropertiesView: UIView {
         setSmokingSegment(userModel.smoking)
         setAlcoholTextView(userModel.alcohols)
         setInterestTextView(userModel.interests)
+    }
+    
+    func setAvatarImage(imageData: Data) {
+            self.avatarImageView.image = UIImage(data: imageData)
     }
     
     func addLocationButtonTarget(_ target: Any, action: Selector) {
@@ -786,6 +791,18 @@ final class ProfilePropertiesView: UIView {
             alcoholButton.menu = updateActionState(actionTitle: alcohol.rawValue.capitalized, menu: menu)
             alcoholTextView.text.append(alcohol.rawValue.capitalized + " ")
         }
+    }
+    
+    func collectSettingsUser() {
+        viewController?.changePhoto(image: avatarImageView.image)
+        viewController?.changeName(name: nameLabel.text)
+        viewController?.changeBirthdaDate(date: birthdayDatePicker.date)
+        viewController?.changeLocation(location: locationButton.titleLabel?.text)
+        viewController?.changeGender(gender: genderSegmentedControl.selectedSegmentIndex)
+        viewController?.changeSmoking(smoking: smokingSegmentedControl.selectedSegmentIndex)
+        viewController?.changeAlcohol(alcohol: alcoholTextView.text)
+        viewController?.changeInterests(interests: interestTextView.text)
+        viewController?.changeDescribe(describe: describeTextView.text)
     }
 }
 

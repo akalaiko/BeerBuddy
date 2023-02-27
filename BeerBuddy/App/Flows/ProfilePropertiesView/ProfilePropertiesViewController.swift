@@ -42,9 +42,8 @@ class ProfilePropertiesViewController: UIViewController {
         super.viewDidLoad()
         profilePropertiesView.viewController = self
         profilePropertiesView.configureUI()
-        profilePropertiesView.addLocationButtonTarget(self, action: #selector(tappedLocationButton))
-        profilePropertiesView.addAvatarButtonTarget(self, action: #selector(didTapAvatarButton))
-        setUserProperties()
+        addTargets()
+        presenter?.getUserModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,12 +56,10 @@ class ProfilePropertiesViewController: UIViewController {
         profilePropertiesView.unsubscribeObserver()
         presenter?.stopLocationUpdate()
     }
-    
-    private func setUserProperties() {
-        guard let userModel = presenter?.getUserModel() else { return }
-        profilePropertiesView.setPropterties(userModel: userModel)
-        profilePropertiesView.addAlcoholMenuItems(alcohol: userModel.alcohols)
-        profilePropertiesView.addInterestsMenuItems(interests: userModel.interests)
+    private func addTargets() {
+        profilePropertiesView.addLocationButtonTarget(self, action: #selector(tappedLocationButton))
+        profilePropertiesView.addAvatarButtonTarget(self, action: #selector(didTapAvatarButton))
+        profilePropertiesView.addSaveButtonTarget(self, action: #selector(tappedSaveButton))
     }
 }
 
@@ -99,6 +96,54 @@ extension ProfilePropertiesViewController: ProfilePropertiesViewInput {
     func removeAlcohol(_ alcohol: String) {
         presenter?.removeAlcohol(alcohol)
     }
+    
+    func setUserProperties(user: User) {
+        profilePropertiesView.setPropterties(userModel: user)
+        profilePropertiesView.addAlcoholMenuItems(alcohol: user.alcohols)
+        profilePropertiesView.addInterestsMenuItems(interests: user.interests)
+    }
+    
+    func setAvatarImage(avatarData: Data) {
+        DispatchQueue.main.async {
+            self.profilePropertiesView.setAvatarImage(imageData: avatarData)
+        }
+    }
+    
+    func changePhoto(image: UIImage?) {
+        presenter?.changePhoto(image: image)
+    }
+    
+    func changeName(name: String?) {
+        presenter?.changeName(name: name)
+    }
+    
+    func changeLocation(location: String?) {
+        presenter?.changeLocation(location: location)
+    }
+    
+    func changeBirthdaDate(date: Date?) {
+        presenter?.changeBirthdaDate(date: date)
+    }
+    
+    func changeGender(gender: Int?) {
+        presenter?.changeGender(gender: gender)
+    }
+    
+    func changeSmoking(smoking: Int?) {
+        presenter?.changeSmoking(smoking: smoking)
+    }
+    
+    func changeAlcohol(alcohol: String?) {
+        presenter?.changeAlcohol(alcohol: alcohol)
+    }
+    
+    func changeInterests(interests: String?) {
+        presenter?.changeInterests(interests: interests)
+    }
+    
+    func changeDescribe(describe: String?) {
+        presenter?.changeDescribe(describe: describe)
+    }
 }
 
 // MARK: - Objc methods
@@ -113,7 +158,7 @@ extension ProfilePropertiesViewController {
     }
     
     @objc func tappedSaveButton(sender: UIButton) {
-        
+        profilePropertiesView.collectSettingsUser()
     }
 }
 

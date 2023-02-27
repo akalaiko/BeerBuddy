@@ -44,13 +44,8 @@ enum AppModuleBuilder {
     }
     
     static func profilePropertiesViewController() -> UIViewController & ProfilePropertiesViewInput {
-        
-        // TODO: - Delete UserModel after update
-        
-        let userModel = User(mockName: "Test", emailAddress: "test@test.com")
-        
         let locationManager = LocationManager()
-        let presenter = ProfilePropertiesPresenter(locationManager: locationManager, userModel: userModel)
+        let presenter = ProfilePropertiesPresenter(locationManager: locationManager)
         let viewController = ProfilePropertiesViewController(presenter: presenter)
         presenter.viewController = viewController
         return viewController

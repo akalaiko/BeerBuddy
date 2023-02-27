@@ -76,43 +76,51 @@ extension ProfilePropertiesPresenter: ProfilePropertiesViewOutput {
         }
         viewController?.updateInterests(interests: user?.interests ?? [Interests.pop])
     }
-
+    
     func getUserModel() -> User {
-        DatabaseManager.shared.getUser(with: DatabaseManager.sa, completion: <#T##(Result<User, Error>) -> Void#>)
-        return user ?? User(name: "", emailAddress: "")
-    }
-    
-    func getCityName() {
-        locationManager?.lookUpCurrentLocation { [weak self] place in
-            guard let cityName = place?.locality else {
-                self?.viewController?.showAlertController()
-                return
-            }
-            self?.viewController?.setCityName(cityName: cityName)
-        }
-    }
-    
-    func stopLocationUpdate() {
-        locationManager?.stopUpdateLocation()
-    }
-    
-    func addAlcoholPreference(_ alcohol: String) {
-        for alcoholInEnum in Alcohol.allCases {
-            if alcoholInEnum.rawValue.lowercased() == alcohol.lowercased() {
-                user?.alcohols.append(alcoholInEnum)
+        let email = UserDefaults.standard.value(forKey: "email") as? String
+        let safeEmail = DatabaseManager.safeEmail(email: email)
+        DatabaseManager.shared.getUser(with: safeEmail) { [weak self] result in
+            switch result {
+            case .success(let user):
+                self?.user = user
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
-        guard let alcohols = user?.alcohols else { return }
-        viewController?.updateAlcohol(alcohol: alcohols)
+        return user ?? User(mockName: "", emailAddress: "")
     }
-    
-    func removeAlcohol(_ alcohol: String) {
-        guard let alcohols = user?.alcohols else { return }
-        for (index, element) in alcohols.enumerated() {
-            if element.rawValue.lowercased() == alcohol.lowercased() {
-                user?.alcohols.remove(at: index)
+        func getCityName() {
+            locationManager?.lookUpCurrentLocation { [weak self] place in
+                guard let cityName = place?.locality else {
+                    self?.viewController?.showAlertController()
+                    return
+                }
+                self?.viewController?.setCityName(cityName: cityName)
             }
         }
-        viewController?.updateAlcohol(alcohol: user?.alcohols ?? [Alcohol.noDrinking])
+        
+        func stopLocationUpdate() {
+            locationManager?.stopUpdateLocation()
+        }
+        
+        func addAlcoholPreference(_ alcohol: String) {
+            for alcoholInEnum in Alcohol.allCases {
+                if alcoholInEnum.rawValue.lowercased() == alcohol.lowercased() {
+                    user?.alcohols.append(alcoholInEnum)
+                }
+            }
+            guard let alcohols = user?.alcohols else { return }
+            viewController?.updateAlcohol(alcohol: alcohols)
+        }
+    
+        func removeAlcohol(_ alcohol: String) {
+            guard let alcohols = user?.alcohols else { return }
+            for (index, element) in alcohols.enumerated() {
+                if element.rawValue.lowercased() == alcohol.lowercased() {
+                    user?.alcohols.remove(at: index)
+                }
+            }
+            viewController?.updateAlcohol(alcohol: user?.alcohols ?? [Alcohol.noDrinking])
+        }
     }
-}

@@ -727,7 +727,7 @@ final class ProfilePropertiesView: UIView {
     }
     
     func addSaveButtonTarget(_ target: Any, action: Selector) {
-        saveButton.addTarget(target, action: action, for: .touchUpInsideДщ)
+        saveButton.addTarget(target, action: action, for: .touchUpInside)
     }
     
     func subscribeObserver() {

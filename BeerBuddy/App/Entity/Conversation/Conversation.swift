@@ -13,6 +13,7 @@ struct Conversation {
     let otherUserEmail: String
     let latestMessage: LatestMessage
     var isPinned: Bool
+    var imageData: Data?
 }
 
 extension Conversation: Equatable {

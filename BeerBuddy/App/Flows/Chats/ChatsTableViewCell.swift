@@ -157,29 +157,18 @@ class ChatsTableViewCell: UITableViewCell {
     ///   - lastMessage: Last message.
     ///   - date: Date of last post.
     ///   - pinned: If the chat is pinned, the pin image appears and the chat background color changes.
-    func configure(email: String, userName: String, lastMessage: String, date: String, pinned: Bool) {
-        backgroundColor = pinned ? AppStyles.color.background.pinnedChat : AppStyles.color.background.main
-        hidePinImage(!pinned)
-        #if DEBUG
-        setUITests(pinned)
-        #endif
-        let path = DatabaseManager.getProfilePicturePath(email: email)
-        StorageManager.shared.downloadURL(for: path) { [weak self] result in
-            switch result {
-            case .success(let urlString):
-                guard let url = URL(string: urlString) else { return }
-                StorageManager.shared.downloadImage(from: url) { avatarData in
-                    DispatchQueue.main.async {
-                        self?.avatarImageView.image = UIImage(data: avatarData)
-                    }
-                }
-            case .failure(let error):
-                print(error)
-            }
+    func configure(_ model: ChatsCellModel) {
+        backgroundColor = model.isPinned ? AppStyles.color.background.pinnedChat : AppStyles.color.background.main
+        hidePinImage(!model.isPinned)
+        if let data = model.imageData {
+            self.avatarImageView.image = UIImage(data: data)
         }
-        usernameLabel.text = userName
-        lastMessageLabel.text = lastMessage
+        usernameLabel.text = model.username
+        lastMessageLabel.text = model.lastMessage
         dateLabel.text = ""
+        #if DEBUG
+        setUITests(model.isPinned)
+        #endif
     }
 
     // MARK: - Private Methods

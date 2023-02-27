@@ -55,7 +55,7 @@ enum AppModuleBuilder {
     static func mainController() -> UIViewController {
         let mainViewController = MainViewController()
         mainViewController.modalPresentationStyle = .fullScreen
-        return MainViewController()
+        return mainViewController
     }
 
     static func testController() -> UIViewController {

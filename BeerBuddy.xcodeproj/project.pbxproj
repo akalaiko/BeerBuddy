@@ -34,6 +34,7 @@
 		AF7AAF77296D54C7001DF0CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7AAF76296D54C7001DF0CD /* AppDelegate.swift */; };
 		AF7AAF80296D54C9001DF0CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF7AAF7F296D54C9001DF0CD /* Assets.xcassets */; };
 		AF7AAF83296D54C9001DF0CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF7AAF81296D54C9001DF0CD /* LaunchScreen.storyboard */; };
+		EF3CD4A329A6844B00E2AE2E /* UserCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3CD4A229A6844B00E2AE2E /* UserCardView.swift */; };
 		AFD26B8029AB7A3700555B5F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD26B7D29AB7A3700555B5F /* ChatViewController.swift */; };
 		AFD26B8129AB7A3700555B5F /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD26B7E29AB7A3700555B5F /* LocationPickerViewController.swift */; };
 		AFD26B8229AB7A3700555B5F /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD26B7F29AB7A3700555B5F /* PhotoViewerViewController.swift */; };
@@ -48,6 +49,9 @@
 		EF5D25D129705BAE00B6F3B1 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5D25D029705BAE00B6F3B1 /* UIColor+Extensions.swift */; };
 		EF5D25D3297080E400B6F3B1 /* AppStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5D25D2297080E400B6F3B1 /* AppStyles.swift */; };
 		EF5D25D72971D7DC00B6F3B1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5D25D62971D7DC00B6F3B1 /* CustomTextField.swift */; };
+		EFDC911E29A15485005519B8 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC911D29A15485005519B8 /* DiscoverViewController.swift */; };
+		EFDC912029A154AB005519B8 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC911F29A154AB005519B8 /* DiscoverView.swift */; };
+		EFDC912229A154E2005519B8 /* DiscoverPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC912129A154E2005519B8 /* DiscoverPresenter.swift */; };
 		F2039603297C2D7C00F655C2 /* AppUITestsLaunchArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2039602297C2D7C00F655C2 /* AppUITestsLaunchArguments.swift */; };
 		F2039605297C2DAA00F655C2 /* MatchesViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2039604297C2DAA00F655C2 /* MatchesViewUITests.swift */; };
 		F2039606297C2DAE00F655C2 /* AppUITestsLaunchArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2039602297C2D7C00F655C2 /* AppUITestsLaunchArguments.swift */; };
@@ -116,6 +120,7 @@
 		AF7AAF7F296D54C9001DF0CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF7AAF82296D54C9001DF0CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF7AAF84296D54C9001DF0CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF3CD4A229A6844B00E2AE2E /* UserCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardView.swift; sourceTree = "<group>"; };
 		AFD26B7D29AB7A3700555B5F /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		AFD26B7E29AB7A3700555B5F /* LocationPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
 		AFD26B7F29AB7A3700555B5F /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +135,9 @@
 		EF5D25D029705BAE00B6F3B1 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		EF5D25D2297080E400B6F3B1 /* AppStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyles.swift; sourceTree = "<group>"; };
 		EF5D25D62971D7DC00B6F3B1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		EFDC911D29A15485005519B8 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
+		EFDC911F29A154AB005519B8 /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
+		EFDC912129A154E2005519B8 /* DiscoverPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverPresenter.swift; sourceTree = "<group>"; };
 		F20395F7297C2D2000F655C2 /* BeerBuddyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerBuddyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2039602297C2D7C00F655C2 /* AppUITestsLaunchArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUITestsLaunchArguments.swift; sourceTree = "<group>"; };
 		F2039604297C2DAA00F655C2 /* MatchesViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesViewUITests.swift; sourceTree = "<group>"; };
@@ -340,6 +348,17 @@
 			path = "Text Field";
 			sourceTree = "<group>";
 		};
+		EFDC911C29A15465005519B8 /* DiscoverView */ = {
+			isa = PBXGroup;
+			children = (
+				EFDC911D29A15485005519B8 /* DiscoverViewController.swift */,
+				EFDC911F29A154AB005519B8 /* DiscoverView.swift */,
+				EF3CD4A229A6844B00E2AE2E /* UserCardView.swift */,
+				EFDC912129A154E2005519B8 /* DiscoverPresenter.swift */,
+			);
+			path = DiscoverView;
+			sourceTree = "<group>";
+		};
 		F20395F8297C2D2000F655C2 /* BeerBuddyUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -454,6 +473,7 @@
 		F286E3D8296D6F1200B0D3EC /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				EFDC911C29A15465005519B8 /* DiscoverView */,
 				AFFD9860299CF48F00CB196B /* Onboarding */,
 				F2C2E47A298E872500051E53 /* Chats */,
 				EF51CE0E2975F85F00B865E8 /* RegistrationView */,
@@ -751,6 +771,9 @@
 				EF5D25D3297080E400B6F3B1 /* AppStyles.swift in Sources */,
 				AFD26B8029AB7A3700555B5F /* ChatViewController.swift in Sources */,
 				EF5D25D129705BAE00B6F3B1 /* UIColor+Extensions.swift in Sources */,
+				EF3CD4A329A6844B00E2AE2E /* UserCardView.swift in Sources */,
+				F21870092994ED9D007AF7B7 /* AppUITestBuilder.swift in Sources */,
+				EFDC911E29A15485005519B8 /* DiscoverViewController.swift in Sources */,
 				AF32476029A8EF0A00A594BE /* StorageManager.swift in Sources */,
 				F21870092994ED9D007AF7B7 /* AppUITestBuilder.swift in Sources */,
 				AF32475B29A8CEC700A594BE /* SearchResult.swift in Sources */,
@@ -779,6 +802,8 @@
 				AF32475C29A8CEC700A594BE /* Location.swift in Sources */,
 				F2C2E477298E84F400051E53 /* DateFormatterHelper.swift in Sources */,
 				F29355FA2990DB2A003DADCA /* ChatModelStub.swift in Sources */,
+				EFDC912229A154E2005519B8 /* DiscoverPresenter.swift in Sources */,
+				EF5D25CE296D922600B6F3B1 /* UserModel.swift in Sources */,
 				AFFD985F299CF48600CB196B /* OnboardingViewPresenter.swift in Sources */,
 				EF5D25CE296D922600B6F3B1 /* User.swift in Sources */,
 				AF7AAF77296D54C7001DF0CD /* AppDelegate.swift in Sources */,
@@ -786,6 +811,7 @@
 				F2F66FDC296D81A4000CF8A8 /* AppData.swift in Sources */,
 				AF32475629A8CEC700A594BE /* LatestMessage.swift in Sources */,
 				F24CC1C32982D18B003C8197 /* MainViewController.swift in Sources */,
+				EFDC912029A154AB005519B8 /* DiscoverView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

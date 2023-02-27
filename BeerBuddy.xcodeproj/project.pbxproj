@@ -296,21 +296,14 @@
 			path = Location;
 			sourceTree = "<group>";
 		};
-		AFA1CDC229ABB9E3009279A2 /* AlcoholViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AlcoholViewModel;
-			sourceTree = "<group>";
-		};
-		AFB2337A2997CF5400B3318E /* ProfilePropertiesVIew */ = {
+		AFB2337A2997CF5400B3318E /* ProfilePropertiesView */ = {
 			isa = PBXGroup;
 			children = (
 				AFB2337B2997CF6F00B3318E /* ProfilePropertiesView.swift */,
 				AFB2337D2997CF8F00B3318E /* ProfilePropertiesViewController.swift */,
 				AFB2337F2997D09400B3318E /* ProfilePropertiesPresenter.swift */,
 			);
-			path = ProfilePropertiesVIew;
+			path = ProfilePropertiesView;
 			sourceTree = "<group>";
 		};
 		AFD26B8329AB7A3D00555B5F /* Chat */ = {
@@ -504,7 +497,7 @@
 		F286E3D8296D6F1200B0D3EC /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				AFB2337A2997CF5400B3318E /* ProfilePropertiesVIew */,
+				AFB2337A2997CF5400B3318E /* ProfilePropertiesView */,
 				AFFD9860299CF48F00CB196B /* Onboarding */,
 				F2C2E47A298E872500051E53 /* Chats */,
 				EF51CE0E2975F85F00B865E8 /* RegistrationView */,
@@ -526,7 +519,6 @@
 		F286E3DA296D6F5100B0D3EC /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				AFA1CDC229ABB9E3009279A2 /* AlcoholViewModel */,
 				F218700B2994F1BB007AF7B7 /* UserModelStub */,
 				F29355F82990DB0A003DADCA /* ChatModelStub */,
 				AF32475D29A8CF1500A594BE /* Chats */,

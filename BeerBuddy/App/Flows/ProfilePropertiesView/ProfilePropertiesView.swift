@@ -13,6 +13,8 @@ final class ProfilePropertiesView: UIView {
     
     private var showTextField = true
     
+    weak var viewController: ProfilePropertiesViewInput?
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -58,7 +60,6 @@ final class ProfilePropertiesView: UIView {
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        //        label.text = "USERNAME"
         label.font = AppStyles.font.username
         label.textColor = AppStyles.color.black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -275,6 +276,8 @@ final class ProfilePropertiesView: UIView {
             self.settingCornerRadius()
         }
     }
+    
+    //MARK: - Private methods
     
     private func settingCornerRadius() {
         avatarImageView.layer.cornerRadius = avatarImageView.frame.height / 2
@@ -582,6 +585,98 @@ final class ProfilePropertiesView: UIView {
         ])
     }
     
+    private func setGenderSegment(_ sex: Sex) {
+        var chooseSegment = -1
+        
+        switch sex {
+        case .male:
+            chooseSegment = 0
+        case .female:
+            chooseSegment = 1
+        case .other:
+            chooseSegment = 2
+        }
+        genderSegmentedControl.selectedSegmentIndex = chooseSegment
+    }
+    
+    private func setSmokingSegment(_ smoking: Smoking) {
+        var chooseSegment = -1
+        
+        switch smoking {
+        case .smoking:
+            chooseSegment = 0
+        case .ok:
+            chooseSegment = 1
+        case .noSmoking:
+            chooseSegment = 2
+        }
+        smokingSegmentedControl.selectedSegmentIndex = chooseSegment
+    }
+    
+    private func setAlcoholTextView(_ alcohols: [Alcohol]) {
+        guard !alcohols.isEmpty else { return }
+        var alcoholArray = [String]()
+        alcoholTextView.text = ""
+        alcohols.forEach { alcohol in
+            alcoholArray.append(alcohol.rawValue.capitalized)
+        }
+        alcoholTextView.text.append(alcoholArray.joined(separator: ", "))
+    }
+    
+    private func setInterestTextView(_ interests: [Interests]) {
+        guard !interests.isEmpty else { return }
+        
+        interestTextView.text = ""
+        for (index, element) in interests.enumerated() {
+            if index == interests.endIndex - 1 {
+                interestTextView.text.append("\(element)".capitalized)
+            } else {
+                interestTextView.text.append("\(element), ".capitalized)
+            }
+        }
+    }
+    
+    private func updateActionState(actionTitle: String? = nil, menu: UIMenu) -> UIMenu {
+        if let actionTitle = actionTitle {
+            menu.children.forEach { action in
+                guard let action = action as? UIAction else {
+                    return
+                }
+                if action.title == actionTitle {
+                    action.state = .on
+                }
+            }
+        } else {
+            let action = menu.children.first as? UIAction
+            action?.state = .on
+        }
+        return menu
+    }
+    
+    private func addAlcoholMenuAction(title: String,
+                                      forTextView textView: UITextView) -> UIAction {
+        return UIAction(title: title.capitalized, handler: { [weak self] action in
+            print(title.capitalized)
+            if action.state == .on {
+                self?.viewController?.removeAlcohol(action.title.lowercased())
+            } else {
+                self?.viewController?.addAlcohol(action.title.lowercased())
+            }
+        })
+    }
+    
+    private func addInterestsMenuAction(title: String,
+                                        forTextView textView: UITextView) -> UIAction {
+        return UIAction(title: title.capitalized, handler: { [weak self] action in
+            print(title.capitalized)
+            if action.state == .on {
+                self?.viewController?.removeInterest(action.title.lowercased())
+            } else {
+                self?.viewController?.addInterest(action.title.lowercased())
+            }
+        })
+    }
+    
     // MARK: - Methods
     
     func configureUI() {
@@ -610,104 +705,16 @@ final class ProfilePropertiesView: UIView {
         addDescribeLabel()
         addDescribeTextView()
         addSaveButton()
-        addAlcoholMenuItems()
-        addInterestsMenuItems()
     }
     
     func setPropterties(userModel: User) {
         nameLabel.text = userModel.name
         birthdayDatePicker.date = Date(timeIntervalSince1970: userModel.birthDate)
+        setLocation(townName: userModel.location)
         setGenderSegment(userModel.sex)
         setSmokingSegment(userModel.smoking)
         setAlcoholTextView(userModel.alcohols)
         setInterestTextView(userModel.interests)
-    }
-    
-    private func setGenderSegment(_ sex: Sex) {
-        var chooseSegment = -1
-        
-        switch sex {
-        case .male:
-           chooseSegment = 0
-        case .female:
-            chooseSegment = 1
-        case .other:
-            chooseSegment = 2
-        }
-        genderSegmentedControl.selectedSegmentIndex = chooseSegment
-    }
-    
-    private func setSmokingSegment(_ smoking: Smoking) {
-        var chooseSegment = -1
-        
-        switch smoking {
-        case .smoking:
-           chooseSegment = 0
-        case .ok:
-            chooseSegment = 1
-        case .noSmoking:
-            chooseSegment = 2
-        }
-        smokingSegmentedControl.selectedSegmentIndex = chooseSegment
-    }
-    
-    private func setAlcoholTextView(_ alcohols: [Alcohol]) {
-        guard !alcohols.isEmpty else { return }
-        
-        alcoholTextView.text = ""
-        for (index, element) in alcohols.enumerated() {
-            if index == alcohols.endIndex - 1 {
-                alcoholTextView.text.append("\(element)".capitalized)
-            } else {
-                alcoholTextView.text.append("\(element), ".capitalized)
-            }
-        }
-    }
-    
-    private func setInterestTextView(_ interests: [Interests]) {
-        guard !interests.isEmpty else { return }
-        
-        interestTextView.text = ""
-        for (index, element) in interests.enumerated() {
-            if index == interests.endIndex - 1 {
-                interestTextView.text.append("\(element)".capitalized)
-            } else {
-                interestTextView.text.append("\(element), ".capitalized)
-            }
-        }
-    }
-    
-    private func addAlcoholMenuItems() {
-        var childrens = [UIAction]()
-        for alcohol in Alcohol.allCases {
-            childrens.append(addMenuAction(title: alcohol.rawValue, forTextView: alcoholTextView))
-        }
-        let menuItems = UIMenu(options: .displayInline, children: childrens)
-        alcoholButton.menu = menuItems
-    }
-    
-    private func addInterestsMenuItems() {
-        var childrens = [UIAction]()
-        for interest in Interests.allCases {
-            childrens.append(addMenuAction(title: interest.rawValue, forTextView: interestTextView))
-        }
-        let menuItems = UIMenu(options: .displayInline, children: childrens)
-        interestsButton.menu = menuItems
-    }
-    
-    private func addMenuAction(title: String, forTextView textView: UITextView) -> UIAction {
-//        var image = UIImage()
-        return UIAction(title: title.capitalized) { _ in
-            print(title.capitalized)
-            var text = ""
-            if !textView.text.isEmpty {
-                text = ", " + title.capitalized
-            } else {
-                text = title.capitalized
-            }
-            textView.text.append(text)
-//            image = UIImage(named: AppData.imageName.doneIcon) ?? UIImage()
-        }
     }
     
     func addLocationButtonTarget(_ target: Any, action: Selector) {
@@ -748,9 +755,37 @@ final class ProfilePropertiesView: UIView {
     func setAvatarImage(image: UIImage) {
         avatarImageView.image = image
     }
+    
+    func addInterestsMenuItems(interests: [Interests]) {
+        var childrens = [UIAction]()
+        for interest in Interests.allCases {
+            childrens.append(addInterestsMenuAction(title: interest.rawValue,
+                                           forTextView: interestTextView))
+        }
+        let menu = UIMenu(options: .displayInline, children: childrens)
+        interestTextView.text = ""
+        interests.forEach { interest in
+            interestsButton.menu = updateActionState(actionTitle: interest.rawValue.capitalized, menu: menu)
+            interestTextView.text.append(interest.rawValue.capitalized + " ")
+        }
+    }
+    
+    func addAlcoholMenuItems(alcohol: [Alcohol]) {
+        var childrens = [UIAction]()
+        for alcohol in Alcohol.allCases {
+            childrens.append(addAlcoholMenuAction(title: alcohol.rawValue,
+                                           forTextView: alcoholTextView))
+        }
+        let menu = UIMenu(options: .displayInline, children: childrens)
+        alcoholTextView.text = ""
+        alcohol.forEach { alcohol in
+            alcoholButton.menu = updateActionState(actionTitle: alcohol.rawValue.capitalized, menu: menu)
+            alcoholTextView.text.append(alcohol.rawValue.capitalized + " ")
+        }
+    }
 }
 
-// MARK: - Obj-c methods
+// MARK: - Objc methods
 
 extension ProfilePropertiesView {
     @objc func keyboardWasShown(notification: Notification) {
@@ -788,18 +823,14 @@ extension ProfilePropertiesView {
     @objc func didTapNameButton() {
         if showTextField == true {
             flipView(nameLabel, nameTextField)
-            nameLabel.isHidden = true
-            nameTextField.isHidden = false
-            showTextField = false
+            self.showTextField = false
             nameTextField.text = nameLabel.text
             nameButton.setImage(UIImage(named: AppData.imageName.doneIcon), for: .normal)
         } else {
-            nameTextField.isHidden = true
-            nameLabel.isHidden = false
             flipView(nameTextField, nameLabel)
+            self.showTextField = true
             nameLabel.text = nameTextField.text
             nameButton.setImage(UIImage(named: AppData.imageName.pencil), for: .normal)
-            showTextField = true
         }
     }
 }

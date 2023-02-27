@@ -40,6 +40,7 @@ class ProfilePropertiesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        profilePropertiesView.viewController = self
         profilePropertiesView.configureUI()
         profilePropertiesView.addLocationButtonTarget(self, action: #selector(tappedLocationButton))
         profilePropertiesView.addAvatarButtonTarget(self, action: #selector(didTapAvatarButton))
@@ -60,16 +61,43 @@ class ProfilePropertiesViewController: UIViewController {
     private func setUserProperties() {
         guard let userModel = presenter?.getUserModel() else { return }
         profilePropertiesView.setPropterties(userModel: userModel)
+        profilePropertiesView.addAlcoholMenuItems(alcohol: userModel.alcohols)
+        profilePropertiesView.addInterestsMenuItems(interests: userModel.interests)
     }
 }
 
 extension ProfilePropertiesViewController: ProfilePropertiesViewInput {
+    
+    func addInterest(_ interest: String) {
+        presenter?.addInterestPreference(interest)
+    }
+    
+    func removeInterest(_ interest: String) {
+        presenter?.removeInterest(interest)
+    }
+    
+    func updateInterests(interests: [Interests]) {
+        profilePropertiesView.addInterestsMenuItems(interests: interests)
+    }
+    
+    func updateAlcohol(alcohol: [Alcohol]) {
+        profilePropertiesView.addAlcoholMenuItems(alcohol: alcohol)
+    }
+    
     func setCityName(cityName: String) {
-        self.profilePropertiesView.setLocation(townName: cityName)
+        profilePropertiesView.setLocation(townName: cityName)
     }
     
     func showAlertController() {
         self.present(profilePropertiesView.presentAlertController(), animated: true)
+    }
+    
+    func addAlcohol(_ alcohol: String) {
+        presenter?.addAlcoholPreference(alcohol)
+    }
+    
+    func removeAlcohol(_ alcohol: String) {
+        presenter?.removeAlcohol(alcohol)
     }
 }
 

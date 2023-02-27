@@ -60,10 +60,9 @@ class MatchesViewController: UIViewController {
 // MARK: - MatchesViewInput
 
 extension MatchesViewController: MatchesViewInput {
-    func reloadTable() {
-        matchesView.reloadTable()
-    }
+
 }
+
 // MARK: - FilterViewDelegate
 
 extension MatchesViewController: FilterViewDelegate {
@@ -73,6 +72,9 @@ extension MatchesViewController: FilterViewDelegate {
 
     func sendFiltrationData(_ data: PreferenceRequest) {
         presenter?.viewRequestFiltering(data)
+    }
+    func reloadTable() {
+        matchesView.reloadTable()
     }
 }
 

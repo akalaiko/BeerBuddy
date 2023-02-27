@@ -35,10 +35,6 @@ class MatchesPresenter: MatchesViewOutput {
         }
     }
 
-    func viewRequestFiltering(_ preference: PreferenceRequest) {
-        preferenceData = preference
-    }
-
     // MARK: - Public Properties
     weak var viewInput: (UIViewController & MatchesViewInput)?
     
@@ -51,6 +47,10 @@ class MatchesPresenter: MatchesViewOutput {
 
     init(network: NetworkProtocol) {
         self.network = network
+    }
+
+    func viewRequestFiltering(_ preference: PreferenceRequest) {
+        preferenceData = preference
     }
 
     func viewRequestFetch() {

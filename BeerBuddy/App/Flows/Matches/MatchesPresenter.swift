@@ -35,10 +35,6 @@ class MatchesPresenter: MatchesViewOutput {
         }
     }
 
-    func viewRequestFiltering(_ preference: PreferenceRequest) {
-        preferenceData = preference
-    }
-
     // MARK: - Public Properties
     weak var viewInput: (UIViewController & MatchesViewInput)?
     

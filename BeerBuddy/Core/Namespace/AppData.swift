@@ -36,6 +36,5 @@ enum AppData {
         static var plusCircle: String { "plusCircle" }
         static var pencil: String { "pencil" }
         static var doneIcon: String { "endEditIcon" }
-        static var close: String { "close" }
     }
 }

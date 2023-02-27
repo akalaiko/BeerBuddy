@@ -77,17 +77,6 @@ extension MatchesViewController: FilterViewDelegate {
         matchesView.reloadTable()
     }
 }
-// MARK: - FilterViewDelegate
-
-extension MatchesViewController: FilterViewDelegate {
-    var userPreference: PreferenceRequest? {
-        presenter?.preferenceData
-    }
-
-    func sendFiltrationData(_ data: PreferenceRequest) {
-        presenter?.viewRequestFiltering(data)
-    }
-}
 
 // MARK: - UITableViewDataSource
 

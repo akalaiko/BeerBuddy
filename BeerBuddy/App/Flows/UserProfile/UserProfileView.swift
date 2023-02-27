@@ -15,6 +15,7 @@ class UserProfileView: UIView {
     /// Initilazing view's components.
     private lazy var headerView: HeaderView = {
             let view = HeaderView(title: "PROFILE")
+            view.font = AppStyles.font.big
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()

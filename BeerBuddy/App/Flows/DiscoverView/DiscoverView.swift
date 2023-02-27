@@ -15,6 +15,7 @@ class DiscoverView: UIView {
     /// Initilazing view's components.
     private lazy var headerView: HeaderView = {
             let view = HeaderView(title: "DISCOVER")
+            view.font = AppStyles.font.big
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()

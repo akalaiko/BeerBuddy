@@ -19,13 +19,26 @@ protocol MatchesViewOutput: AnyObject {
     /// Data of users with whom there were matches.
     var data: [User] { get }
     var matchesCellModels: [MatchesCellModel] { get }
+    /// User preferences.
+    var preferenceData: PreferenceRequest? { get }
+    /// The user has selected data filtering.
+    func viewRequestFiltering(_ preference: PreferenceRequest)
     /// Fetch information from the network.
     func viewRequestFetch()
     func openConversation(_ index: IndexPath)
 }
 
 class MatchesPresenter: MatchesViewOutput {
-    
+    private(set) var preferenceData: PreferenceRequest? = .init(sex: .male, smoke: false, interest: "Obj-c") {
+        willSet {
+            print(newValue)
+        }
+    }
+
+    func viewRequestFiltering(_ preference: PreferenceRequest) {
+        preferenceData = preference
+    }
+
     // MARK: - Public Properties
     weak var viewInput: (UIViewController & MatchesViewInput)?
     

@@ -22,7 +22,7 @@ class UserInfoView: UIView {
 
     private lazy var usernameLabel: UILabel = {
         let label = UILabel()
-        label.font = AppStyles.font.username
+        label.font = AppStyles.font.middle
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

@@ -15,20 +15,38 @@ class HeaderView: UIView {
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = AppStyles.font.title
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     private var rightButton: UIButton?
 
+    /// The position and dimensions of the button, if any.
+    var buttonFrame: CGRect? {
+        rightButton?.frame
+    }
+
+    // MARK: - Public Properties
+    
+    /// Sets font in tittle.
+    var font: UIFont {
+        get {
+            titleLabel.font
+        }
+
+        set {
+            titleLabel.font = newValue
+        }
+    }
+
     // MARK: - Initialization
 
     /// Header with title and optional ability to add a button.
     /// - Parameter text: Text title.
-    init(title text: String) {
+    init(title text: String, backgroundIsDark: Bool = false) {
         super.init(frame: .zero)
-        setupUI(title: text)
+        setupUI(title: text, backgroundIsDark: backgroundIsDark)
+        
         #if DEBUG
         setUITests()
         #endif
@@ -47,7 +65,7 @@ class HeaderView: UIView {
 
     /// Settings  visual components.
     /// - Parameter title: Title text.
-    private func setupUI(title text: String) {
+    private func setupUI(title text: String, backgroundIsDark: Bool ) {
         titleLabel.text = text
         backgroundColor = AppStyles.color.background.main
 

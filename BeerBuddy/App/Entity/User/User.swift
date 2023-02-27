@@ -8,17 +8,17 @@
 import UIKit
 
 struct User {
-    let name: String
-    let emailAddress: String
-    let sex: Sex
-    let birthDate: Double
-    let location: String
-    let smoking: Smoking
-    let interests: [Interests]
-    let alcohols: [Alcohol]
-    let matches: [String]
-    let possibleMatches: [String]
-    let rejectedUsers: [String]
+    var name: String
+    var emailAddress: String
+    var sex: Sex
+    var birthDate: Double
+    var location: String
+    var smoking: Smoking
+    var interests: [Interests]
+    var alcohols: [Alcohol]
+    var matches: [String]
+    var possibleMatches: [String]
+    var rejectedUsers: [String]
     
     var age: Int {
         let now = Date()
@@ -121,7 +121,7 @@ enum Sex: String {
     case other
 }
 
-enum Interests: String {
+enum Interests: String, CaseIterable {
     case football
     case hockey
     case tennis
@@ -158,7 +158,7 @@ enum Interests: String {
     case thriller
 }
 
-enum Alcohol: String {
+enum Alcohol: String, CaseIterable {
     case beer
     case wine
     case cider

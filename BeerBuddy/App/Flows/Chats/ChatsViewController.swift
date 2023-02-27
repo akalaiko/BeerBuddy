@@ -15,6 +15,8 @@ class ChatsViewController: UIViewController {
     }
 
     private var presenter: ChatsViewOutput?
+    
+    var loginObserver: NSObjectProtocol?
 
     // MARK: - Initialization
 
@@ -37,7 +39,14 @@ class ChatsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         chatsView.setupUI()
-        presenter?.viewRequestFetch()
+        presenter?.startListeningForConversations()
+        
+        loginObserver = NotificationCenter.default.addObserver(forName: Notification.Name("didLogInNotification"),
+                                                               object: nil,
+                                                               queue: .main,
+                                                               using: { [weak self] _ in
+            self?.presenter?.startListeningForConversations()
+        })
     }
 
     // MARK: - Private Methods
@@ -102,7 +111,8 @@ extension ChatsViewController: UITableViewDataSource {
         guard let presenter = presenter else { preconditionFailure("No presenter") }
 
         let data = presenter.viewRequestCellData(indexPath)
-        cell.configure(userName: data.username, lastMessage: data.lastMessage,
+        
+        cell.configure(email: data.email, userName: data.username, lastMessage: data.lastMessage,
                        date: data.date, pinned: data.isPinned)
         return cell
     }
@@ -130,6 +140,7 @@ extension ChatsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         presenter?.viewOpenScreenChat(indexPath)
     }
 }

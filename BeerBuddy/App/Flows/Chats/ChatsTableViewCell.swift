@@ -152,21 +152,34 @@ class ChatsTableViewCell: UITableViewCell {
 
     /// Cell configuration.
     /// - Parameters:
-    ///   - avatar: User avatar.
+    ///   - emal: User email for avatar download.
     ///   - userName: User's username.
     ///   - lastMessage: Last message.
     ///   - date: Date of last post.
     ///   - pinned: If the chat is pinned, the pin image appears and the chat background color changes.
-    func configure(avatar: UIImage? = nil, userName: String, lastMessage: String, date: String, pinned: Bool) {
+    func configure(email: String, userName: String, lastMessage: String, date: String, pinned: Bool) {
         backgroundColor = pinned ? AppStyles.color.background.pinnedChat : AppStyles.color.background.main
         hidePinImage(!pinned)
         #if DEBUG
         setUITests(pinned)
         #endif
-        avatarImageView.image = UIImage(named: AppData.imageName.testAvatar)
+        let path = DatabaseManager.getProfilePicturePath(email: email)
+        StorageManager.shared.downloadURL(for: path) { [weak self] result in
+            switch result {
+            case .success(let urlString):
+                guard let url = URL(string: urlString) else { return }
+                StorageManager.shared.downloadImage(from: url) { avatarData in
+                    DispatchQueue.main.async {
+                        self?.avatarImageView.image = UIImage(data: avatarData)
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
         usernameLabel.text = userName
         lastMessageLabel.text = lastMessage
-        dateLabel.text = date
+        dateLabel.text = ""
     }
 
     // MARK: - Private Methods

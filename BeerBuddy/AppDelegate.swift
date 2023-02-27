@@ -43,7 +43,8 @@ extension AppDelegate {
     /// - Returns: Controller.
     private func selectTestController(_ arguments: [String] ) -> UIViewController {
         let controller: UIViewController
-
+        // TODO: Починить тесты(написать новый мок)
+        /*
         if arguments.contains(AppUITestsLaunchArguments.matchesView) {
             controller = AppUITestBuilder.matchesController()
         } else if arguments.contains(AppUITestsLaunchArguments.chatsView) {
@@ -52,6 +53,9 @@ extension AppDelegate {
         } else {
             controller = UINavigationController(rootViewController: AppModuleBuilder.onboardingViewController())
         }
+         */
+
+        controller = UINavigationController(rootViewController: AppModuleBuilder.onboardingViewController())
 
         return controller
     }

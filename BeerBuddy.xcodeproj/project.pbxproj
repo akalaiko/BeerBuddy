@@ -37,7 +37,6 @@
 		AFD26B8029AB7A3700555B5F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD26B7D29AB7A3700555B5F /* ChatViewController.swift */; };
 		AFD26B8129AB7A3700555B5F /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD26B7E29AB7A3700555B5F /* LocationPickerViewController.swift */; };
 		AFD26B8229AB7A3700555B5F /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD26B7F29AB7A3700555B5F /* PhotoViewerViewController.swift */; };
-		AFFD9859299CD9D600CB196B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFD9858299CD9D600CB196B /* DatabaseManager.swift */; };
 		AFFD985B299CF46000CB196B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFD985A299CF46000CB196B /* OnboardingView.swift */; };
 		AFFD985D299CF47900CB196B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFD985C299CF47900CB196B /* OnboardingViewController.swift */; };
 		AFFD985F299CF48600CB196B /* OnboardingViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFD985E299CF48600CB196B /* OnboardingViewPresenter.swift */; };
@@ -61,6 +60,8 @@
 		F218701A29951824007AF7B7 /* ChatsViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218701929951824007AF7B7 /* ChatsViewUITests.swift */; };
 		F23AF69529742A8000584F85 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23AF69429742A8000584F85 /* HeaderView.swift */; };
 		F24CC1C32982D18B003C8197 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24CC1C22982D18B003C8197 /* MainViewController.swift */; };
+		F24F329229ACE2D400732868 /* FirebaseNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24F329129ACE2D400732868 /* FirebaseNetwork.swift */; };
+		F24F329529ACE69C00732868 /* NetworkProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24F329429ACE69C00732868 /* NetworkProtocol.swift */; };
 		F26C37C92976E0C400E14944 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26C37C82976E0C400E14944 /* UserInfoView.swift */; };
 		F29355FA2990DB2A003DADCA /* ChatModelStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29355F92990DB2A003DADCA /* ChatModelStub.swift */; };
 		F29356002990EF7A003DADCA /* ChatsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29355FF2990EF7A003DADCA /* ChatsPresenterTests.swift */; };
@@ -119,7 +120,6 @@
 		AFD26B7D29AB7A3700555B5F /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		AFD26B7E29AB7A3700555B5F /* LocationPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
 		AFD26B7F29AB7A3700555B5F /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
-		AFFD9858299CD9D600CB196B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		AFFD985A299CF46000CB196B /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		AFFD985C299CF47900CB196B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		AFFD985E299CF48600CB196B /* OnboardingViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewPresenter.swift; sourceTree = "<group>"; };
@@ -142,6 +142,8 @@
 		F218701929951824007AF7B7 /* ChatsViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewUITests.swift; sourceTree = "<group>"; };
 		F23AF69429742A8000584F85 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		F24CC1C22982D18B003C8197 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		F24F329129ACE2D400732868 /* FirebaseNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseNetwork.swift; sourceTree = "<group>"; };
+		F24F329429ACE69C00732868 /* NetworkProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProtocol.swift; sourceTree = "<group>"; };
 		F26C37C82976E0C400E14944 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		F29355F92990DB2A003DADCA /* ChatModelStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModelStub.swift; sourceTree = "<group>"; };
 		F29355FD2990ED81003DADCA /* NetworkMockForTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMockForTests.swift; sourceTree = "<group>"; };
@@ -401,6 +403,14 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
+		F24F329329ACE68900732868 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				F24F329429ACE69C00732868 /* NetworkProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		F26C37C72976E09D00E14944 /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,7 +437,6 @@
 				AF00D81429742CC7005B6C5D /* Builder */,
 				EF5D25CF29705B8D00B6F3B1 /* Extensions */,
 				F2F66FDA296D8190000CF8A8 /* Namespace */,
-				AFFD9858299CD9D600CB196B /* DatabaseManager.swift */,
 				AF32475F29A8EF0A00A594BE /* StorageManager.swift */,
 			);
 			path = Core;
@@ -487,6 +496,8 @@
 		F29355F52990D9E5003DADCA /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				F24F329329ACE68900732868 /* Protocol */,
+				F24F329129ACE2D400732868 /* FirebaseNetwork.swift */,
 				F29355FD2990ED81003DADCA /* NetworkMockForTests.swift */,
 				F21870102994FD8C007AF7B7 /* NetworkMockProtocol.swift */,
 			);
@@ -742,7 +753,6 @@
 				F2C2E480298E87A500051E53 /* ChatsTableViewCell.swift in Sources */,
 				AFD26B8229AB7A3700555B5F /* PhotoViewerViewController.swift in Sources */,
 				F2E59C452975AC7F008773E8 /* MatchesTableViewCell.swift in Sources */,
-				AFFD9859299CD9D600CB196B /* DatabaseManager.swift in Sources */,
 				F23AF69529742A8000584F85 /* HeaderView.swift in Sources */,
 				F218700E2994F588007AF7B7 /* NetworkMockForTests.swift in Sources */,
 				AFFD985D299CF47900CB196B /* OnboardingViewController.swift in Sources */,
@@ -754,10 +764,12 @@
 				AF32476029A8EF0A00A594BE /* StorageManager.swift in Sources */,
 				F21870092994ED9D007AF7B7 /* AppUITestBuilder.swift in Sources */,
 				AF32475B29A8CEC700A594BE /* SearchResult.swift in Sources */,
+				F24F329529ACE69C00732868 /* NetworkProtocol.swift in Sources */,
 				F2C2E47C298E872E00051E53 /* ChatsViewController.swift in Sources */,
 				AFFD985B299CF46000CB196B /* OnboardingView.swift in Sources */,
 				AF15F39129AA4E830019C4AB /* MatchesCellModel.swift in Sources */,
 				EF51CE102975F87300B865E8 /* RegistrationView.swift in Sources */,
+				F24F329229ACE2D400732868 /* FirebaseNetwork.swift in Sources */,
 				AF00D81929743C17005B6C5D /* CustomButton.swift in Sources */,
 				AF00D81629742D06005B6C5D /* AppModuleBuilder.swift in Sources */,
 				AF32475A29A8CEC700A594BE /* Conversation.swift in Sources */,

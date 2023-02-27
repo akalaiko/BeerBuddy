@@ -66,6 +66,12 @@ class ChatsPresenter: ChatsViewOutput {
 //        self.network = network
 //    }
 
+    private let network: NetworkProtocol
+
+    init(network: NetworkProtocol) {
+        self.network = network
+    }
+
     // MARK: - Public Methods
 
 //    func viewRequestFetch() {
@@ -83,9 +89,9 @@ class ChatsPresenter: ChatsViewOutput {
             NotificationCenter.default.removeObserver(loginObserver)
         }
         
-        let safeEmail = DatabaseManager.safeEmail(email: email)
+        let safeEmail = network.safeEmail(email: email)
         print("we are here, safe email is:", safeEmail)
-        DatabaseManager.shared.getAllConversations(for: safeEmail, completion: { [weak self] result in
+        network.getAllConversations(for: safeEmail, completion: { [weak self] result in
             switch result {
             case .success(let fetchedConversations):
                 guard !fetchedConversations.isEmpty else { return }
@@ -191,7 +197,7 @@ class ChatsPresenter: ChatsViewOutput {
     
     func viewOpenScreenChat(_ indexPath: IndexPath) {
         let conversation = data[indexPath.row]
-        let vc = ChatViewController(with: conversation.otherUserEmail, id: conversation.id)
+        let vc = ChatViewController(with: conversation.otherUserEmail, id: conversation.id, network: network)
         let nav = UINavigationController(rootViewController: vc)
         vc.isNewConversation = false
         vc.title = conversation.name

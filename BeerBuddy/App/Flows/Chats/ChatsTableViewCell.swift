@@ -163,6 +163,8 @@ class ChatsTableViewCell: UITableViewCell {
         #if DEBUG
         setUITests(pinned)
         #endif
+        // TODO: Переделать на нормальную закачку
+        /*
         let path = DatabaseManager.getProfilePicturePath(email: email)
         StorageManager.shared.downloadURL(for: path) { [weak self] result in
             switch result {
@@ -177,6 +179,7 @@ class ChatsTableViewCell: UITableViewCell {
                 print(error)
             }
         }
+        */
         usernameLabel.text = userName
         lastMessageLabel.text = lastMessage
         dateLabel.text = ""

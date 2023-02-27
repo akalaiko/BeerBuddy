@@ -28,7 +28,11 @@ protocol RegistrationViewOutput: AnyObject {
 final class RegistrationPresenter {
     weak var viewController: (UIViewController & RegistrationViewInput)?
     
-    // MARK: - Private methods
+    private let network: NetworkProtocol
+
+    init(network: NetworkProtocol) {
+        self.network = network
+    }
 }
 
 // MARK: - Extensions
@@ -50,7 +54,7 @@ extension RegistrationPresenter: RegistrationViewOutput {
         }
         
         // firebase register
-        DatabaseManager.shared.userExists(with: login, completion: { [weak self] exists in
+        network.userExists(with: login, completion: { [weak self] exists in
             guard let self else { return }
             guard !exists else {
                 self.viewController?.alertLoginError(message: "User already exists!")
@@ -64,7 +68,7 @@ extension RegistrationPresenter: RegistrationViewOutput {
                 }
 //                let chatUser = User(name: name, emailAddress: login)
                 let mockChatUser = User(mockName: name, emailAddress: login)
-                DatabaseManager.shared.insertUser(with: mockChatUser, completion: { success in
+                self?.network.insertUser(with: mockChatUser, completion: { success in
                     if success {
                         guard let data = avatar.pngData() else { return }
                         let fileName = mockChatUser.profilePictureFileName

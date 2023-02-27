@@ -23,8 +23,12 @@ final class LoginPresenter {
     // MARK: - Properties
     
     weak var viewController: (UIViewController & LoginViewInput)?
-    
-    // MARK: - Private functions
+
+    private let network: NetworkProtocol
+
+    init(network: NetworkProtocol) {
+        self.network = network
+    }
     
 }
 
@@ -47,9 +51,9 @@ extension LoginPresenter: LoginViewOutput {
                 return
             }
             // here we should get data for user from database
-            let safeEmail = DatabaseManager.safeEmail(email: login)
+            let safeEmail = self.network.safeEmail(email: login)
             
-            DatabaseManager.shared.getDataFor(path: "users/\(safeEmail)", completion: { result in
+            self.network.getDataFor(path: "users/\(safeEmail)", completion: { result in
                 switch result {
                 case .success(let data):
                     guard let userData = data as? [String: Any],

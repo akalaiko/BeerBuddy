@@ -33,16 +33,22 @@ class MatchesPresenter: MatchesViewOutput {
     
     private(set) lazy var data: [User] = []
     private(set) lazy var matchesCellModels: [MatchesCellModel] = []
-    
+
+    private let network: NetworkProtocol
+
+    init(network: NetworkProtocol) {
+        self.network = network
+    }
+
     func viewRequestFetch() {
         data = []
         matchesCellModels = []
-        let safeEmail = DatabaseManager.safeEmail(email: senderEmail)
-        DatabaseManager.shared.getAllMatches(for: safeEmail) { [weak self] result in
+        let safeEmail = network.safeEmail(email: senderEmail)
+        network.getAllMatches(for: safeEmail) { [weak self] result in
             switch result {
             case .success(let matches):
                 matches.forEach({ match in
-                    DatabaseManager.shared.getUser(with: match) { result in
+                    self?.network.getUser(with: match) { result in
                         switch result {
                         case .success(let user):
                             self?.data.append(user)
@@ -59,7 +65,7 @@ class MatchesPresenter: MatchesViewOutput {
     }
     
     private func configureCellModels(with user: User) {
-        let path = DatabaseManager.getProfilePicturePath(email: user.safeEmail)
+        let path = network.getProfilePicturePath(email: user.safeEmail)
         StorageManager.shared.downloadURL(for: path) { [weak self] result in
             guard let self else { return }
             switch result {
@@ -89,22 +95,24 @@ class MatchesPresenter: MatchesViewOutput {
         let name = user.name
         let safeEmail = user.safeEmail
         
-        DatabaseManager.shared.conversationExists(with: safeEmail, completion: { [weak self] result in
+        network.conversationExists(with: safeEmail, completion: { [weak self] result in
+            guard let self else { return }
+
             switch result {
             case .success(let conversationId):
-                let vc = ChatViewController(with: safeEmail, id: conversationId)
+                let vc = ChatViewController(with: safeEmail, id: conversationId, network: self.network)
                 let nav = UINavigationController(rootViewController: vc)
                 vc.isNewConversation = false
                 vc.title = name
                 nav.isNavigationBarHidden = false
-                self?.viewInput?.present(nav, animated: true)
+                self.viewInput?.present(nav, animated: true)
             case .failure:
-                let vc = ChatViewController(with: safeEmail, id: nil)
+                let vc = ChatViewController(with: safeEmail, id: nil, network: self.network)
                 let nav = UINavigationController(rootViewController: vc)
                 vc.isNewConversation = true
                 vc.title = name
                 nav.isNavigationBarHidden = false
-                self?.viewInput?.present(nav, animated: true)
+                self.viewInput?.present(nav, animated: true)
             }
         })
     }

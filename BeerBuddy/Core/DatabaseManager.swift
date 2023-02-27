@@ -140,7 +140,6 @@ extension DatabaseManager {
                     break
                 }
                 guard let kindInput else { return nil }
-                print(Message(sender: sender, messageId: id, sentDate: date, kind: kindInput))
                 return Message(sender: sender, messageId: id, sentDate: date, kind: kindInput)
             })
             completion(.success(messages))
@@ -223,23 +222,25 @@ extension DatabaseManager {
                 
                 let path = "users/\(safeEmail)/conversations"
                 self?.database.child(path).observeSingleEvent(of: .value) { [weak self] snapshot in
+                    var targetConversation = [String: Any]()
                     if var conversations = snapshot.value as? [[String: Any]] {
-                        for (index, conversationEntry) in conversations.enumerated() {
-                            if conversationEntry["id"] as? String == conversation {
-                                var targetConversation = conversations[index]
-                                targetConversation["latest_message"] = latestMessageUpdatedValue
-                                conversations[index] = targetConversation
-                                self?.database.child(path).setValue(conversations)
-                                completion(true)
-                                break
-                            } else {
-                                conversations.append(newConversationData)
-                                self?.database.child(path).setValue(conversations)
-                                completion(true)
-                                break
-                            }
+                        for (index, conversationEntry) in conversations.enumerated() where
+                        conversationEntry["id"] as? String == conversation {
+                            print("we found convo, rewriting it")
+                            targetConversation = conversations[index]
+                            targetConversation["latest_message"] = latestMessageUpdatedValue
+                            conversations[index] = targetConversation
+                            self?.database.child(path).setValue(conversations)
+                            completion(true)
+                            break
                         }
+                        guard targetConversation.isEmpty else { return }
+                        print("we did not found convo, appending to others")
+                        conversations.append(newConversationData)
+                        self?.database.child(path).setValue(conversations)
+                        completion(true)
                     } else {
+                        print("we did not found any convos, creating new")
                         self?.database.child(path).setValue([newConversationData])
                         completion(true)
                     }
@@ -247,23 +248,25 @@ extension DatabaseManager {
                 
                 let otherUserPath = "users/\(otherUserEmail)/conversations"
                 self?.database.child(otherUserPath).observeSingleEvent(of: .value, with: { [weak self] snapshot in
+                    var targetConversation = [String: Any]()
                     if var conversations = snapshot.value as? [[String: Any]] {
-                        for (index, conversationEntry) in conversations.enumerated() {
-                            if conversationEntry["id"] as? String == conversation {
-                                var targetConversation = conversations[index]
-                                targetConversation["latest_message"] = latestMessageUpdatedValue
-                                conversations[index] = targetConversation
-                                self?.database.child(otherUserPath).setValue(conversations)
-                                completion(true)
-                                break
-                            } else {
-                                conversations.append(recipientNewConversationData)
-                                self?.database.child(otherUserPath).setValue(conversations)
-                                completion(true)
-                                break
-                            }
+                        for (index, conversationEntry) in conversations.enumerated() where
+                        conversationEntry["id"] as? String == conversation {
+                            print("we found other users convo, rewriting it")
+                            targetConversation = conversations[index]
+                            targetConversation["latest_message"] = latestMessageUpdatedValue
+                            conversations[index] = targetConversation
+                            self?.database.child(otherUserPath).setValue(conversations)
+                            completion(true)
+                            break
                         }
+                        guard targetConversation.isEmpty else { return }
+                        print("we did not found other users convo, appending to others")
+                        conversations.append(recipientNewConversationData)
+                        self?.database.child(otherUserPath).setValue(conversations)
+                        completion(true)
                     } else {
+                        print("we did not found other users convo, creating new")
                         self?.database.child(otherUserPath).setValue([recipientNewConversationData])
                         completion(true)
                     }

@@ -77,7 +77,6 @@ class ChatsPresenter: ChatsViewOutput {
 //    }
     
     func startListeningForConversations() {
-        print("at least here")
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else { return }
 
         if let loginObserver = viewInput?.loginObserver {
@@ -192,7 +191,6 @@ class ChatsPresenter: ChatsViewOutput {
     
     func viewOpenScreenChat(_ indexPath: IndexPath) {
         let conversation = data[indexPath.row]
-        
         let vc = ChatViewController(with: conversation.otherUserEmail, id: conversation.id)
         let nav = UINavigationController(rootViewController: vc)
         vc.isNewConversation = false

@@ -10,10 +10,12 @@ import UIKit
 
 final class CustomButton: UIButton {
     private var title: String = ""
+    private var isDarkMode: Bool = false
     
     init(title: String, isDarkMode: Bool = false) {
         super.init(frame: .init(x: 0, y: 0, width: 0, height: 50))
         self.title = title
+        self.isDarkMode = isDarkMode
         
         setupUI()
     }
@@ -47,5 +49,10 @@ final class CustomButton: UIButton {
             backgroundColor = AppStyles.color.brown
         }
         titleLabel?.font = AppStyles.font.button
+        
+        if isDarkMode {
+            setTitleColor(.black, for: .normal)
+            backgroundColor = AppStyles.color.offwhite
+        }
     }
 }

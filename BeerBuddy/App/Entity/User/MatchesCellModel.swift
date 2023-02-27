@@ -30,3 +30,9 @@ struct MatchesCellModel {
         self.avatarData = avatarData
     }
 }
+
+extension MatchesCellModel: Equatable {
+    static func == (lhs: MatchesCellModel, rhs: MatchesCellModel) -> Bool {
+        lhs.safeEmail == rhs.safeEmail
+    }
+}

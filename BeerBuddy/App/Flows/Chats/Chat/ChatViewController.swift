@@ -188,7 +188,6 @@ class ChatViewController: MessagesViewController {
             case .success(let messages):
                 guard !messages.isEmpty else { return }
                 self?.messages = messages
-                print(messages)
                 DispatchQueue.main.async {
                     self?.messagesCollectionView.reloadDataAndKeepOffset()
                     if shouldScrollToBottom {
@@ -210,6 +209,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text))
         
         if isNewConversation {
+            print("we are sending to new conversation")
             DatabaseManager.shared.createNewConversation(with: otherUserEmail,
                                                          name: title ?? "User",
                                                          firstMessage: message,
@@ -226,6 +226,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
             })
         } else {
             guard let conversationId else { return }
+            print("we are sending to existing conversation")
             DatabaseManager.shared.sendMessage(to: conversationId,
                                                otherUserEmail: otherUserEmail,
                                                name: selfSender.displayName,

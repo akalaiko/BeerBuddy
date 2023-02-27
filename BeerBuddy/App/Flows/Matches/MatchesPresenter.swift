@@ -73,8 +73,8 @@ class MatchesPresenter: MatchesViewOutput {
     
     private func configureCellModels(with user: User) {
         let path = DatabaseManager.getProfilePicturePath(email: user.safeEmail)
-        print(path)
         StorageManager.shared.downloadURL(for: path) { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let urlString):
                 guard let url = URL(string: urlString) else { return }
@@ -85,9 +85,10 @@ class MatchesPresenter: MatchesViewOutput {
                                                  noSmoking: user.noSmoking,
                                                  noDrinking: user.noDrinking,
                                                  avatarData: avatarData)
-                    self?.matchesCellModels.append(model)
+                    guard !self.matchesCellModels.contains(model) else { return }
+                    self.matchesCellModels.append(model)
                     DispatchQueue.main.async {
-                        self?.viewInput?.reloadTable()
+                        self.viewInput?.reloadTable()
                     }
                 }
             case .failure(let error):

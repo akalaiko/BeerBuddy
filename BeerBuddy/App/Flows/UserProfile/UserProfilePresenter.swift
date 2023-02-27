@@ -91,6 +91,7 @@ extension UserProfilePresenter: UserProfileViewOutput {
     }
     
     func didTapEditButton() {
-        print(#function)
+        viewController?.navigationController?.present(AppModuleBuilder.profilePropertiesViewController(),
+                                                     animated: true)
     }
 }

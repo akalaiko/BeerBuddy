@@ -89,7 +89,7 @@ final class MainViewController: UIViewController {
         guard controllersData.isEmpty else { return }
         
         controllersData = [
-            ControllerData(builder: AppModuleBuilder.matchesController, buttonImageName: AppData.imageName.search),
+            ControllerData(builder: AppModuleBuilder.discoverViewController, buttonImageName: AppData.imageName.search),
             ControllerData(builder: AppModuleBuilder.matchesController, buttonImageName: AppData.imageName.beer),
             ControllerData(builder: AppModuleBuilder.chatsController, buttonImageName: AppData.imageName.message),
             ControllerData(builder: AppModuleBuilder.userProfileViewController,

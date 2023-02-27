@@ -20,7 +20,7 @@ final class ProfilePropertiesView: UIView {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = true
-        scrollView.backgroundColor = .clear
+        scrollView.backgroundColor = AppStyles.color.light
         scrollView.addGestureRecognizer(
             UITapGestureRecognizer(
                 target: self,

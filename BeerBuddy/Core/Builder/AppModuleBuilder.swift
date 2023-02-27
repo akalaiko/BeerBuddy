@@ -56,6 +56,13 @@ enum AppModuleBuilder {
         presenter.viewController = viewController
         return viewController
     }
+    
+    static func userProfileViewController() -> UIViewController & UserProfileViewInput {
+        let presenter = UserProfilePresenter()
+        let viewController = UserProfileViewController(presenter: presenter)
+        presenter.viewController = viewController
+        return viewController
+    }
 
     static func mainController() -> UIViewController {
         let mainViewController = MainViewController()

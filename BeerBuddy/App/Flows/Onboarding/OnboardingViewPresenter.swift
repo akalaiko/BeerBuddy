@@ -34,14 +34,8 @@ extension OnboardingPresenter: OnboardingViewOutput {
             let mainViewController = AppModuleBuilder.mainController()
             viewController?.navigationController?.setViewControllers([mainViewController], animated: true)
             NotificationCenter.default.post(Notification(name: Notification.Name("didLogInNotification")))
-//            let navigationController = UINavigationController(rootViewController: mainViewController)
-//            navigationController.modalPresentationStyle = .fullScreen
-//            viewController?.present(navigationController, animated: true)
         } else {
             let loginViewController = AppModuleBuilder.loginViewController()
-//            let navigationController = UINavigationController(rootViewController: loginViewController)
-//            navigationController.modalPresentationStyle = .fullScreen
-//            viewController?.present(navigationController, animated: true)
             viewController?.navigationController?.setViewControllers([loginViewController], animated: true)
         }
     }

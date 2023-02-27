@@ -77,7 +77,7 @@ final class MainViewController: UIViewController {
             createController(with: AppModuleBuilder.discoverViewController, imageName: AppData.imageName.search),
             createController(with: AppModuleBuilder.matchesController, imageName: AppData.imageName.beer),
             createController(with: AppModuleBuilder.chatsController, imageName: AppData.imageName.message),
-            createController(with: AppModuleBuilder.matchesController, imageName: AppData.imageName.settings)
+            createController(with: AppModuleBuilder.userProfileViewController, imageName: AppData.imageName.settings)
         ]
 
         guard let controller = controllers.first else { return }

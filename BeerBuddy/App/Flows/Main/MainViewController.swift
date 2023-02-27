@@ -92,7 +92,7 @@ final class MainViewController: UIViewController {
             ControllerData(builder: AppModuleBuilder.matchesController, buttonImageName: AppData.imageName.search),
             ControllerData(builder: AppModuleBuilder.matchesController, buttonImageName: AppData.imageName.beer),
             ControllerData(builder: AppModuleBuilder.chatsController, buttonImageName: AppData.imageName.message),
-            ControllerData(builder: AppModuleBuilder.profilePropertiesViewController,
+            ControllerData(builder: AppModuleBuilder.userProfileViewController,
                            buttonImageName: AppData.imageName.settings)
         ]
 

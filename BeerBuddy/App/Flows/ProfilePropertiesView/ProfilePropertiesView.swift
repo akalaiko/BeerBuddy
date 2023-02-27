@@ -277,7 +277,7 @@ final class ProfilePropertiesView: UIView {
         }
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
     
     private func settingCornerRadius() {
         avatarImageView.layer.cornerRadius = avatarImageView.frame.height / 2
@@ -726,6 +726,10 @@ final class ProfilePropertiesView: UIView {
         avatarButton.addTarget(target, action: action, for: .touchUpInside)
     }
     
+    func addSaveButtonTarget(_ target: Any, action: Selector) {
+        saveButton.addTarget(target, action: action, for: .touchUpInsideДщ)
+    }
+    
     func subscribeObserver() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.keyboardWasShown),
@@ -760,7 +764,7 @@ final class ProfilePropertiesView: UIView {
         var childrens = [UIAction]()
         for interest in Interests.allCases {
             childrens.append(addInterestsMenuAction(title: interest.rawValue,
-                                           forTextView: interestTextView))
+                                                    forTextView: interestTextView))
         }
         let menu = UIMenu(options: .displayInline, children: childrens)
         interestTextView.text = ""
@@ -774,7 +778,7 @@ final class ProfilePropertiesView: UIView {
         var childrens = [UIAction]()
         for alcohol in Alcohol.allCases {
             childrens.append(addAlcoholMenuAction(title: alcohol.rawValue,
-                                           forTextView: alcoholTextView))
+                                                  forTextView: alcoholTextView))
         }
         let menu = UIMenu(options: .displayInline, children: childrens)
         alcoholTextView.text = ""

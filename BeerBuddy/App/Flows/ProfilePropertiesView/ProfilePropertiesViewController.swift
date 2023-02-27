@@ -111,6 +111,10 @@ extension ProfilePropertiesViewController {
     @objc func didTapAvatarButton(sender: UIButton) {
         presentPhotoActionSheet()
     }
+    
+    @objc func tappedSaveButton(sender: UIButton) {
+        
+    }
 }
 
 extension ProfilePropertiesViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

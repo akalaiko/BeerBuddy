@@ -76,9 +76,9 @@ extension ProfilePropertiesPresenter: ProfilePropertiesViewOutput {
         }
         viewController?.updateInterests(interests: user?.interests ?? [Interests.pop])
     }
-    
-    
+
     func getUserModel() -> User {
+        DatabaseManager.shared.getUser(with: DatabaseManager.sa, completion: <#T##(Result<User, Error>) -> Void#>)
         return user ?? User(name: "", emailAddress: "")
     }
     

@@ -8,6 +8,25 @@
 import Foundation
 import UIKit
 
+extension MainViewController {
+    /// Сontroller data. With delayed creation of the controller only at the time of the call.
+    private class ControllerData {
+        lazy var data: UIViewController = {
+            let controller = self.builder()
+            controller.view.translatesAutoresizingMaskIntoConstraints = false
+            return controller
+        }()
+        let buttonImageName: String
+
+        private let builder: () -> UIViewController
+
+        init(builder: @escaping () -> UIViewController, buttonImageName: String) {
+            self.builder = builder
+            self.buttonImageName = buttonImageName
+        }
+    }
+}
+
 final class MainViewController: UIViewController {
     // MARK: - Visual Components
 
@@ -28,20 +47,14 @@ final class MainViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    /// Controllers that can be shown (if selected).
-    private lazy var controllers: [UIViewController] = []
+    /// Controllers data that can be shown (if selected).
+    private lazy var controllersData: [ControllerData] = []
 
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupFooter()
-    }
-
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-
-        guard controllers.isEmpty else { return }
         setupControllers()
     }
 
@@ -73,35 +86,35 @@ final class MainViewController: UIViewController {
 
     /// Adds the selected controllers to the controller array. Displays the starting controller on the screen.
     private func setupControllers() {
-        controllers = [
-            createController(with: AppModuleBuilder.matchesController, imageName: AppData.imageName.search),
-            createController(with: AppModuleBuilder.matchesController, imageName: AppData.imageName.beer),
-            createController(with: AppModuleBuilder.chatsController, imageName: AppData.imageName.message),
-            createController(with: AppModuleBuilder.matchesController, imageName: AppData.imageName.settings)
+        guard controllersData.isEmpty else { return }
+        
+        controllersData = [
+            ControllerData(builder: AppModuleBuilder.matchesController, buttonImageName: AppData.imageName.search),
+            ControllerData(builder: AppModuleBuilder.matchesController, buttonImageName: AppData.imageName.beer),
+            ControllerData(builder: AppModuleBuilder.chatsController, buttonImageName: AppData.imageName.message),
+            ControllerData(builder: AppModuleBuilder.profilePropertiesViewController,
+                           buttonImageName: AppData.imageName.settings)
         ]
 
-        guard let controller = controllers.first else { return }
-        showController(controller)
+        controllersData.enumerated().forEach { index, data in
+            addButtonToTabBar(imageName: data.buttonImageName, index: index)
+        }
+
+        guard let controller = controllersData.first else { return }
+        showController(controller.data)
     }
 
-    /// Creates a controller and binds its index to the button tag.
+    /// Adds a controller button to the tab bar by linking it to the index.
     /// - Parameters:
-    ///   - controller: The method that returns the controller.
     ///   - imageName: Image name. You can use both the symbol and the image from the Asset.
-    /// - Returns: The controller that will be shown on the screen when you switch the buttons on the tab bar.
-    private func createController(with controller: () -> UIViewController, imageName: String) -> UIViewController {
-        let index = tabBar.arrangedSubviews.count
-
+    ///   - index: Controller index.
+    private func addButtonToTabBar(imageName: String, index: Int) {
         let button = createButton(imageName: imageName)
         button.tag = index
         if index == 0 {
             button.tintColor = .white
         }
         tabBar.addArrangedSubview(button)
-
-        let vc = controller()
-        vc.view.translatesAutoresizingMaskIntoConstraints = false
-        return vc
     }
 
     /// Creates  button tabbar to which you will need to in the tag bind the index of the associated controller .
@@ -164,7 +177,7 @@ final class MainViewController: UIViewController {
         }
 
         children.forEach(hideController)
-        let controller = controllers[indexButton]
-        showController(controller)
+        let controller = controllersData[indexButton]
+        showController(controller.data)
     }
 }

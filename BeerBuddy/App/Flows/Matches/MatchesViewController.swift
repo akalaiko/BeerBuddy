@@ -52,6 +52,9 @@ class MatchesViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
     }
+
+    // MARK: - Actions
+
 }
 
 // MARK: - MatchesViewInput
@@ -74,18 +77,29 @@ extension MatchesViewController: FilterViewDelegate {
         matchesView.reloadTable()
     }
 }
+// MARK: - FilterViewDelegate
+
+extension MatchesViewController: FilterViewDelegate {
+    var userPreference: PreferenceRequest? {
+        presenter?.preferenceData
+    }
+
+    func sendFiltrationData(_ data: PreferenceRequest) {
+        presenter?.viewRequestFiltering(data)
+    }
+}
 
 // MARK: - UITableViewDataSource
 
 extension MatchesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.data.count ?? 0
+        return presenter?.matchesCellModels.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MatchesTableViewCell.identifier)
                 as? MatchesTableViewCell else { preconditionFailure("MatchesTableViewCell error") }
-        let user = presenter?.data[indexPath.row] ?? .init(id: 0)
+        let user = presenter?.matchesCellModels[indexPath.row]
         cell.configure(user)
         return cell
     }
@@ -99,6 +113,7 @@ extension MatchesViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.viewOpenUserInfo(indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
+        presenter?.openConversation(indexPath)
     }
 }

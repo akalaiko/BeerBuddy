@@ -23,8 +23,12 @@ final class LoginPresenter {
     // MARK: - Properties
     
     weak var viewController: (UIViewController & LoginViewInput)?
-    
-    // MARK: - Private functions
+
+    private let network: NetworkProtocol
+
+    init(network: NetworkProtocol) {
+        self.network = network
+    }
     
 }
 
@@ -40,15 +44,31 @@ extension LoginPresenter: LoginViewOutput {
         }
         
         // firebase login
-        FirebaseAuth.Auth.auth().signIn(withEmail: login, password: password) { [weak self] authResult, error in
+        FirebaseAuth.Auth.auth().signIn(withEmail: login, password: password) { [weak self] _, error in
             guard let self else { return }
-            guard let result = authResult, error == nil else {
+            guard error == nil else {
                 self.viewController?.alertLoginError(message: "Failed to log in user with login: \(login)")
                 return
             }
-
             // here we should get data for user from database
-            print("great success", result.user)
+            let safeEmail = self.network.safeEmail(email: login)
+            
+            self.network.getDataFor(path: "users/\(safeEmail)", completion: { result in
+                switch result {
+                case .success(let data):
+                    guard let userData = data as? [String: Any],
+                          let name = userData["name"] as? String
+                    else {
+                        return
+                    }
+                    UserDefaults.standard.set(login, forKey: "email")
+                    UserDefaults.standard.set(name, forKey: "name")
+                    NotificationCenter.default.post(Notification(name: Notification.Name("didLogInNotification")))
+                    
+                case .failure(let error):
+                    print("failed to read data with error:", error)
+                }
+            })
             
             let mainViewController = AppModuleBuilder.mainController()
             self.viewController?.present(mainViewController, animated: true)

@@ -19,7 +19,8 @@ enum AppModuleBuilder {
     }
     
     static func loginViewController() -> UIViewController & LoginViewInput {
-        let presenter = LoginPresenter()
+        let network = FirebaseNetwork()
+        let presenter = LoginPresenter(network: network)
         let viewController = LoginViewController(presenter: presenter)
         presenter.viewController = viewController
         viewController.modalPresentationStyle = .fullScreen
@@ -28,7 +29,8 @@ enum AppModuleBuilder {
     }
     
     static func registrationViewController() -> UIViewController & RegistrationViewInput {
-        let presenter = RegistrationPresenter()
+        let network = FirebaseNetwork()
+        let presenter = RegistrationPresenter(network: network)
         let viewController = RegistrationViewController(presenter: presenter)
         presenter.viewController = viewController
         
@@ -36,27 +38,51 @@ enum AppModuleBuilder {
     }
 
     static func matchesController() -> UIViewController & MatchesViewInput {
-        let network = NetworkMockForTests()
-        let presenter = MatchesPresenter(newtwork: network)
+        let network = FirebaseNetwork()
+        let presenter = MatchesPresenter(network: network)
         let viewController = MatchesViewController(presenter: presenter)
         presenter.viewInput = viewController
 
         return viewController
     }
+    
+    static func profilePropertiesViewController() -> UIViewController & ProfilePropertiesViewInput {
+        let locationManager = LocationManager()
+        let network = FirebaseNetwork()
+        let presenter = ProfilePropertiesPresenter(locationManager: locationManager, network: network)
+        let viewController = ProfilePropertiesViewController(presenter: presenter)
+        presenter.viewController = viewController
+        return viewController
+    }
 
     static func chatsController() -> UIViewController & ChatsViewInput {
-        let dateFormatter = DateFormatterHelper()
-        let network = NetworkMockForTests()
-        let presenter = ChatsPresenter(dateFormatter: dateFormatter, network: network)
+//        let dateFormatter = DateFormatterHelper()
+        let network = FirebaseNetwork()
+        let presenter = ChatsPresenter(network: network)
         let viewController = ChatsViewController(presenter: presenter)
         presenter.viewInput = viewController
+        return viewController
+    }
+    
+    static func discoverViewController() -> UIViewController & DiscoverViewInput {
+        let presenter = DiscoverPresenter()
+        let viewController = DiscoverViewController(presenter: presenter)
+        presenter.viewController = viewController
+        return viewController
+    }
+    
+    static func userProfileViewController() -> UIViewController & UserProfileViewInput {
+        let network = FirebaseNetwork()
+        let presenter = UserProfilePresenter(network: network)
+        let viewController = UserProfileViewController(presenter: presenter)
+        presenter.viewController = viewController
         return viewController
     }
 
     static func mainController() -> UIViewController {
         let mainViewController = MainViewController()
         mainViewController.modalPresentationStyle = .fullScreen
-        return MainViewController()
+        return mainViewController
     }
 
     static func testController() -> UIViewController {

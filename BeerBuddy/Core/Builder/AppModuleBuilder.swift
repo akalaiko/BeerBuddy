@@ -54,6 +54,13 @@ enum AppModuleBuilder {
         presenter.viewInput = viewController
         return viewController
     }
+    
+    static func discoverViewController() -> UIViewController & DiscoverViewInput {
+        let presenter = DiscoverPresenter()
+        let viewController = DiscoverViewController(presenter: presenter)
+        presenter.viewController = viewController
+        return viewController
+    }
 
     static func mainController() -> UIViewController {
         let mainViewController = MainViewController()

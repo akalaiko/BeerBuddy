@@ -1,0 +1,278 @@
+//
+//  UserCardView.swift
+//  BeerBuddy
+//
+//  Created by Polina Tikhomirova on 22.02.2023.
+//
+
+import Foundation
+import UIKit
+
+class UserCardView: UIView {
+    
+    // MARK: - Private properties
+    
+    /// Initilazing view's components.
+    private lazy var cardView: UIView = {
+        let view = UIView()
+        view.backgroundColor = AppStyles.color.black
+        view.layer.cornerRadius = 25
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        let avatarImage = "avatar"
+        imageView.image = UIImage(named: avatarImage)
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private lazy var userInfoView: UserInfoView = {
+        let view = UserInfoView(color: AppStyles.color.offwhite)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.config(username: "USERNAME", age: 30, location: "SILICON VALLEY", noSmoking: true, noDrinking: true)
+        return view
+    }()
+    
+    private lazy var userInterestsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 1
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var userBioStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 1
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var userInfoStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 8
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var userInfoCardView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var separatorLine: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        return view
+    }()
+
+    private lazy var interestsLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = AppStyles.color.offwhite
+        label.font = AppStyles.font.title
+        label.font = AppStyles.font.bigTextCard
+        label.text = "INTERESTS"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var interestsListingLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = AppStyles.color.offwhite
+        label.font = AppStyles.font.button
+        label.font = AppStyles.font.smallTextCard
+        label.text = "Football, IT, Crypto, Politics"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var aboutMyselfLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = AppStyles.color.offwhite
+        label.font = AppStyles.font.title
+        label.font = AppStyles.font.bigTextCard
+        label.text = "ABOUT MYSELF:"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var userBioLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = AppStyles.color.offwhite
+        label.font = AppStyles.font.smallTextCard
+        label.text = "CEO of Apple. Love beer. Cheers!"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private(set) lazy var rejectButton: CustomButton = {
+        let button = CustomButton(title: "SORRY")
+        button.backgroundColor = AppStyles.color.sand
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private(set) lazy var acceptButton: CustomButton = {
+        let button = CustomButton(title: "CHEERS!", isDarkMode: true)
+        button.backgroundColor = AppStyles.color.offwhite
+        button.titleLabel?.textColor = AppStyles.color.black
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var buttonsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 16
+        stackView.distribution = .fillEqually
+        stackView.axis = .horizontal
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    // MARK: - Initialization
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        prepareForReuse()
+        configureUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Views
+    
+    /// Setting up visual components.
+    public func configureUI() {
+        addCardView()
+        addImageView()
+        addUserInfoView()
+        addUserInfoCardView()
+        addButtonsStackView()
+    }
+    
+    // MARK: - Public Methods
+    
+    func configure(userAvatar: UIImage,
+                   interestsList: String,
+                   userBio: String,
+                   rejectButtonTitle: String,
+                   acceptButtonTitle: String) {
+        imageView.image = userAvatar
+        interestsListingLabel.text = interestsList
+        userBioLabel.text = userBio
+        rejectButton.setTitle(rejectButtonTitle, for: .normal)
+        acceptButton.setTitle(acceptButtonTitle, for: .normal)
+    }
+    
+    // MARK: - Private methods
+    
+    private func prepareForReuse() {
+        imageView.image = nil
+        interestsListingLabel.text = nil
+        userBioLabel.text = nil
+        rejectButton.titleLabel?.text = nil
+        acceptButton.titleLabel?.text = nil
+    }
+    
+    private func addCardView() {
+        self.addSubview(cardView)
+        
+        NSLayoutConstraint.activate([
+            cardView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
+                                          constant: AppStyles.size.verticalMargin.small),
+            cardView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -AppStyles.size.verticalMargin.small),
+            cardView.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                              constant: AppStyles.size.horizontalMargin.middle),
+            cardView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                               constant: -AppStyles.size.horizontalMargin.middle)
+        ])
+    }
+    
+    /// Setting up user's image.
+    private func addImageView() {
+        cardView.addSubview(imageView)
+        
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: cardView.topAnchor),
+            imageView.heightAnchor.constraint(equalTo: cardView.heightAnchor, multiplier: 0.6),
+            imageView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor)
+        ])
+    }
+    
+    /// Setting up user information view (username, age, location, etc,).
+    private func addUserInfoView() {
+        cardView.addSubview(userInfoView)
+            
+        NSLayoutConstraint.activate([
+            userInfoView.topAnchor.constraint(greaterThanOrEqualTo: imageView.topAnchor),
+            userInfoView.heightAnchor.constraint(equalTo: cardView.heightAnchor, multiplier: 0.15),
+            userInfoView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
+            userInfoView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor,
+                                                  constant: AppStyles.size.horizontalMargin.middle),
+            userInfoView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                   constant: -AppStyles.size.horizontalMargin.big)
+        ])
+    }
+    
+    /// Setting up view which consists of stack views with user interests and bio labels.
+    private func addUserInfoCardView() {
+        cardView.addSubview(userInfoCardView)
+        userInfoCardView.addSubview(separatorLine)
+        userInfoCardView.addSubview(userInfoStackView)
+        userInfoStackView.addArrangedSubview(userInterestsStackView)
+        userInfoStackView.addArrangedSubview(userBioStackView)
+        userInterestsStackView.addArrangedSubview(interestsLabel)
+        userInterestsStackView.addArrangedSubview(interestsListingLabel)
+        userBioStackView.addArrangedSubview(aboutMyselfLabel)
+        userBioStackView.addArrangedSubview(userBioLabel)
+        
+        NSLayoutConstraint.activate([
+            separatorLine.topAnchor.constraint(equalTo: imageView.bottomAnchor,
+                                               constant: AppStyles.size.verticalMargin.middle),
+            separatorLine.widthAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 0.9),
+            separatorLine.heightAnchor.constraint(equalToConstant: 2),
+            separatorLine.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+            separatorLine.bottomAnchor.constraint(equalTo: userInfoStackView.topAnchor,
+                                                  constant: -AppStyles.size.verticalMargin.small),
+            userInfoCardView.topAnchor.constraint(equalTo: separatorLine.bottomAnchor),
+            userInfoCardView.heightAnchor.constraint(equalTo: userInfoStackView.heightAnchor),
+            userInfoStackView.topAnchor.constraint(equalTo: separatorLine.bottomAnchor),
+            userInfoStackView.leadingAnchor.constraint(greaterThanOrEqualTo: userInfoCardView.trailingAnchor,
+                                                       constant: AppStyles.size.horizontalMargin.middle),
+            userInfoStackView.widthAnchor.constraint(equalTo: userInfoView.widthAnchor),
+            userInfoStackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor)
+        ])
+    }
+    
+    private func addButtonsStackView() {
+        cardView.addSubview(buttonsStackView)
+        buttonsStackView.addArrangedSubview(rejectButton)
+        buttonsStackView.addArrangedSubview(acceptButton)
+        
+        NSLayoutConstraint.activate([
+            buttonsStackView.topAnchor.constraint(equalTo: userInfoStackView.bottomAnchor,
+                                                  constant: AppStyles.size.verticalMargin.middle),
+            buttonsStackView.widthAnchor.constraint(equalTo: cardView.widthAnchor, multiplier: 0.66),
+            buttonsStackView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor,
+                                                     constant: -AppStyles.size.verticalMargin.middle),
+            buttonsStackView.centerXAnchor.constraint(equalTo: cardView.centerXAnchor)
+        ])
+    }
+}

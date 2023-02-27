@@ -48,7 +48,8 @@ enum AppModuleBuilder {
     
     static func profilePropertiesViewController() -> UIViewController & ProfilePropertiesViewInput {
         let locationManager = LocationManager()
-        let presenter = ProfilePropertiesPresenter(locationManager: locationManager)
+        let network = FirebaseNetwork()
+        let presenter = ProfilePropertiesPresenter(locationManager: locationManager, network: network)
         let viewController = ProfilePropertiesViewController(presenter: presenter)
         presenter.viewController = viewController
         return viewController

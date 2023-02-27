@@ -60,18 +60,21 @@ final class ProfilePropertiesPresenter: NSObject {
     private var user: User?
     
     weak var viewController: (UIViewController & ProfilePropertiesViewInput)?
-    var locationManager: LocationManager?
+    private var locationManager: LocationManager?
+    private var network: NetworkProtocol?
     
     // MARK: - Init
     
-    init(locationManager: LocationManager?) {
+    init(locationManager: LocationManager?, network: NetworkProtocol?) {
         super.init()
         self.locationManager = locationManager
+        self.network = network
     }
     
     // MARK: - Private methods
+    
     private func getUserPhoto(safeEmail: String) {
-        let path = DatabaseManager.getProfilePicturePath(email: safeEmail)
+        guard let path = network?.getProfilePicturePath(email: safeEmail) else { return }
         StorageManager.shared.downloadURL(for: path) { [weak self] result in
             guard let self else { return }
             switch result {
@@ -83,6 +86,13 @@ final class ProfilePropertiesPresenter: NSObject {
             case .failure(let error):
                 print(error)
             }
+        }
+    }
+    
+    private func sendUserChanges() {
+        guard let user = user else { return }
+        network?.insertUser(with: user) { isSend in
+            print(isSend)
         }
     }
 }
@@ -109,9 +119,9 @@ extension ProfilePropertiesPresenter: ProfilePropertiesViewOutput {
     
     func getUserModel() {
         let email = UserDefaults.standard.value(forKey: "email") as? String
-        let safeEmail = DatabaseManager.safeEmail(email: email)
+        guard let safeEmail = network?.safeEmail(email: email) else { return }
         
-        DatabaseManager.shared.getUser(with: safeEmail) { [weak self] result in
+        network?.getUser(with: safeEmail) { [weak self] result in
             switch result {
             case .success(let user):
                 self?.getUserPhoto(safeEmail: safeEmail)
@@ -122,6 +132,7 @@ extension ProfilePropertiesPresenter: ProfilePropertiesViewOutput {
             }
         }
     }
+    
     func getCityName() {
         locationManager?.lookUpCurrentLocation { [weak self] place in
             guard let cityName = place?.locality else {
@@ -154,6 +165,21 @@ extension ProfilePropertiesPresenter: ProfilePropertiesViewOutput {
     
     func changePhoto(image: UIImage?) {
         let imageData = image?.pngData()
+        guard
+            let imageData = imageData,
+            let user = user
+        else { return }
+        StorageManager.shared.uploadProfilePicture(with: imageData,
+                                                   fileName: user.profilePictureFileName,
+                                                   completion: { result in
+            switch result {
+            case .success(let downloadURL):
+                UserDefaults.standard.set(downloadURL, forKey: "profile_picture_url")
+                print(downloadURL)
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
     
     func changeName(name: String?) {
@@ -213,14 +239,29 @@ extension ProfilePropertiesPresenter: ProfilePropertiesViewOutput {
     
     func changeAlcohol(alcohol: String?) {
         let alcoholArray = alcohol?.components(separatedBy: " ")
+        var newAlcoholArray = [Alcohol]()
         
+        alcoholArray?.forEach({ alcohol in
+            for alc in Alcohol.allCases where alc.rawValue == alcohol {
+                newAlcoholArray.append(alc)
+            }
+        })
+        user?.alcohols = newAlcoholArray
     }
     
     func changeInterests(interests: String?) {
-        print(1)
+        let interestsArray = interests?.components(separatedBy: " ")
+        var newInterestsArray = [Interests]()
+        
+        interestsArray?.forEach({ interest in
+            for inter in Interests.allCases where inter.rawValue == interest {
+                newInterestsArray.append(inter)
+            }
+        })
+        user?.interests = newInterestsArray
     }
     
     func changeDescribe(describe: String?) {
-        print(1)
+        sendUserChanges()
     }
 }

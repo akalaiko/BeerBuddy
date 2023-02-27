@@ -13,7 +13,6 @@ final class LocationManager: NSObject {
     // MARK: - Private properties
     
     private let locationManager = CLLocationManager()
-    let status = CLLocationManager.authorizationStatus()
     
     func setDelegateLocation() {
         locationManager.delegate = self

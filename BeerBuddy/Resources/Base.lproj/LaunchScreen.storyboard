@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waveBackground" translatesAutoresizingMaskIntoConstraints="NO" id="lHA-jY-cfH">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bearLogin" translatesAutoresizingMaskIntoConstraints="NO" id="xOb-ag-KXa">
+                                <rect key="frame" x="98.333333333333329" y="277.66666666666669" width="196.33333333333337" height="236.66666666666669"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="xOb-ag-KXa" secondAttribute="height" multiplier="532:640" id="aRP-fO-7v9"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEER BUDDY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Csi-hw-6Aw">
+                                <rect key="frame" x="62.666666666666657" y="522.33333333333337" width="267.66666666666674" height="52.666666666666629"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="44"/>
+                                <color key="textColor" red="0.45198273659999999" green="0.30757841470000002" blue="0.20069456099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="lHA-jY-cfH" secondAttribute="bottom" id="3Tv-I1-t4v"/>
+                            <constraint firstItem="lHA-jY-cfH" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="5Px-p9-Ox1"/>
+                            <constraint firstItem="xOb-ag-KXa" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-30" id="5Yk-vW-nwb"/>
+                            <constraint firstItem="Csi-hw-6Aw" firstAttribute="top" secondItem="xOb-ag-KXa" secondAttribute="bottom" constant="8" id="Kyv-DC-xlI"/>
+                            <constraint firstAttribute="trailing" secondItem="lHA-jY-cfH" secondAttribute="trailing" id="T9f-Tt-3v7"/>
+                            <constraint firstItem="xOb-ag-KXa" firstAttribute="width" secondItem="lHA-jY-cfH" secondAttribute="width" multiplier="0.5" id="kka-yz-MNF"/>
+                            <constraint firstItem="xOb-ag-KXa" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="qIW-UD-VUM"/>
+                            <constraint firstItem="lHA-jY-cfH" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="r5G-M5-Shz"/>
+                            <constraint firstItem="Csi-hw-6Aw" firstAttribute="centerX" secondItem="lHA-jY-cfH" secondAttribute="centerX" id="rV7-L6-56R"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="bearLogin" width="532" height="640"/>
+        <image name="waveBackground" width="2049" height="3646"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
